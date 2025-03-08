@@ -7,55 +7,80 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Feedback {
+  id          String @id @default(uuid())
+  name        String
+  description String
+  rating      Float
+}
+
+model Pajamas {
+  id           String         @id @default(uuid())
+  name         String
+  description  String
+  image        String
+  price        Float
+  season       String
+  type         String
+  gender       String
+  sizes        PajamaSize[]
+  favorite     Boolean
+  on_sale      Boolean
+  sale_percent Float?
+  Sale         Sale_Pajamas[]
+}
+
+model PajamaSize {
+  id             String   @id @default(uuid())
+  stock_quantity Int
+  created_at     DateTime @default(now())
+
+  pajamaId String
+  Pajama   Pajamas @relation(fields: [pajamaId], references: [id])
+}
+
+model Sale {
+  id         String         @id @default(uuid())
+  buyer_name String
+  cpf        String         @unique
+  price      Float
+  pajamas    Sale_Pajamas[]
+
+  addressId String  @unique
+  Address   Address @relation(fields: [addressId], references: [id])
+
+  payment_method String
+  installments   Int     @default(1)
+  card_number    String?
+}
+
+model Sale_Pajamas {
+  id       String @id @default(uuid())
+  quantity Int
+  price    Float
+
+  pajamasId String
+  Pajamas   Pajamas @relation(fields: [pajamasId], references: [id])
+
+  saleId String
+  Sale   Sale   @relation(fields: [saleId], references: [id])
+}
+
+model Address {
+  id           String @id @default(uuid())
+  zip_code     String
+  state        String
+  city         String
+  neighborhood String
+  address      String
+  number       String
+  sale         Sale[]
+}
+
 model User {
   id       String @id @default(uuid())
   name     String
+  username String @unique
   email    String @unique
   password String
-  photo    String
-
-  posts    Post[]
-  comments Comment[]
-  likes    Like[]
-}
-
-model Post {
-  id         String   @id @default(uuid())
-  title      String
-  content    String
-  created_at DateTime @default(now())
-
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
-
-  comments Comment[]
-  likes    Like[]
-}
-
-model Comment {
-  id         String   @id @default(uuid())
-  content    String
-  created_at DateTime @default(now())
-
-  userId String
-  user   User   @relation(fields: [userId], references: [id])
-
-  postId String
-  post   Post   @relation(fields: [postId], references: [id])
-
-  likes Like[]
-}
-
-model Like {
-  id        String   @id @default(uuid())
-  create_at DateTime @default(now())
-
-  userId String
-  User   User   @relation(fields: [userId], references: [id])
-
-  postId String?
-  Post   Post?   @relation(fields: [postId], references: [id])
-
-  commentId String?
-  Comment   Comment? @relation(fields: [commentId], references: [id])
 }
