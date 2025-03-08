@@ -23,11 +23,19 @@ const router = createBrowserRouter([
                 element:<></>
             },
             {
+                path:"/pijamas/:pijamaTipo",
+                element:<></>
+            },
+            {
                 path:"/pijama",
                 element:<></>
             },
             {
                 path:"/favorito",
+                element:<></>
+            },
+            {
+                path:"/carrinho",
                 element:<></>
             },
             {
