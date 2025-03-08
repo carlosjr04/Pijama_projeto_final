@@ -13,7 +13,7 @@ export class PrismaUsersRepository implements UsersRepository {
 
     async update(id: string, data: Prisma.UserUpdateInput) {
         const user = await prisma.user.update({
-            where: {id}
+            where: {id},
             data: {
                 name: data.name,
                 username: data.username,
@@ -25,12 +25,20 @@ export class PrismaUsersRepository implements UsersRepository {
         return user
     }
 
-    async delete(id: string): Promise<User | null> {
-        throw new Error("Method not implemented.");
+    async delete(id: string) {
+        const user = await prisma.user.delete ({
+            where: {id}
+        })
+
+        return user
     }
 
-    async findById(userId: string): Promise<User | null> {
-        throw new Error("Method not implemented.");
+    async findById(id: string) {
+        const user = await prisma.user.findUnique ({
+            where: {id}
+        })
+
+        return user
     }
     
 }
