@@ -12,6 +12,7 @@ export interface roupa{
     sale_percent:number 
 }
 export interface roupa_lista{
+    id:number
     name:string
     image:string 
     price: number 

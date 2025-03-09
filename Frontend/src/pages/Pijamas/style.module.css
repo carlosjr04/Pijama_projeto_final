@@ -104,3 +104,32 @@ body{
   margin-top: 5rem;
   gap:2rem;
 }
+.navegador{
+  width: auto;
+}
+.navegador ul{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Roboto;
+font-weight: 400;
+font-size: 32.64px;
+line-height: 100%;
+letter-spacing: 0%;
+text-align: center;
+ color:#274553;
+ gap:1rem;
+}
+.navegador ul li{
+  cursor: pointer;
+}
+.primeiraPagina{
+  height: 68px;
+  width: 68px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #72A8C1;
+  cursor: pointer;
+}

@@ -8,9 +8,6 @@ import { useState } from "react";
 
 export default function Roupa(roupa: roupa_lista) {
   const [favorito, setFavorito] = useState(roupa.favorite);
-  const [animacao, setAnimacao] = useState(false);
-
-  
 
   function parcelamento(preco: number): number {
     const precoParcelado = preco / 6;
