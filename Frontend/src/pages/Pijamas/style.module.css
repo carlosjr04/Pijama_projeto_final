@@ -1,3 +1,6 @@
+body{
+  background-image: url("../../assets/Background_azul.png");
+}
 .filtro {
   display: flex;
   flex-direction: column;
@@ -92,4 +95,12 @@
   margin-right: 13px;
 
   align-self: center;
+}
+
+.lista_cards{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 5rem;
+  gap:2rem;
 }
