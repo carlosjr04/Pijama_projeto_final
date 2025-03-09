@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import RootLayout from "./RootLayout";
+import Pijamas from "./pages/Pijamas/Pijamas";
 
 const router = createBrowserRouter([
     {
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
             },
             {
                 path:"/pijamas",
-                element:<></>
+                element:<Pijamas/>
             },
             {
                 path:"/pijamas/:pijamaTipo",

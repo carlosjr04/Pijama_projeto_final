@@ -1,0 +1,95 @@
+.filtro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 250px;
+  background-color: #72a8c1;
+  padding-left: 3rem;
+  padding: 0px;
+}
+.buscaInput {
+  display: flex;
+  position: relative;
+}
+.busca {
+  width: 1000px;
+  height: 45px;
+  font-family: Roboto;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 5%;
+  
+  border-radius: 24px;
+  padding-left: 1.5rem;
+}
+
+.botaoBusca {
+  position: absolute;
+  right: 0px; 
+  top:-4px;
+  width: 58px;
+  height: 58px;
+  /* width: 50px;
+  height: 50px; se quiser a bolinha dentro do input certinho e tira o top tbm*/
+  border-radius: 50%;
+  padding-right: 30px;
+  background-image: url("../../assets/lupa.png");
+  background-size: cover;
+  background-position-x: 3px;
+  background-color: #274553;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-position-x: 4px;
+  border: 0px;
+  cursor: pointer;
+}
+.botoes {
+  display: flex;
+  gap: 2.5rem;
+  cursor: pointer;
+  margin-top: 2.8rem;
+  margin-bottom: 2rem;
+}
+.botoes button {
+  width: 312px;
+  height: 52px;
+  border: 0px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  background-color: #97c3d8;
+  font-family: Nunito Sans;
+  font-weight: 500;
+  font-size: 25px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  display: flex;
+  justify-content: space-between;
+  padding: 0px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.botoes button div {
+  display: flex;
+}
+.botoes button div div {
+  width: 10px;
+  height: auto;
+  background-color: #4e8098;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+.botoes button div p {
+  margin-left: 13px;
+  align-self: center;
+}
+.botoes button img {
+  width: 19px;
+  height: 11px;
+  margin-right: 13px;
+
+  align-self: center;
+}
