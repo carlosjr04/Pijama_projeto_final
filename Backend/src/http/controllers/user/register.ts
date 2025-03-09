@@ -33,5 +33,5 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
         throw err
     }
 
-    return reply.status(201).send("Usuário registrado ccom sucesso!")
+    return reply.status(201).send("Usuário registrado com sucesso!")
 }
