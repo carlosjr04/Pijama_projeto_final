@@ -1,5 +1,5 @@
 import { PrismaFeedbacksRepository } from "@/repositories/prisma/prisma-feedbacks-repository";
-import { PostFeedbackUseCase } from "@/use-cases/post-feedbacks-use-case";
+import { PostFeedbackUseCase } from "@/use-cases/feedbacks/post-feedbacks-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
