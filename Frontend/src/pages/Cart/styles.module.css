@@ -1,0 +1,15 @@
+.cartContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 2vh;
+    margin: 3vh 4vw ;
+}
+
+.cartItemsList {
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5vh;
+    width: 100%;
+}
