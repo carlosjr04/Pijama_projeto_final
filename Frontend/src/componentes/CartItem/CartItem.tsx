@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { formatPrice } from '../../utils/formatPrice'
 import styles from './styles.module.css'
 
 interface cartItemProps {
@@ -47,7 +48,7 @@ export default function CartItem({name, imgPath, code, size, price} : cartItemPr
                 <h6>Não perca sua oportunidade! Há apenas mais <span>{inStock}</span> peças disponíveis!</h6>
                 
             </div>
-            <h2>R$ {quantity * price}</h2>
+            <h2>R$ {formatPrice(quantity * price)}</h2>
             <div>
                 {/* Botão de excluir do carrinho */}
             </div>
