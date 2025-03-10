@@ -20,7 +20,7 @@ export async function deleteUser(request: FastifyRequest, reply: FastifyReply) {
             userId
         })
 
-        return reply.status(204).send({ user })
+        return reply.status(204).send()
         
     } catch (err) {
         

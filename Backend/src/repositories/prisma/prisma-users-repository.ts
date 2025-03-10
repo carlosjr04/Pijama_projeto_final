@@ -46,8 +46,6 @@ export class PrismaUsersRepository implements UsersRepository {
         const user = await prisma.user.delete ({
             where: {id}
         })
-
-        return user
     }
 
     async findById(id: string) {
