@@ -20,12 +20,12 @@ export async function deleteUser(request: FastifyRequest, reply: FastifyReply) {
             userId
         })
 
-        return await reply.status(204).send()
+        return reply.status(204).send()
         
     } catch (err) {
         
         if (err instanceof ResourceNotFoundError){
-            return await reply.status(404).send({message: err.message})
+            return reply.status(404).send({message: err.message})
         }
         throw err
     }

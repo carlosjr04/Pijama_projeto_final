@@ -21,7 +21,7 @@ export async function authenticate(request: FastifyRequest, reply: FastifyReply)
             password
         })
 
-        return reply.status(200).send('Usuário autenticado com sucesso!')
+        return reply.status(200).send(user)
         
     } catch (err) {
         return reply.status(401).send('Usuário não autorizado')
