@@ -1,6 +1,6 @@
 import { Prisma, Sale } from "@prisma/client";
-import { SalesRepository } from "../sales-Repository";
 import { prisma } from "@/lib/prisma";
+import { SalesRepository } from "../sales-repository";
 
 export class PrismaSalesRepository implements SalesRepository {
     async create(data: Prisma.SaleCreateInput) {
