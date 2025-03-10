@@ -1,3 +1,4 @@
+import SectionHeader from '../../componentes/SectionHeader/SectionHeader'
 import CartItem from '../../componentes/CartItem/CartItem'
 import styles from './styles.module.css'
 
@@ -30,10 +31,7 @@ export default function Cart(){
     ]
     return(
         <>
-            <div className={styles.navigationTabs}>
-
-            </div>
-
+            <SectionHeader />
             <div className={styles.cartContainer}>
                 <ul className={styles.cartItemsList}>
                     {
