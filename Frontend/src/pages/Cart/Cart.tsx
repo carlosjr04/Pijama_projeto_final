@@ -6,7 +6,7 @@ export default function Cart(){
         {
             id: 1,
             name: "PIJAMA FEMININO LONGO - ESTAMPA POÁ",
-            imgPath: "../assets/test-image.jpeg",
+            imgPath: "https://picsum.photos/200/300",
             code: "Ref: #123456",
             size: "M",
             price: 78.90,
@@ -14,7 +14,7 @@ export default function Cart(){
         {
             id: 2,
             name: "PIJAMA FEMININO LONGO - ESTAMPA POÁ",
-            imgPath: "../assets/test-image.jpeg",
+            imgPath: "https://picsum.photos/200/300",
             code: "Ref: #123456",
             size: "P",
             price: 78.90,
@@ -22,7 +22,7 @@ export default function Cart(){
         {
             id: 3,
             name: "PIJAMA FEMININO LONGO - ESTAMPA POÁ",
-            imgPath: "../assets/test-image.jpeg",
+            imgPath: "https://picsum.photos/200/300",
             code: "Ref: #123456",
             size: "GG",
             price: 78.90,
