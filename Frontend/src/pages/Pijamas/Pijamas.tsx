@@ -4,292 +4,419 @@ import Roupa from "./componentes/roupa/roupa";
 import anterior from "../../assets/anterior.png";
 import posterior from "../../assets/prox.png";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { roupa_lista } from "../../types/types";
 
 const roupas_teste = [
   {
     id: 1,
     name: "Pijama feminino longo - estampa poá",
-    image: "../../../../assets/favorito_vazio.png",
+    image: "../../../../assets/pijama_feminino_poa.png",
     price: 78.8,
     favorite: true,
     on_sale: true,
     sale_percent: 15.0,
+    type: "Adulto",
+    gender: "Feminino",
+    estacao: "Inverno",
   },
   {
     id: 2,
-    name: "Blusa de inverno feminina - gola alta",
-    image: "../../../../assets/favorito_vazio.png",
-    price: 98.5,
+    name: "Camiseta masculina básica - branca",
+    image: "../../../../assets/camiseta_branca.png",
+    price: 39.9,
     favorite: false,
-    on_sale: true,
-    sale_percent: 25.5,
+    on_sale: false,
+    sale_percent: 0,
+    type: "Todos",
+    gender: "Masculino",
+    estacao: "Verão",
   },
   {
     id: 3,
-    name: "Calça jeans feminina - corte reto",
-    image: "../../../../assets/favorito_vazio.png",
-    price: 120.0,
+    name: "Vestido floral midi",
+    image: "../../../../assets/vestido_floral.png",
+    price: 129.9,
     favorite: true,
-    on_sale: false,
-    sale_percent: 0,
+    on_sale: true,
+    sale_percent: 20.0,
+    type: "Infantil",
+    gender: "Feminino",
+    estacao: "Todos",
   },
   {
     id: 4,
-    name: "Vestido de verão feminino - estampa floral",
-    image: "../../../../assets/favorito_vazio.png",
-    price: 85.3,
-    favorite: false,
-    on_sale: true,
-    sale_percent: 15.2,
-  },
-  {
-    id: 5,
-    name: "Jaqueta de couro feminina - preta",
-    image: "../../../../assets/favorito_vazio.png",
-    price: 250.0,
-    favorite: true,
-    on_sale: false,
-    sale_percent: 0,
-  },
-  {
-    id: 6,
-    name: "Tênis esportivo feminino - modelo clássico",
-    image: "../../../../assets/favorito_vazio.png",
-    price: 160.7,
-    favorite: true,
-    on_sale: true,
-    sale_percent: 20.3,
-  },
-  {
-    id: 7,
-    name: "Saia midi feminina - jeans",
-    image: "../../../../assets/favorito_vazio.png",
-    price: 95.4,
-    favorite: false,
-    on_sale: true,
-    sale_percent: 10.0,
-  },
-  {
-    id: 8,
-    name: "Blusa de algodão feminina - manga curta",
-    image: "../../../../assets/favorito_vazio.png",
-    price: 45.0,
-    favorite: true,
-    on_sale: true,
-    sale_percent: 30.0,
-  },
-  {
-    id: 9,
-    name: "Short feminino - cintura alta",
-    image: "../../../../assets/favorito_vazio.png",
-    price: 55.9,
-    favorite: false,
-    on_sale: true,
-    sale_percent: 18.2,
-  },
-  {
-    id: 10,
-    name: "Casaco feminino - lã sintética",
-    image: "../../../../assets/favorito_vazio.png",
-    price: 180.3,
-    favorite: true,
-    on_sale: false,
-    sale_percent: 0,
-  },
-  {
-    id: 11,
-    name: "Camiseta feminina - estampa divertida",
-    image: "../../../../assets/favorito_vazio.png",
-    price: 35.0,
-    favorite: false,
-    on_sale: true,
-    sale_percent: 5.0,
-  },
-  {
-    id: 12,
-    name: "Macacão feminino - estilo casual",
-    image: "../../../../assets/favorito_vazio.png",
-    price: 120.0,
-    favorite: true,
-    on_sale: true,
-    sale_percent: 12.5,
-  },
-  {
-    id: 13,
-    name: "Sapatilha feminina - couro sintético",
-    image: "../../../../assets/favorito_vazio.png",
+    name: "Bermuda jeans masculina",
+    image: "../../../../assets/bermuda_jeans.png",
     price: 89.9,
     favorite: false,
     on_sale: true,
-    sale_percent: 8.5,
+    sale_percent: 10.0,
+    type: "Adulto",
+    gender: "Masculino",
+    estacao: "Verão",
   },
   {
-    id: 14,
-    name: "Bolsa feminina - modelo tote",
-    image: "../../../../assets/favorito_vazio.png",
-    price: 150.0,
+    id: 5,
+    name: "Blusa de lã feminina - bege",
+    image: "../../../../assets/blusa_lã.png",
+    price: 149.9,
     favorite: true,
     on_sale: false,
     sale_percent: 0,
+    type: "Todos",
+    gender: "Feminino",
+    estacao: "Inverno",
   },
   {
-    id: 15,
-    name: "Blusa de lã feminina - tricô",
-    image: "../../../../assets/favorito_vazio.png",
-    price: 70.2,
+    id: 6,
+    name: "Jaqueta de couro masculina - preta",
+    image: "../../../../assets/jaqueta_couro.png",
+    price: 299.9,
     favorite: false,
     on_sale: true,
-    sale_percent: 22.4,
+    sale_percent: 25.0,
+    type: "Infantil",
+    gender: "Masculino",
+    estacao: "Todos",
   },
   {
-    id: 16,
-    name: "Moletom feminino - capuz e bolso canguru",
-    image: "../../../../assets/favorito_vazio.png",
-    price: 110.0,
-    favorite: true,
-    on_sale: true,
-    sale_percent: 18.0,
-  },
-  {
-    id: 17,
-    name: "Blazer feminino - alfaiataria",
-    image: "../../../../assets/favorito_vazio.png",
-    price: 210.5,
+    id: 7,
+    name: "Short esportivo feminino - rosa",
+    image: "../../../../assets/short_esportivo.png",
+    price: 59.9,
     favorite: false,
-    on_sale: true,
-    sale_percent: 12.0,
-  },
-  {
-    id: 18,
-    name: "Legging fitness feminina - compressão",
-    image: "../../../../assets/favorito_vazio.png",
-    price: 75.3,
-    favorite: true,
     on_sale: false,
     sale_percent: 0,
+    type: "Todos",
+    gender: "Feminino",
+    estacao: "Verão",
   },
   {
-    id: 19,
-    name: "Regata feminina - tecido leve",
-    image: "../../../../assets/favorito_vazio.png",
-    price: 39.9,
-    favorite: false,
-    on_sale: true,
-    sale_percent: 20.0,
-  },
-  {
-    id: 20,
-    name: "Cardigan feminino - longo",
-    image: "../../../../assets/favorito_vazio.png",
-    price: 140.0,
-    favorite: true,
-    on_sale: false,
-    sale_percent: 0,
-  },
-  {
-    id: 21,
-    name: "Conjunto de pijama feminino - cetim",
-    image: "../../../../assets/favorito_vazio.png",
-    price: 95.0,
+    id: 8,
+    name: "Calça social masculina - preta",
+    image: "../../../../assets/calca_social.png",
+    price: 179.9,
     favorite: true,
     on_sale: true,
     sale_percent: 15.0,
+    type: "Adulto",
+    gender: "Masculino",
+    estacao: "Todas",
   },
   {
-    id: 22,
-    name: "Blusa ombro a ombro feminina",
-    image: "../../../../assets/favorito_vazio.png",
-    price: 65.4,
+    id: 9,
+    name: "Blazer feminino - azul-marinho",
+    image: "../../../../assets/blazer.png",
+    price: 249.9,
     favorite: false,
     on_sale: true,
     sale_percent: 10.0,
+    type: "Infantil",
+    gender: "Todos",
+    estacao: "Todos",
   },
   {
-    id: 23,
-    name: "Tênis casual feminino - sola plataforma",
-    image: "../../../../assets/favorito_vazio.png",
-    price: 170.0,
-    favorite: true,
-    on_sale: false,
-    sale_percent: 0,
-  },
-  {
-    id: 24,
-    name: "Saia curta feminina - veludo",
-    image: "../../../../assets/favorito_vazio.png",
-    price: 88.5,
-    favorite: false,
-    on_sale: true,
-    sale_percent: 22.5,
-  },
-  {
-    id: 25,
-    name: "Bota cano curto feminina - couro sintético",
-    image: "../../../../assets/favorito_vazio.png",
-    price: 220.0,
-    favorite: true,
-    on_sale: true,
-    sale_percent: 12.0,
-  },
-  {
-    id: 26,
-    name: "Suéter feminino - lã acrílica",
-    image: "../../../../assets/favorito_vazio.png",
-    price: 130.3,
+    id: 10,
+    name: "Regata masculina esportiva - preta",
+    image: "../../../../assets/regata_esportiva.png",
+    price: 29.9,
     favorite: false,
     on_sale: false,
     sale_percent: 0,
+    type: "Todos",
+    gender: "Masculino",
+    estacao: "Verão",
   },
   {
-    id: 27,
-    name: "Short saia feminino - poliéster",
-    image: "../../../../assets/favorito_vazio.png",
-    price: 72.0,
-    favorite: true,
-    on_sale: true,
-    sale_percent: 18.5,
-  },
-  {
-    id: 28,
-    name: "Blusa social feminina - manga longa",
-    image: "../../../../assets/favorito_vazio.png",
-    price: 90.7,
-    favorite: false,
-    on_sale: true,
-    sale_percent: 14.0,
-  },
-  {
-    id: 29,
-    name: "Vestido midi feminino - estampa geométrica",
-    image: "../../../../assets/favorito_vazio.png",
-    price: 135.0,
+    id: 11,
+    name: "Suéter feminino de tricô - cinza",
+    image: "../../../../assets/sueter_trico.png",
+    price: 119.9,
     favorite: true,
     on_sale: false,
     sale_percent: 0,
+    type: "Infantil",
+    gender: "Feminino",
+    estacao: "Inverno",
   },
   {
-    id: 30,
-    name: "Bolsa transversal feminina - couro ecológico",
-    image: "../../../../assets/favorito_vazio.png",
-    price: 125.0,
+    id: 12,
+    name: "Camisa social masculina - azul claro",
+    image: "../../../../assets/camisa_social.png",
+    price: 139.9,
     favorite: false,
+    on_sale: true,
+    sale_percent: 20.0,
+    type: "Adulto",
+    gender: "Todos",
+    estacao: "Todas",
+  },
+  {
+    id: 13,
+    name: "Jaqueta corta-vento unissex - cinza",
+    image: "../../../../assets/jaqueta_cortavento.png",
+    price: 199.9,
+    favorite: true,
+    on_sale: true,
+    sale_percent: 30.0,
+    type: "Todos",
+    gender: "Unissex",
+    estacao: "Todos",
+  },
+  {
+    id: 14,
+    name: "Calça moletom masculina - preta",
+    image: "../../../../assets/calca_moletom.png",
+    price: 89.9,
+    favorite: false,
+    on_sale: false,
+    sale_percent: 0,
+    type: "Infantil",
+    gender: "Todos",
+    estacao: "Inverno",
+  },
+  {
+    id: 15,
+    name: "Macacão jeans feminino",
+    image: "../../../../assets/macacao_jeans.png",
+    price: 159.9,
+    favorite: true,
+    on_sale: true,
+    sale_percent: 15.0,
+    type: "Todos",
+    gender: "Feminino",
+    estacao: "Todas",
+  },
+  {
+    id: 16,
+    name: "Tênis esportivo unissex - branco",
+    image: "../../../../assets/tenis_esportivo.png",
+    price: 249.9,
+    favorite: true,
     on_sale: true,
     sale_percent: 10.0,
+    type: "Infantil",
+    gender: "Unissex",
+    estacao: "Todas",
+  },
+  {
+    id: 17,
+    name: "Saia midi plissada - bege",
+    image: "../../../../assets/saia_midi.png",
+    price: 99.9,
+    favorite: false,
+    on_sale: false,
+    sale_percent: 0,
+    type: "Todos",
+    gender: "Feminino",
+    estacao: "Todos",
+  },
+  {
+    id: 18,
+    name: "Casaco de lã masculino - cinza",
+    image: "../../../../assets/casaco_la.png",
+    price: 279.9,
+    favorite: true,
+    on_sale: false,
+    sale_percent: 0,
+    type: "Infantil",
+    gender: "Masculino",
+    estacao: "Inverno",
+  },
+  {
+    id: 19,
+    name: "Casaco de lã masculino - cinza",
+    image: "../../../../assets/casaco_la.png",
+    price: 279.9,
+    favorite: true,
+    on_sale: false,
+    sale_percent: 0,
+    type: "Adulto",
+    gender: "Masculino",
+    estacao: "Inverno",
+  },
+  {
+    id: 20,
+    name: "Casaco de lã masculino - cinza",
+    image: "../../../../assets/casaco_la.png",
+    price: 279.9,
+    favorite: true,
+    on_sale: false,
+    sale_percent: 0,
+    type: "Infantil",
+    gender: "Masculino",
+    estacao: "Inverno",
   },
 ];
 
+const estacoes = ["Inverno", "Verão", "Todos"];
+const generos = ["Unisex", "Masculino", "Feminino", "Família", "Todos"];
+const tipos = ["Adulto", "Infantil", "Todos"];
 export default function Pijamas() {
+  const [listaPijamas, setListaPijamas] = useState<roupa_lista[]>(roupas_teste);
+  const [numPijamas, setNumPijamas] = useState(roupas_teste.length);
+  const [filtros, setFiltros] = useState(0);
   const [paginaPresente, setPaginaPresente] = useState(1);
+  const [generoFiltro, setGeneroFiltro] = useState(false);
+  const [tipoFiltro, setTipoFiltro] = useState(false);
+  const [estacaoFiltro, setEstacaoFiltro] = useState(false);
 
-  function gerarPagina(): roupa_lista[] {
+  const [genero, setGenero] = useState(false);
+  const [tipo, setTipo] = useState(false);
+  const [estacao, setEstacao] = useState(false);
+
+  useEffect(() => {
+    gerarPagina();
+  }, []);
+
+  function gerarPagina() {
     let lista: roupa_lista[] = [];
     for (let i = (paginaPresente - 1) * 5; i < paginaPresente * 5; i++) {
       lista.push(roupas_teste[i]);
     }
+    console.log(paginaPresente);
+    setListaPijamas(lista);
     return lista;
   }
+
+  function paginaTotal(): number {
+    let num = 1;
+    if (listaPijamas) {
+      num = Math.ceil(numPijamas / 5);
+    } else {
+      return num;
+    }
+    return num;
+  }
+  function filtrarGenero(genero: string) {
+    setPaginaPresente(1)
+    let lista = [];
+    let reset = false
+    if(generoFiltro===true){
+      setFiltros(0)
+      reset = true
+    }
+    if (filtros === 0|| reset ===true) {
+      let listaTemp = roupas_teste.filter((roupa) => roupa.gender == genero);
+      for (let i = (paginaPresente - 1) * 5; i < paginaPresente * 5; i++) {
+        if (i >= listaTemp.length) {
+          break;
+        }
+        lista.push(listaTemp[i]);
+      }
+      let num = filtros + 1;
+      setFiltros(num);
+    } else {
+      if (listaPijamas) {
+        let listaTemp = listaPijamas.filter((roupa) => roupa.gender == genero);
+
+        for (let i = (paginaPresente - 1) * 5; i < paginaPresente * 5; i++) {
+          if (i >= listaTemp.length) {
+            break;
+          }
+          lista.push(listaTemp[i]);
+        }
+      } else {
+        alert("Não possui pijama com esses filtros");
+        return 0;
+      }
+    }
+    if (lista.length === 0) {
+      alert("Não possui pijama com esses filtros");
+      return 0;
+    }
+    setNumPijamas(lista.length);
+    setListaPijamas(lista);
+    setGeneroFiltro(true)
+  }
+
+  function filtrarTipo(tipo: string) {
+    let lista = [];
+    setPaginaPresente(1)
+    let reset = false
+
+    if(tipoFiltro===true){
+      setFiltros(0)
+      reset = true
+    }
+    if (filtros === 0|| reset ===true) {
+      let listaTemp = roupas_teste.filter((roupa) => roupa.type == tipo);
+      for (let i = (paginaPresente - 1) * 5; i < paginaPresente * 5; i++) {
+        if (i >= listaTemp.length) {
+          break;
+        }
+        lista.push(listaTemp[i]);
+      }
+      let num = filtros + 1;
+      setFiltros(num);
+    } else {
+      if (listaPijamas) {
+        let listaTemp = listaPijamas.filter((roupa) => roupa.type == tipo);
+        for (let i = (paginaPresente - 1) * 5; i < paginaPresente * 5; i++) {
+          if (i >= listaTemp.length) {
+            break;
+          }
+          lista.push(listaTemp[i]);
+        }
+      } else {
+        alert("Não possui pijama com esses filtros");
+        return 0;
+      }
+    }
+
+    if (lista.length === 0) {
+      alert("Não possui pijama com esses filtros");
+      return 0;
+    }
+    setNumPijamas(lista.length);
+    setListaPijamas(lista);
+    setTipoFiltro(true)
+  }
+
+  function filtrarEstacao(estacao: string) {
+    setPaginaPresente(1)
+    let lista = [];
+    let reset = false
+    if(estacaoFiltro===true){
+      setFiltros(0)
+      reset = true
+    }
+    if (filtros === 0|| reset === true) {
+      let listaTemp = roupas_teste.filter((roupa) => roupa.estacao == estacao);
+      for (let i = (paginaPresente - 1) * 5; i < paginaPresente * 5; i++) {
+        if (i >= listaTemp.length) {
+          break;
+        }
+        lista.push(listaTemp[i]);
+      }
+      let num = filtros + 1;
+      setFiltros(num);
+    } else {
+      if (listaPijamas) {
+        let listaTemp = listaPijamas.filter(
+          (roupa) => roupa.estacao == estacao
+        );
+        for (let i = (paginaPresente - 1) * 5; i < paginaPresente * 5; i++) {
+          if (i >= listaTemp.length) {
+            break;
+          }
+          lista.push(listaTemp[i]);
+        }
+      } else {
+        alert("Não possui pijama com esses filtros");
+        return 0;
+      }
+    }
+    if (lista.length === 0) {
+      alert("Não possui pijama com esses filtros");
+      return 0;
+    }
+    setNumPijamas(lista.length);
+    setListaPijamas(lista);
+    setEstacaoFiltro(true)
+  }
+
   return (
     <>
       <div className={style.filtro}>
@@ -304,46 +431,101 @@ export default function Pijamas() {
           </div>
         </div>
         <div className={style.botoes}>
-          <button className={style.genero}>
-            <div>
-              <div></div>
-              <p>Gênero</p>
+          <button className={style.estacao} onClick={() => setGenero(!genero)}>
+            <div className={style.botaoInicial}>
+              <div className={style.tracoBotao}></div>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <p style={{ marginLeft: "12px" }}>Gênero</p>
+              </div>
             </div>
 
+            {genero ? (
+              <ul className={style.listaEstacao}>
+                <div className={style.tracoLista}></div>
+                <div className={style.elementosFiltro}>
+                  {generos.map((genero) => (
+                    <div onClick={() => filtrarGenero(genero)}>
+                      <li className={style.separador}></li>
+                      <li style={{ marginLeft: "12px" }}>{genero}</li>
+                    </div>
+                  ))}
+                </div>
+              </ul>
+            ) : null}
             <img src={vector} alt="" />
           </button>
-          <button className={style.tipo}>
-            <div>
-              <div></div>
-              <p>Tipo</p>
-            </div>
 
-            <img src={vector} alt="" />
-          </button>
           <button className={style.estacao}>
-            <div>
-              <div></div>
-              <p>Estação</p>
+            <div className={style.botaoInicial} onClick={() => setTipo(!tipo)}>
+              <div className={style.tracoBotao}></div>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <p style={{ marginLeft: "12px" }}>Tipo</p>
+              </div>
             </div>
 
+            {tipo ? (
+              <ul className={style.listaEstacao}>
+                <div className={style.tracoLista}></div>
+                <div className={style.elementosFiltro}>
+                  {tipos.map((tipo) => (
+                    <div onClick={() => filtrarTipo(tipo)}>
+                      <li className={style.separador}></li>
+                      <li style={{ marginLeft: "12px" }}>{tipo}</li>
+                    </div>
+                  ))}
+                </div>
+              </ul>
+            ) : null}
+            <img src={vector} alt="" />
+          </button>
+
+          <button
+            className={style.estacao}
+            onClick={() => setEstacao(!estacao)}
+          >
+            <div className={style.botaoInicial}>
+              <div className={style.tracoBotao}></div>
+              <div style={{ display: "flex", alignItems: "center" }}>
+                <p style={{ marginLeft: "12px" }}>Estação</p>
+              </div>
+            </div>
+
+            {estacao ? (
+              <ul className={style.listaEstacao}>
+                <div className={style.tracoLista}></div>
+                <div className={style.elementosFiltro}>
+                  {estacoes.map((estacao) => (
+                    <div onClick={() => filtrarEstacao(estacao)}>
+                      <li className={style.separador}></li>
+                      <li style={{ marginLeft: "12px" }}>{estacao}</li>
+                    </div>
+                  ))}
+                </div>
+              </ul>
+            ) : null}
             <img src={vector} alt="" />
           </button>
         </div>
       </div>
 
       <div className={style.lista_cards}>
-        {gerarPagina().map((roupa) => (
-          <Roupa
-            key={roupa.id}
-            id={roupa.id}
-            favorite={roupa.favorite}
-            image={roupa.image}
-            name={roupa.name}
-            on_sale={roupa.on_sale}
-            sale_percent={roupa.sale_percent}
-            price={roupa.price}
-          />
-        ))}
+        {listaPijamas
+          ? listaPijamas.map((roupa) => (
+              <Roupa
+                key={roupa.id}
+                id={roupa.id}
+                favorite={roupa.favorite}
+                image={roupa.image}
+                name={roupa.name}
+                on_sale={roupa.on_sale}
+                sale_percent={roupa.sale_percent}
+                price={roupa.price}
+                estacao={roupa.estacao}
+                gender={roupa.gender}
+                type={roupa.type}
+              />
+            ))
+          : null}
       </div>
       <div className={style.navegador}>
         <ul>
@@ -354,6 +536,7 @@ export default function Pijamas() {
               onClick={() => {
                 if (paginaPresente > 1) {
                   setPaginaPresente(() => paginaPresente - 1);
+                  gerarPagina();
                 }
               }}
             />
@@ -361,38 +544,67 @@ export default function Pijamas() {
           </li>
           {paginaPresente === 1 ? (
             <div className={style.primeiraPagina}>
-              <li onClick={() => setPaginaPresente(() => paginaPresente)}>
+              <li
+                onClick={() => {
+                  setPaginaPresente(() => paginaPresente);
+                  gerarPagina();
+                }}
+              >
                 {paginaPresente}
               </li>
             </div>
-          ) : paginaPresente != roupas_teste.length / 5 - 1 &&
-            paginaPresente != roupas_teste.length / 5 ? (
-            <li onClick={() => setPaginaPresente(() => paginaPresente - 1)}>
+          ) : paginaPresente != paginaTotal() - 1 &&
+            paginaPresente != paginaTotal() ? (
+            <li
+              onClick={() => {
+                setPaginaPresente(() => paginaPresente - 1);
+                gerarPagina();
+              }}
+            >
               {paginaPresente - 1}
             </li>
           ) : (
-            <li onClick={() => setPaginaPresente(() => paginaPresente - 2)}>
+            <li
+              onClick={() => {
+                setPaginaPresente(() => paginaPresente - 2);
+                gerarPagina();
+              }}
+            >
               {paginaPresente - 2}
             </li>
           )}
 
           {/* Segundo */}
           {paginaPresente > 1 &&
-          paginaPresente != roupas_teste.length / 5 - 1 &&
-          paginaPresente != roupas_teste.length / 5 ? (
+          paginaPresente != paginaTotal() - 1 &&
+          paginaPresente != paginaTotal() ? (
             <div className={style.primeiraPagina}>
-              <li onClick={() => setPaginaPresente(() => paginaPresente)}>
+              <li
+                onClick={() => {
+                  setPaginaPresente(() => paginaPresente);
+                  gerarPagina();
+                }}
+              >
                 {paginaPresente}
               </li>
             </div>
-          ) : 
-            paginaPresente == roupas_teste.length / 5 - 1  ? (
-            <li onClick={() => setPaginaPresente(() => paginaPresente - 1)}>
+          ) : paginaPresente == paginaTotal() - 1 ? (
+            <li
+              onClick={() => {
+                setPaginaPresente(() => paginaPresente - 1);
+                gerarPagina();
+              }}
+            >
               {paginaPresente - 1}
             </li>
           ) : null}
           {paginaPresente == 1 ? (
-            <li onClick={() => setPaginaPresente(() => paginaPresente + 1)}>
+            <li
+              onClick={() => {
+                setPaginaPresente(() => paginaPresente + 1);
+                gerarPagina();
+              }}
+            >
               {paginaPresente + 1}
             </li>
           ) : null}
@@ -400,40 +612,41 @@ export default function Pijamas() {
           <li>...</li>
 
           {/* Terceiro */}
-          {paginaPresente === roupas_teste.length / 5 - 1 ? (
+          {paginaTotal()===1?null:paginaPresente === paginaTotal() - 1 ? (
             <div className={style.primeiraPagina}>
               <li
-                onClick={() =>
-                  setPaginaPresente(() => roupas_teste.length / 5 - 1)
-                }
+                onClick={() => {
+                  setPaginaPresente(() => paginaTotal() - 1);
+                  gerarPagina();
+                }}
               >
-                {roupas_teste.length / 5 - 1}
+                {paginaTotal() - 1}
               </li>
             </div>
           ) : (
             <li
-              onClick={() =>
-                setPaginaPresente(() => roupas_teste.length / 5 - 1)
+              onClick={() =>{
+                setPaginaPresente(() => paginaTotal() - 1);gerarPagina()}
               }
             >
-              {roupas_teste.length / 5 - 1}
+              {paginaTotal() - 1}
             </li>
           )}
 
           {/* Quarto */}
-          {paginaPresente === roupas_teste.length / 5 ? (
+          {paginaTotal()===1? null:paginaPresente === paginaTotal() ? (
             <div className={style.primeiraPagina}>
               <li
-                onClick={() => setPaginaPresente(() => roupas_teste.length / 5)}
+                onClick={() => {setPaginaPresente(() => paginaTotal());gerarPagina()}}
               >
-                {roupas_teste.length / 5}
+                {paginaTotal()}
               </li>
             </div>
           ) : (
             <li
-              onClick={() => setPaginaPresente(() => roupas_teste.length / 5)}
+              onClick={() => {setPaginaPresente(() => paginaTotal());gerarPagina()}}
             >
-              {roupas_teste.length / 5}
+              {paginaTotal()}
             </li>
           )}
 
@@ -442,9 +655,18 @@ export default function Pijamas() {
               src={posterior}
               alt=""
               onClick={() => {
-                if (paginaPresente + 1 < (roupas_teste.length + 1) / 5) {
-                  setPaginaPresente(() => paginaPresente + 1);
+                if(paginaTotal()<3){
+                  if (paginaPresente + 1 <= paginaTotal()+1) {
+                    setPaginaPresente(() => paginaPresente + 1);
+                    gerarPagina();
+                  }
+                }else{
+                  if (paginaPresente + 1 < paginaTotal()+1) {
+                    setPaginaPresente(() => paginaPresente + 1);
+                    gerarPagina();
+                  }
                 }
+                
               }}
             />
           </li>

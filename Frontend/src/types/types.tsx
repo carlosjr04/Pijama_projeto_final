@@ -19,4 +19,7 @@ export interface roupa_lista{
     favorite:boolean 
     on_sale: boolean 
     sale_percent:number 
+    type:string
+    gender:string 
+    estacao:string
 }
