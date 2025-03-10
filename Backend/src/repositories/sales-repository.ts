@@ -1,5 +1,5 @@
 import { Prisma, Sale } from "@prisma/client";
 
 export interface SalesRepository {
-    create(data: Prisma.SaleCreateInput): Promise<Sale>
+    create(data: Prisma.SaleUncheckedCreateInput): Promise<Sale>
 }

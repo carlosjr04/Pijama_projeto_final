@@ -3,7 +3,7 @@ import { prisma } from "@/lib/prisma";
 import { SalesRepository } from "../sales-repository";
 
 export class PrismaSalesRepository implements SalesRepository {
-    async create(data: Prisma.SaleCreateInput) {
+    async create(data: Prisma.SaleUncheckedCreateInput) {
         const sale = await prisma.sale.create({
             data
         })

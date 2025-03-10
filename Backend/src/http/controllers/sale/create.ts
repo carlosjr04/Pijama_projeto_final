@@ -5,27 +5,23 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
 export async function create(request: FastifyRequest, reply: FastifyReply){
-    const registerSaleBodySchema = z.object({
+    const registerBodySchema = z.object({
         buyer_name: z.string(),
         cpf: z.string(),
         price: z.number(),
-        payment_method: z.string(),
+        payment_method: z.enum(["Debit Card", "Credit Card", "Pix"]),
         installments: z.number().optional(),
-        card_number: z.string().optional()
-
-    })
-
-    const registerAddressBodySchema = z.object({
+        card_number: z.string().optional(),
         zip_code: z.string(),
         state: z.string(),
         city: z.string(),
         neighborhood: z.string(),
         address: z.string(),
         number: z.string()
+
     })
 
-    const { buyer_name, cpf, price, payment_method, installments, card_number } = registerSaleBodySchema.parse(request.body)
-    const { zip_code, state, city, neighborhood, address, number } = registerAddressBodySchema.parse(request.body)
+    const { buyer_name, cpf, price, payment_method, installments, card_number, zip_code, state, city, neighborhood, address, number } = registerBodySchema.parse(request.body)
 
     try {
 
@@ -41,10 +37,8 @@ export async function create(request: FastifyRequest, reply: FastifyReply){
                 price, 
                 payment_method, 
                 installments, 
-                card_number
-            },
-
-            {
+                card_number,
+                
                 zip_code, 
                 state, 
                 city, 

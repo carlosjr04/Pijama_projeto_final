@@ -44,11 +44,11 @@ model PajamaSize {
 model Sale {
   id         String         @id @default(uuid())
   buyer_name String
-  cpf        String         @unique
+  cpf        String
   price      Float
   pajamas    Sale_Pajamas[]
 
-  addressId String  @unique
+  addressId String
   Address   Address @relation(fields: [addressId], references: [id])
 
   payment_method String
@@ -77,6 +77,8 @@ model Address {
   address      String
   number       String
   sale         Sale[]
+
+  @@unique([zip_code, state, city, neighborhood, address, number])
 }
 
 model User {

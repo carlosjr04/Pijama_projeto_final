@@ -3,23 +3,23 @@ import { SalesRepository } from "@/repositories/sales-repository";
 import { Sale } from "@prisma/client";
 
 
-interface CreateAddressUseCaseRequest {
-    zip_code: string,
-    state: string,
-    city: string,
-    neighborhood: string,
-    address: string,
-    number: string
-}
-interface CreateSaleUseCaseRequest {
-    buyer_name: string,
-    cpf: string,
-    price: number,
-    payment_method: string,
-    installments?: number,
+interface CreateUseCaseRequest {
+
+    buyer_name: string
+    cpf: string
+    price: number
+    payment_method: string
+    installments?: number
     card_number?: string
 
+    zip_code: string
+    state: string
+    city: string
+    neighborhood: string
+    address: string
+    number: string
 }
+
 
 interface CreateSaleUseCaseResponse {
     sale: Sale
@@ -28,7 +28,7 @@ interface CreateSaleUseCaseResponse {
 export class CreateSaleUseCase {
     constructor (private SalesRepository: SalesRepository, private AddressRepository: AddressRepository){}
 
-    async execute({buyer_name, cpf, price, payment_method, installments, card_number}: CreateSaleUseCaseRequest, {zip_code, state, city, address, neighborhood, number}: CreateAddressUseCaseRequest): Promise<CreateSaleUseCaseResponse> {
+    async execute({buyer_name, cpf, price, payment_method, installments, card_number, zip_code, state, city, address, neighborhood, number}: CreateUseCaseRequest): Promise<CreateSaleUseCaseResponse> {
 
         if (payment_method.toLowerCase() === "credit card" || payment_method.toLowerCase() === "debit card"){
             if (!card_number) {
@@ -36,7 +36,7 @@ export class CreateSaleUseCase {
             }
         }
 
-        const createdAddress = await this.AddressRepository.create({
+        const createdAddress = await this.AddressRepository.firstOrCreate({
             zip_code,
             state,
             city,
@@ -50,7 +50,7 @@ export class CreateSaleUseCase {
             buyer_name,
             cpf,
             price,
-            Address: { connect: { id: createdAddress.id } },
+            addressId: createdAddress.id,
             payment_method,
             installments,
             card_number
