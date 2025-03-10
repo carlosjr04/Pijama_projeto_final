@@ -262,6 +262,10 @@ export default function Pijamas() {
   const [tipoFiltro, setTipoFiltro] = useState(false);
   const [estacaoFiltro, setEstacaoFiltro] = useState(false);
 
+  const [pijamaBusca, setPijamaBusca] = useState<roupa_lista[]>();
+  const [Pesquisa, setPesquisa] = useState(false);
+  const [Busca, setBusca] = useState("");
+
   const [genero, setGenero] = useState(false);
   const [tipo, setTipo] = useState(false);
   const [estacao, setEstacao] = useState(false);
@@ -275,7 +279,6 @@ export default function Pijamas() {
     for (let i = (paginaPresente - 1) * 5; i < paginaPresente * 5; i++) {
       lista.push(roupas_teste[i]);
     }
-    console.log(paginaPresente);
     setListaPijamas(lista);
     return lista;
   }
@@ -290,14 +293,14 @@ export default function Pijamas() {
     return num;
   }
   function filtrarGenero(genero: string) {
-    setPaginaPresente(1)
+    setPaginaPresente(1);
     let lista = [];
-    let reset = false
-    if(generoFiltro===true){
-      setFiltros(0)
-      reset = true
+    let reset = false;
+    if (generoFiltro === true) {
+      setFiltros(0);
+      reset = true;
     }
-    if (filtros === 0|| reset ===true) {
+    if (filtros === 0 || reset === true) {
       let listaTemp = roupas_teste.filter((roupa) => roupa.gender == genero);
       for (let i = (paginaPresente - 1) * 5; i < paginaPresente * 5; i++) {
         if (i >= listaTemp.length) {
@@ -328,19 +331,19 @@ export default function Pijamas() {
     }
     setNumPijamas(lista.length);
     setListaPijamas(lista);
-    setGeneroFiltro(true)
+    setGeneroFiltro(true);
   }
 
   function filtrarTipo(tipo: string) {
     let lista = [];
-    setPaginaPresente(1)
-    let reset = false
+    setPaginaPresente(1);
+    let reset = false;
 
-    if(tipoFiltro===true){
-      setFiltros(0)
-      reset = true
+    if (tipoFiltro === true) {
+      setFiltros(0);
+      reset = true;
     }
-    if (filtros === 0|| reset ===true) {
+    if (filtros === 0 || reset === true) {
       let listaTemp = roupas_teste.filter((roupa) => roupa.type == tipo);
       for (let i = (paginaPresente - 1) * 5; i < paginaPresente * 5; i++) {
         if (i >= listaTemp.length) {
@@ -371,18 +374,18 @@ export default function Pijamas() {
     }
     setNumPijamas(lista.length);
     setListaPijamas(lista);
-    setTipoFiltro(true)
+    setTipoFiltro(true);
   }
 
   function filtrarEstacao(estacao: string) {
-    setPaginaPresente(1)
+    setPaginaPresente(1);
     let lista = [];
-    let reset = false
-    if(estacaoFiltro===true){
-      setFiltros(0)
-      reset = true
+    let reset = false;
+    if (estacaoFiltro === true) {
+      setFiltros(0);
+      reset = true;
     }
-    if (filtros === 0|| reset === true) {
+    if (filtros === 0 || reset === true) {
       let listaTemp = roupas_teste.filter((roupa) => roupa.estacao == estacao);
       for (let i = (paginaPresente - 1) * 5; i < paginaPresente * 5; i++) {
         if (i >= listaTemp.length) {
@@ -414,9 +417,23 @@ export default function Pijamas() {
     }
     setNumPijamas(lista.length);
     setListaPijamas(lista);
-    setEstacaoFiltro(true)
+    setEstacaoFiltro(true);
   }
+  function buscarPijama(): roupa_lista[] {
+    let pijamaBuscar = listaPijamas.filter((pijama) =>
+      pijama.name.toLowerCase().includes(Busca)
+    );
 
+    return pijamaBuscar;
+  }
+  function handleClick() {
+    setPesquisa(true);
+    setPijamaBusca(buscarPijama());
+  }
+  if (Busca == "" && Pesquisa == true) {
+    setPijamaBusca(undefined);
+    setPesquisa(false);
+  }
   return (
     <>
       <div className={style.filtro}>
@@ -426,8 +443,16 @@ export default function Pijamas() {
               type="text"
               className={style.busca}
               placeholder="Pesquise pelo produto..."
+              value={Busca}
+              onChange={(e) => {
+                setBusca(e.target.value);
+              }}
             />
-            <button className={style.botaoBusca}></button>
+            <button
+              type="submit"
+              onClick={handleClick}
+              className={style.botaoBusca}
+            ></button>
           </div>
         </div>
         <div className={style.botoes}>
@@ -509,8 +534,19 @@ export default function Pijamas() {
       </div>
 
       <div className={style.lista_cards}>
-        {listaPijamas
-          ? listaPijamas.map((roupa) => (
+        {Pesquisa ? (
+          pijamaBusca?.length === 0 ? (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                marginTop: "10rem",
+              }}
+            >
+              <h1 className={style.textoVazio}>Pijama não encontrado.</h1>
+            </div>
+          ) : (
+            pijamaBusca?.map((roupa) => (
               <Roupa
                 key={roupa.id}
                 id={roupa.id}
@@ -525,7 +561,24 @@ export default function Pijamas() {
                 type={roupa.type}
               />
             ))
-          : null}
+          )
+        ) : listaPijamas ? (
+          listaPijamas.map((roupa) => (
+            <Roupa
+              key={roupa.id}
+              id={roupa.id}
+              favorite={roupa.favorite}
+              image={roupa.image}
+              name={roupa.name}
+              on_sale={roupa.on_sale}
+              sale_percent={roupa.sale_percent}
+              price={roupa.price}
+              estacao={roupa.estacao}
+              gender={roupa.gender}
+              type={roupa.type}
+            />
+          ))
+        ) : null}
       </div>
       <div className={style.navegador}>
         <ul>
@@ -612,7 +665,7 @@ export default function Pijamas() {
           <li>...</li>
 
           {/* Terceiro */}
-          {paginaTotal()===1?null:paginaPresente === paginaTotal() - 1 ? (
+          {paginaTotal() === 1 ? null : paginaPresente === paginaTotal() - 1 ? (
             <div className={style.primeiraPagina}>
               <li
                 onClick={() => {
@@ -625,26 +678,33 @@ export default function Pijamas() {
             </div>
           ) : (
             <li
-              onClick={() =>{
-                setPaginaPresente(() => paginaTotal() - 1);gerarPagina()}
-              }
+              onClick={() => {
+                setPaginaPresente(() => paginaTotal() - 1);
+                gerarPagina();
+              }}
             >
               {paginaTotal() - 1}
             </li>
           )}
 
           {/* Quarto */}
-          {paginaTotal()===1? null:paginaPresente === paginaTotal() ? (
+          {paginaTotal() === 1 ? null : paginaPresente === paginaTotal() ? (
             <div className={style.primeiraPagina}>
               <li
-                onClick={() => {setPaginaPresente(() => paginaTotal());gerarPagina()}}
+                onClick={() => {
+                  setPaginaPresente(() => paginaTotal());
+                  gerarPagina();
+                }}
               >
                 {paginaTotal()}
               </li>
             </div>
           ) : (
             <li
-              onClick={() => {setPaginaPresente(() => paginaTotal());gerarPagina()}}
+              onClick={() => {
+                setPaginaPresente(() => paginaTotal());
+                gerarPagina();
+              }}
             >
               {paginaTotal()}
             </li>
@@ -655,18 +715,17 @@ export default function Pijamas() {
               src={posterior}
               alt=""
               onClick={() => {
-                if(paginaTotal()<3){
-                  if (paginaPresente + 1 <= paginaTotal()+1) {
+                if (paginaTotal() < 3) {
+                  if (paginaPresente + 1 <= paginaTotal() + 1) {
                     setPaginaPresente(() => paginaPresente + 1);
                     gerarPagina();
                   }
-                }else{
-                  if (paginaPresente + 1 < paginaTotal()+1) {
+                } else {
+                  if (paginaPresente + 1 < paginaTotal() + 1) {
                     setPaginaPresente(() => paginaPresente + 1);
                     gerarPagina();
                   }
                 }
-                
               }}
             />
           </li>
