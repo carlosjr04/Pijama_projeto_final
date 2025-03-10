@@ -4,7 +4,7 @@
 
 .cardContainer {
     display: flex;
-    gap: 2vw;
+    gap: 3vw;
 }
 
 .cardContainer > img {
@@ -13,7 +13,7 @@
 
 .cardContainer > h2 {
     font-size: 1.2rem;
-    font-weight: 500;
+    font-weight: 700;
     align-self: center;
 }
 
