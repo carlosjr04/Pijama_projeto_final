@@ -4,7 +4,7 @@ import { ReadPijamaUseCase } from "@/use-cases/pijamas/read-pijama-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
-export async function get(request: FastifyRequest, reply: FastifyReply) {
+export async function read(request: FastifyRequest, reply: FastifyReply) {
     const getParamsSchema = z.object({
         pijamaId: z.string().uuid()
     })

@@ -6,6 +6,7 @@ import fastifyCookie from "@fastify/cookie";
 import fastifyCors from "@fastify/cors";
 import { userRoutes } from "./http/controllers/user/routes";
 import { feedbacksRoutes } from "./http/controllers/feedback/routes";
+import { pijamaRoutes } from "./http/controllers/pijama/routes";
 
 export const app = fastify();
 
@@ -30,6 +31,7 @@ app.register(fastifyJwt, {
 app.register(fastifyCookie);
 
 app.register(userRoutes);
+app.register(pijamaRoutes);
 app.register(feedbacksRoutes);
 
 app.setErrorHandler((error, request, reply) => {
