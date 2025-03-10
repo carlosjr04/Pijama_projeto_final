@@ -1,10 +1,12 @@
 import { PrismaFeedbacksRepository } from "@/repositories/prisma/prisma-feedbacks-repository";
+import { PrismaUsersRepository } from "@/repositories/prisma/prisma-users-repository";
 import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-fount-error";
-import { DeleteFeedbackUseCase } from "@/use-cases/feedbacks/delete-feedbacks-use-case";
+import { GetFeedbackByIdUseCase } from "@/use-cases/feedbacks/get-feedback-by-id-use-case";
+import { GetFeedbackUseCase } from "@/use-cases/feedbacks/get-feedbacks-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
-export async function deleteFeedbackById(
+export async function getFeedbackById(
   request: FastifyRequest,
   reply: FastifyReply
 ) {
@@ -16,13 +18,14 @@ export async function deleteFeedbackById(
 
   try {
     const prismaFeedbacksRepository = new PrismaFeedbacksRepository();
-    const deleteFeedbackUseCase = new DeleteFeedbackUseCase(
+    const getFeedbackUseCase = new GetFeedbackByIdUseCase(
       prismaFeedbacksRepository
     );
 
-    await deleteFeedbackUseCase.execute({
+    const feedbacks = await getFeedbackUseCase.execute({
       feedbackId,
     });
+    return feedbacks;
   } catch (err) {
     if (err instanceof ResourceNotFoundError) {
       return reply.status(404).send({ message: err.message });

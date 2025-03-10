@@ -3,6 +3,12 @@ import { FeedbacksRepository } from "../feedbacks-repository";
 import { prisma } from "@/lib/prisma";
 
 export class PrismaFeedbacksRepository implements FeedbacksRepository {
+  async getById(feedbackId: string): Promise<Feedback | null> {
+    const feedback = await prisma.feedback.findUnique({
+      where: { id: feedbackId },
+    });
+    return feedback;
+  }
   async getAll(): Promise<Feedback[]> {
     const feedbacks = await prisma.feedback.findMany();
     return feedbacks;
@@ -22,9 +28,9 @@ export class PrismaFeedbacksRepository implements FeedbacksRepository {
     return feedback;
   }
 
-  async deleteByUserId(userId: string): Promise<void> {
-    await prisma.feedback.deleteMany({
-      where: { userId },
+  async deleteById(feedbackId: string): Promise<void> {
+    await prisma.feedback.delete({
+      where: { id: feedbackId },
     });
   }
 }
