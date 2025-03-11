@@ -52,6 +52,7 @@
     background-color: var(--cinza0);
     border: none;
     font-size: 1.5rem;
+    cursor: pointer;
 }
 
 .output {
@@ -75,3 +76,17 @@
     font-weight: bold;
 }
 
+.deleteButton {
+    border: none;
+    background-color: inherit;
+    align-self: flex-start;
+    font-size: 2rem;
+}
+
+.deleteButton:hover {
+    cursor: pointer;
+}
+
+.deleteButton:active {
+    background-color: var(--cinza0);
+}

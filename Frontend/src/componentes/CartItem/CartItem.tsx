@@ -49,9 +49,7 @@ export default function CartItem({name, imgPath, code, size, price} : cartItemPr
                 
             </div>
             <h2>R$ {formatPrice(quantity * price)}</h2>
-            <div>
-                {/* Botão de excluir do carrinho */}
-            </div>
+            <button className={styles.deleteButton}>X</button>
         </div>
     )
 }
