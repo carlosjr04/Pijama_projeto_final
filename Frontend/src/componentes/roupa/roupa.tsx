@@ -1,7 +1,7 @@
-import roupaImagem from "../../../../assets/roupa_teste.png";
-import favorito_cheio from "../../../../assets/favorito_cheio.png";
-import favorito_vazio from "../../../../assets/favorito_vazio.png";
-import desconto_imagem from "../../../../assets/desconto_imagem.png";
+import roupaImagem from "../../assets/roupa_teste.png";
+import favorito_cheio from "../../assets/favorito_cheio.png";
+import favorito_vazio from "../../assets/favorito_vazio.png";
+import desconto_imagem from "../../assets/desconto_imagem.png";
 import style from "./style.module.css";
 import { pijama } from "../../types/types";
 import { useState } from "react";
@@ -25,7 +25,7 @@ export default function Roupa(roupa: pijama) {
     return partesLista;
   }
   function navigatePijama(){
-    navigate(`pijama/${roupa.id}`)
+    navigate(`/pijama/${roupa.id}`)
   }
   return (
     <>
