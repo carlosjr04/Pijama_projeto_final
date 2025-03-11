@@ -6,6 +6,7 @@ import posterior from "../../assets/prox.png";
 
 import { useEffect, useState } from "react";
 import { roupa_lista } from "../../types/types";
+import { useParams } from "react-router-dom";
 
 const roupas_teste = [
   {
@@ -53,7 +54,7 @@ const roupas_teste = [
     on_sale: true,
     sale_percent: 10.0,
     type: "Adulto",
-    gender: "Masculino",
+    gender: "Feminino",
     estacao: "Verão",
   },
   {
@@ -77,7 +78,7 @@ const roupas_teste = [
     on_sale: true,
     sale_percent: 25.0,
     type: "Infantil",
-    gender: "Masculino",
+    gender: "Feminino",
     estacao: "Todos",
   },
   {
@@ -101,7 +102,7 @@ const roupas_teste = [
     on_sale: true,
     sale_percent: 15.0,
     type: "Adulto",
-    gender: "Masculino",
+    gender: "Feminino",
     estacao: "Todas",
   },
   {
@@ -113,7 +114,7 @@ const roupas_teste = [
     on_sale: true,
     sale_percent: 10.0,
     type: "Infantil",
-    gender: "Todos",
+    gender: "Feminino",
     estacao: "Todos",
   },
   {
@@ -255,9 +256,14 @@ const generos = ["Unisex", "Masculino", "Feminino", "Família", "Todos"];
 const tipos = ["Adulto", "Infantil", "Todos"];
 export default function Pijamas() {
   const [listaPijamas, setListaPijamas] = useState<roupa_lista[]>(roupas_teste);
+  const [listaPijamasPagina, setListaPijamasPagina] =
+    useState<roupa_lista[]>(roupas_teste);
   const [numPijamas, setNumPijamas] = useState(roupas_teste.length);
+
   const [filtros, setFiltros] = useState(0);
+
   const [paginaPresente, setPaginaPresente] = useState(1);
+
   const [generoFiltro, setGeneroFiltro] = useState(false);
   const [tipoFiltro, setTipoFiltro] = useState(false);
   const [estacaoFiltro, setEstacaoFiltro] = useState(false);
@@ -270,16 +276,46 @@ export default function Pijamas() {
   const [tipo, setTipo] = useState(false);
   const [estacao, setEstacao] = useState(false);
 
+  const { pijamaTipo } = useParams();
+  useEffect(() => {
+    if (pijamaTipo === "masculino") {
+      filtrarGenero("Masculino");
+    } else if (pijamaTipo === "feminino") {
+      filtrarGenero("Feminino");
+    } else if (pijamaTipo === "infantil"){ 
+      filtrarTipo("Infantil")
+    }else{
+      setListaPijamas(roupas_teste)
+      setNumPijamas(roupas_teste.length)
+      gerarPagina()
+    };
+  }, [pijamaTipo]);
   useEffect(() => {
     gerarPagina();
   }, []);
+  useEffect(() => {
+    console.log("Página Atualizada:", paginaPresente);
+    gerarPagina();
+  }, [paginaPresente]);
+  useEffect(() => {
+    gerarPagina();
+  }, [listaPijamas, filtros]);
 
   function gerarPagina() {
     let lista: roupa_lista[] = [];
+
+    console.log(listaPijamas.length);
     for (let i = (paginaPresente - 1) * 5; i < paginaPresente * 5; i++) {
-      lista.push(roupas_teste[i]);
+      if (i >= listaPijamas.length) {
+        console.log("deubrak");
+        break;
+      }
+      console.log(listaPijamas[i]);
+      lista.push(listaPijamas[i]);
     }
-    setListaPijamas(lista);
+
+    setListaPijamasPagina(lista);
+
     return lista;
   }
 
@@ -289,6 +325,9 @@ export default function Pijamas() {
       num = Math.ceil(numPijamas / 5);
     } else {
       return num;
+    }
+    if (num < 2) {
+      return 1;
     }
     return num;
   }
@@ -302,24 +341,15 @@ export default function Pijamas() {
     }
     if (filtros === 0 || reset === true) {
       let listaTemp = roupas_teste.filter((roupa) => roupa.gender == genero);
-      for (let i = (paginaPresente - 1) * 5; i < paginaPresente * 5; i++) {
-        if (i >= listaTemp.length) {
-          break;
-        }
-        lista.push(listaTemp[i]);
-      }
+
+      lista = listaTemp;
+
       let num = filtros + 1;
       setFiltros(num);
     } else {
       if (listaPijamas) {
         let listaTemp = listaPijamas.filter((roupa) => roupa.gender == genero);
-
-        for (let i = (paginaPresente - 1) * 5; i < paginaPresente * 5; i++) {
-          if (i >= listaTemp.length) {
-            break;
-          }
-          lista.push(listaTemp[i]);
-        }
+        lista = listaTemp;
       } else {
         alert("Não possui pijama com esses filtros");
         return 0;
@@ -329,8 +359,10 @@ export default function Pijamas() {
       alert("Não possui pijama com esses filtros");
       return 0;
     }
+
     setNumPijamas(lista.length);
     setListaPijamas(lista);
+
     setGeneroFiltro(true);
   }
 
@@ -345,23 +377,16 @@ export default function Pijamas() {
     }
     if (filtros === 0 || reset === true) {
       let listaTemp = roupas_teste.filter((roupa) => roupa.type == tipo);
-      for (let i = (paginaPresente - 1) * 5; i < paginaPresente * 5; i++) {
-        if (i >= listaTemp.length) {
-          break;
-        }
-        lista.push(listaTemp[i]);
-      }
+
+      lista = listaTemp;
+
       let num = filtros + 1;
       setFiltros(num);
     } else {
       if (listaPijamas) {
         let listaTemp = listaPijamas.filter((roupa) => roupa.type == tipo);
-        for (let i = (paginaPresente - 1) * 5; i < paginaPresente * 5; i++) {
-          if (i >= listaTemp.length) {
-            break;
-          }
-          lista.push(listaTemp[i]);
-        }
+
+        lista = listaTemp;
       } else {
         alert("Não possui pijama com esses filtros");
         return 0;
@@ -387,12 +412,9 @@ export default function Pijamas() {
     }
     if (filtros === 0 || reset === true) {
       let listaTemp = roupas_teste.filter((roupa) => roupa.estacao == estacao);
-      for (let i = (paginaPresente - 1) * 5; i < paginaPresente * 5; i++) {
-        if (i >= listaTemp.length) {
-          break;
-        }
-        lista.push(listaTemp[i]);
-      }
+
+      lista = listaTemp;
+
       let num = filtros + 1;
       setFiltros(num);
     } else {
@@ -400,12 +422,8 @@ export default function Pijamas() {
         let listaTemp = listaPijamas.filter(
           (roupa) => roupa.estacao == estacao
         );
-        for (let i = (paginaPresente - 1) * 5; i < paginaPresente * 5; i++) {
-          if (i >= listaTemp.length) {
-            break;
-          }
-          lista.push(listaTemp[i]);
-        }
+
+        lista = listaTemp;
       } else {
         alert("Não possui pijama com esses filtros");
         return 0;
@@ -562,8 +580,8 @@ export default function Pijamas() {
               />
             ))
           )
-        ) : listaPijamas ? (
-          listaPijamas.map((roupa) => (
+        ) : listaPijamasPagina ? (
+          listaPijamasPagina.map((roupa) => (
             <Roupa
               key={roupa.id}
               id={roupa.id}
@@ -588,142 +606,126 @@ export default function Pijamas() {
               alt=""
               onClick={() => {
                 if (paginaPresente > 1) {
-                  setPaginaPresente(() => paginaPresente - 1);
-                  gerarPagina();
+                  setPaginaPresente(paginaPresente - 1);
                 }
               }}
             />
-            {/* Primeiro */}
           </li>
-          {paginaPresente === 1 ? (
-            <div className={style.primeiraPagina}>
-              <li
-                onClick={() => {
-                  setPaginaPresente(() => paginaPresente);
-                  gerarPagina();
-                }}
-              >
-                {paginaPresente}
-              </li>
-            </div>
-          ) : paginaPresente != paginaTotal() - 1 &&
-            paginaPresente != paginaTotal() ? (
-            <li
-              onClick={() => {
-                setPaginaPresente(() => paginaPresente - 1);
-                gerarPagina();
-              }}
-            >
-              {paginaPresente - 1}
-            </li>
-          ) : (
-            <li
-              onClick={() => {
-                setPaginaPresente(() => paginaPresente - 2);
-                gerarPagina();
-              }}
-            >
-              {paginaPresente - 2}
-            </li>
+          {/* Primeiro */}
+          {paginaTotal() >= 4 && (
+            <>
+              {paginaPresente < paginaTotal() - 1 ? (
+                paginaPresente === 1 ? (
+                  <li className={style.primeiraPagina}>{paginaPresente}</li>
+                ) : (
+                  <li>{paginaPresente - 1}</li>
+                )
+              ) : null}
+
+              {paginaPresente === paginaTotal() - 1 && (
+                <li>{paginaPresente - 2}</li>
+              )}
+              {paginaPresente === paginaTotal() && (
+                <li>{paginaPresente - 3}</li>
+              )}
+
+              {paginaPresente < paginaTotal() - 1 ? (
+                paginaPresente !== 1 ? (
+                  <li className={style.primeiraPagina}>{paginaPresente}</li>
+                ) : (
+                  <li>{paginaPresente + 1}</li>
+                )
+              ) : null}
+
+              {paginaPresente === paginaTotal() - 1 && (
+                <li>{paginaPresente - 1}</li>
+              )}
+              {paginaPresente === paginaTotal() && (
+                <li>{paginaPresente - 2}</li>
+              )}
+
+              <li>...</li>
+
+              {paginaPresente === paginaTotal() - 1 ? (
+                <li className={style.primeiraPagina}>{paginaTotal() - 1}</li>
+              ) : (
+                <li>{paginaTotal() - 1}</li>
+              )}
+
+              {paginaPresente === paginaTotal() ? (
+                <li className={style.primeiraPagina}>{paginaTotal()}</li>
+              ) : (
+                <li>{paginaTotal()}</li>
+              )}
+            </>
+          )}
+          {paginaTotal() === 3 && (
+            <>
+              {paginaPresente != paginaTotal() ? (
+                paginaPresente === 1 ? (
+                  <li className={style.primeiraPagina}>{paginaPresente}</li>
+                ) : (
+                  <li>{paginaPresente - 1}</li>
+                )
+              ) : (
+                <li>{paginaPresente - 2}</li>
+              )}
+
+              {paginaPresente != paginaTotal() ? (
+                paginaPresente === 1 ? (
+                  <li>{paginaPresente + 1}</li>
+                ) : (
+                  <li className={style.primeiraPagina}>{paginaPresente}</li>
+                )
+              ) : (
+                <li>{paginaPresente - 1}</li>
+              )}
+
+              <li>...</li>
+
+              {paginaPresente === paginaTotal() ? (
+                <li className={style.primeiraPagina}>{paginaTotal()}</li>
+              ) : (
+                <li>{paginaTotal()}</li>
+              )}
+            </>
           )}
 
-          {/* Segundo */}
-          {paginaPresente > 1 &&
-          paginaPresente != paginaTotal() - 1 &&
-          paginaPresente != paginaTotal() ? (
-            <div className={style.primeiraPagina}>
-              <li
-                onClick={() => {
-                  setPaginaPresente(() => paginaPresente);
-                  gerarPagina();
-                }}
-              >
-                {paginaPresente}
-              </li>
-            </div>
-          ) : paginaPresente == paginaTotal() - 1 ? (
-            <li
-              onClick={() => {
-                setPaginaPresente(() => paginaPresente - 1);
-                gerarPagina();
-              }}
-            >
-              {paginaPresente - 1}
-            </li>
-          ) : null}
-          {paginaPresente == 1 ? (
-            <li
-              onClick={() => {
-                setPaginaPresente(() => paginaPresente + 1);
-                gerarPagina();
-              }}
-            >
-              {paginaPresente + 1}
-            </li>
-          ) : null}
+          {paginaTotal() === 2 && (
+            <>
+              {paginaPresente === 1 ? (
+                <li className={style.primeiraPagina}>{paginaPresente}</li>
+              ) : null}
+              {paginaPresente === 2 ? (
+                <li className={style.primeiraPagina}>{paginaPresente}</li>
+              ) : null}
 
-          <li>...</li>
-
-          {/* Terceiro */}
-          {paginaTotal() === 1 ? null : paginaPresente === paginaTotal() - 1 ? (
-            <div className={style.primeiraPagina}>
-              <li
-                onClick={() => {
-                  setPaginaPresente(() => paginaTotal() - 1);
-                  gerarPagina();
-                }}
-              >
-                {paginaTotal() - 1}
-              </li>
-            </div>
-          ) : (
-            <li
-              onClick={() => {
-                setPaginaPresente(() => paginaTotal() - 1);
-                gerarPagina();
-              }}
-            >
-              {paginaTotal() - 1}
-            </li>
+              <li>...</li>
+            </>
           )}
+          {paginaTotal() === 1 && (
+            <>
+              {paginaPresente === 1 ? (
+                <li className={style.primeiraPagina}>{paginaPresente}</li>
+              ) : null}
 
-          {/* Quarto */}
-          {paginaTotal() === 1 ? null : paginaPresente === paginaTotal() ? (
-            <div className={style.primeiraPagina}>
-              <li
-                onClick={() => {
-                  setPaginaPresente(() => paginaTotal());
-                  gerarPagina();
-                }}
-              >
-                {paginaTotal()}
-              </li>
-            </div>
-          ) : (
-            <li
-              onClick={() => {
-                setPaginaPresente(() => paginaTotal());
-                gerarPagina();
-              }}
-            >
-              {paginaTotal()}
-            </li>
+              <li>...</li>
+            </>
           )}
-
           <li>
             <img
               src={posterior}
               alt=""
               onClick={() => {
-                if (paginaTotal() < 3) {
-                  if (paginaPresente + 1 <= paginaTotal() + 1) {
-                    setPaginaPresente(() => paginaPresente + 1);
-                    gerarPagina();
-                  }
-                } else {
-                  if (paginaPresente + 1 < paginaTotal() + 1) {
-                    setPaginaPresente(() => paginaPresente + 1);
-                    gerarPagina();
+                if (paginaTotal() > 1) {
+                  if (paginaTotal() < 3) {
+                    if (paginaPresente + 1 <= paginaTotal() + 1) {
+                      setPaginaPresente(paginaPresente + 1);
+                    }
+                  } else {
+                    if (paginaPresente + 1 < paginaTotal() + 1) {
+                      setPaginaPresente(paginaPresente + 1);
+                    }
                   }
                 }
               }}
