@@ -5,7 +5,7 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
 export async function create(request: FastifyRequest, reply: FastifyReply){
-    const registerBodySchema = z.object({
+    const createBodySchema = z.object({
         buyer_name: z.string(),
         cpf: z.string(),
         price: z.number(),
@@ -21,7 +21,7 @@ export async function create(request: FastifyRequest, reply: FastifyReply){
 
     })
 
-    const { buyer_name, cpf, price, payment_method, installments, card_number, zip_code, state, city, neighborhood, address, number } = registerBodySchema.parse(request.body)
+    const { buyer_name, cpf, price, payment_method, installments, card_number, zip_code, state, city, neighborhood, address, number } = createBodySchema.parse(request.body)
 
     try {
 
