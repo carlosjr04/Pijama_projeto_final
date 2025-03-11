@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { roupa_lista } from "../../types/types";
 import { useParams } from "react-router-dom";
 
-const roupas_teste = [
+const roupas_teste =  [
   {
     id: 1,
     name: "Pijama feminino longo - estampa poá",
