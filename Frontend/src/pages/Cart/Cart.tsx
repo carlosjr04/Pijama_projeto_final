@@ -31,7 +31,7 @@ export default function Cart(){
     ]
     return(
         <>
-            <SectionHeader />
+            <SectionHeader currentPage="cart"/>
             <div className={styles.cartContainer}>
                 <ul className={styles.cartItemsList}>
                     {
