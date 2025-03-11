@@ -28,6 +28,7 @@ CREATE TABLE "PajamaSize" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "stock_quantity" INTEGER NOT NULL,
     "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "size" TEXT NOT NULL,
     "pajamaId" TEXT NOT NULL,
     CONSTRAINT "PajamaSize_pajamaId_fkey" FOREIGN KEY ("pajamaId") REFERENCES "Pajamas" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );

@@ -36,6 +36,7 @@ model PajamaSize {
   id             String   @id @default(uuid())
   stock_quantity Int
   created_at     DateTime @default(now())
+  size String
 
   pajamaId String
   Pajama   Pajamas @relation(fields: [pajamaId], references: [id])
