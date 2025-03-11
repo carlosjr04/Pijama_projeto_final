@@ -5,13 +5,14 @@ import anterior from "../../assets/anterior.png";
 import posterior from "../../assets/prox.png";
 
 import { useEffect, useState } from "react";
-import { roupa_lista } from "../../types/types";
+import { pijama } from "../../types/types";
 import { useParams } from "react-router-dom";
 
-const roupas_teste =  [
+export const roupas_teste =  [
   {
     id: 1,
     name: "Pijama feminino longo - estampa poá",
+    description:"oioi",
     image: "../../../../assets/pijama_feminino_poa.png",
     price: 78.8,
     favorite: true,
@@ -19,11 +20,13 @@ const roupas_teste =  [
     sale_percent: 15.0,
     type: "Adulto",
     gender: "Feminino",
-    estacao: "Inverno",
+    season: "Inverno",
+    size:"GG"
   },
   {
     id: 2,
     name: "Camiseta masculina básica - branca",
+    description:"oioi",
     image: "../../../../assets/camiseta_branca.png",
     price: 39.9,
     favorite: false,
@@ -31,11 +34,13 @@ const roupas_teste =  [
     sale_percent: 0,
     type: "Todos",
     gender: "Masculino",
-    estacao: "Verão",
+    season: "Verão",
+    size:"GG"
   },
   {
     id: 3,
     name: "Vestido floral midi",
+    description:"oioi",
     image: "../../../../assets/vestido_floral.png",
     price: 129.9,
     favorite: true,
@@ -43,11 +48,13 @@ const roupas_teste =  [
     sale_percent: 20.0,
     type: "Infantil",
     gender: "Feminino",
-    estacao: "Todos",
+    season: "Todos",
+    size:"GG"
   },
   {
     id: 4,
     name: "Bermuda jeans masculina",
+    description:"oioi",
     image: "../../../../assets/bermuda_jeans.png",
     price: 89.9,
     favorite: false,
@@ -55,11 +62,13 @@ const roupas_teste =  [
     sale_percent: 10.0,
     type: "Adulto",
     gender: "Feminino",
-    estacao: "Verão",
+    season: "Verão",
+    size:"GG"
   },
   {
     id: 5,
     name: "Blusa de lã feminina - bege",
+    description:"oioi",
     image: "../../../../assets/blusa_lã.png",
     price: 149.9,
     favorite: true,
@@ -67,11 +76,13 @@ const roupas_teste =  [
     sale_percent: 0,
     type: "Todos",
     gender: "Feminino",
-    estacao: "Inverno",
+    season: "Inverno",
+    size:"GG"
   },
   {
     id: 6,
     name: "Jaqueta de couro masculina - preta",
+    description:"oioi",
     image: "../../../../assets/jaqueta_couro.png",
     price: 299.9,
     favorite: false,
@@ -79,11 +90,13 @@ const roupas_teste =  [
     sale_percent: 25.0,
     type: "Infantil",
     gender: "Feminino",
-    estacao: "Todos",
+    season: "Todos",
+    size:"GG"
   },
   {
     id: 7,
     name: "Short esportivo feminino - rosa",
+    description:"oioi",
     image: "../../../../assets/short_esportivo.png",
     price: 59.9,
     favorite: false,
@@ -91,11 +104,13 @@ const roupas_teste =  [
     sale_percent: 0,
     type: "Todos",
     gender: "Feminino",
-    estacao: "Verão",
+    season: "Verão",
+    size:"GG"
   },
   {
     id: 8,
     name: "Calça social masculina - preta",
+    description:"oioi",
     image: "../../../../assets/calca_social.png",
     price: 179.9,
     favorite: true,
@@ -103,11 +118,13 @@ const roupas_teste =  [
     sale_percent: 15.0,
     type: "Adulto",
     gender: "Feminino",
-    estacao: "Todas",
+    season: "Todas",
+    size:"GG"
   },
   {
     id: 9,
     name: "Blazer feminino - azul-marinho",
+    description:"oioi",
     image: "../../../../assets/blazer.png",
     price: 249.9,
     favorite: false,
@@ -115,11 +132,13 @@ const roupas_teste =  [
     sale_percent: 10.0,
     type: "Infantil",
     gender: "Feminino",
-    estacao: "Todos",
+    season: "Todos",
+    size:"GG"
   },
   {
     id: 10,
     name: "Regata masculina esportiva - preta",
+    description:"oioi",
     image: "../../../../assets/regata_esportiva.png",
     price: 29.9,
     favorite: false,
@@ -127,11 +146,13 @@ const roupas_teste =  [
     sale_percent: 0,
     type: "Todos",
     gender: "Masculino",
-    estacao: "Verão",
+    season: "Verão",
+    size:"GG"
   },
   {
     id: 11,
     name: "Suéter feminino de tricô - cinza",
+    description:"oioi",
     image: "../../../../assets/sueter_trico.png",
     price: 119.9,
     favorite: true,
@@ -139,11 +160,13 @@ const roupas_teste =  [
     sale_percent: 0,
     type: "Infantil",
     gender: "Feminino",
-    estacao: "Inverno",
+    season: "Inverno",
+    size:"GG"
   },
   {
     id: 12,
     name: "Camisa social masculina - azul claro",
+    description:"oioi",
     image: "../../../../assets/camisa_social.png",
     price: 139.9,
     favorite: false,
@@ -151,11 +174,13 @@ const roupas_teste =  [
     sale_percent: 20.0,
     type: "Adulto",
     gender: "Todos",
-    estacao: "Todas",
+    season: "Todas",
+    size:"GG"
   },
   {
     id: 13,
     name: "Jaqueta corta-vento unissex - cinza",
+    description:"oioi",
     image: "../../../../assets/jaqueta_cortavento.png",
     price: 199.9,
     favorite: true,
@@ -163,11 +188,13 @@ const roupas_teste =  [
     sale_percent: 30.0,
     type: "Todos",
     gender: "Unissex",
-    estacao: "Todos",
+    season: "Todos",
+    size:"GG"
   },
   {
     id: 14,
     name: "Calça moletom masculina - preta",
+    description:"oioi",
     image: "../../../../assets/calca_moletom.png",
     price: 89.9,
     favorite: false,
@@ -175,11 +202,13 @@ const roupas_teste =  [
     sale_percent: 0,
     type: "Infantil",
     gender: "Todos",
-    estacao: "Inverno",
+    season: "Inverno",
+    size:"GG"
   },
   {
     id: 15,
     name: "Macacão jeans feminino",
+    description:"oioi",
     image: "../../../../assets/macacao_jeans.png",
     price: 159.9,
     favorite: true,
@@ -187,11 +216,13 @@ const roupas_teste =  [
     sale_percent: 15.0,
     type: "Todos",
     gender: "Feminino",
-    estacao: "Todas",
+    season: "Todas",
+    size:"GG"
   },
   {
     id: 16,
     name: "Tênis esportivo unissex - branco",
+    description:"oioi",
     image: "../../../../assets/tenis_esportivo.png",
     price: 249.9,
     favorite: true,
@@ -199,11 +230,13 @@ const roupas_teste =  [
     sale_percent: 10.0,
     type: "Infantil",
     gender: "Unissex",
-    estacao: "Todas",
+    season: "Todas",
+    size:"GG"
   },
   {
     id: 17,
     name: "Saia midi plissada - bege",
+    description:"oioi",
     image: "../../../../assets/saia_midi.png",
     price: 99.9,
     favorite: false,
@@ -211,11 +244,13 @@ const roupas_teste =  [
     sale_percent: 0,
     type: "Todos",
     gender: "Feminino",
-    estacao: "Todos",
+    season: "Todos",
+    size:"GG"
   },
   {
     id: 18,
     name: "Casaco de lã masculino - cinza",
+    description:"oioi",
     image: "../../../../assets/casaco_la.png",
     price: 279.9,
     favorite: true,
@@ -223,11 +258,13 @@ const roupas_teste =  [
     sale_percent: 0,
     type: "Infantil",
     gender: "Masculino",
-    estacao: "Inverno",
+    season: "Inverno",
+    size:"GG"
   },
   {
     id: 19,
     name: "Casaco de lã masculino - cinza",
+    description:"oioi",
     image: "../../../../assets/casaco_la.png",
     price: 279.9,
     favorite: true,
@@ -235,11 +272,13 @@ const roupas_teste =  [
     sale_percent: 0,
     type: "Adulto",
     gender: "Masculino",
-    estacao: "Inverno",
+    season: "Inverno",
+    size:"GG"
   },
   {
     id: 20,
     name: "Casaco de lã masculino - cinza",
+    description:"oioi",
     image: "../../../../assets/casaco_la.png",
     price: 279.9,
     favorite: true,
@@ -247,7 +286,8 @@ const roupas_teste =  [
     sale_percent: 0,
     type: "Infantil",
     gender: "Masculino",
-    estacao: "Inverno",
+    season: "Inverno",
+    size:"GG"
   },
 ];
 
@@ -255,9 +295,9 @@ const estacoes = ["Inverno", "Verão", "Todos"];
 const generos = ["Unisex", "Masculino", "Feminino", "Família", "Todos"];
 const tipos = ["Adulto", "Infantil", "Todos"];
 export default function Pijamas() {
-  const [listaPijamas, setListaPijamas] = useState<roupa_lista[]>(roupas_teste);
+  const [listaPijamas, setListaPijamas] = useState<pijama[]>(roupas_teste);
   const [listaPijamasPagina, setListaPijamasPagina] =
-    useState<roupa_lista[]>(roupas_teste);
+    useState<pijama[]>(roupas_teste);
   const [numPijamas, setNumPijamas] = useState(roupas_teste.length);
 
   const [filtros, setFiltros] = useState(0);
@@ -268,7 +308,7 @@ export default function Pijamas() {
   const [tipoFiltro, setTipoFiltro] = useState(false);
   const [estacaoFiltro, setEstacaoFiltro] = useState(false);
 
-  const [pijamaBusca, setPijamaBusca] = useState<roupa_lista[]>();
+  const [pijamaBusca, setPijamaBusca] = useState<pijama[]>();
   const [Pesquisa, setPesquisa] = useState(false);
   const [Busca, setBusca] = useState("");
 
@@ -302,7 +342,7 @@ export default function Pijamas() {
   }, [listaPijamas, filtros]);
 
   function gerarPagina() {
-    let lista: roupa_lista[] = [];
+    let lista: pijama[] = [];
 
     console.log(listaPijamas.length);
     for (let i = (paginaPresente - 1) * 5; i < paginaPresente * 5; i++) {
@@ -411,7 +451,7 @@ export default function Pijamas() {
       reset = true;
     }
     if (filtros === 0 || reset === true) {
-      let listaTemp = roupas_teste.filter((roupa) => roupa.estacao == estacao);
+      let listaTemp = roupas_teste.filter((roupa) => roupa.season == estacao);
 
       lista = listaTemp;
 
@@ -420,7 +460,7 @@ export default function Pijamas() {
     } else {
       if (listaPijamas) {
         let listaTemp = listaPijamas.filter(
-          (roupa) => roupa.estacao == estacao
+          (roupa) => roupa.season == estacao
         );
 
         lista = listaTemp;
@@ -437,7 +477,7 @@ export default function Pijamas() {
     setListaPijamas(lista);
     setEstacaoFiltro(true);
   }
-  function buscarPijama(): roupa_lista[] {
+  function buscarPijama(): pijama[] {
     let pijamaBuscar = listaPijamas.filter((pijama) =>
       pijama.name.toLowerCase().includes(Busca)
     );
@@ -574,7 +614,7 @@ export default function Pijamas() {
                 on_sale={roupa.on_sale}
                 sale_percent={roupa.sale_percent}
                 price={roupa.price}
-                estacao={roupa.estacao}
+                estacao={roupa.season}
                 gender={roupa.gender}
                 type={roupa.type}
               />
@@ -591,7 +631,7 @@ export default function Pijamas() {
               on_sale={roupa.on_sale}
               sale_percent={roupa.sale_percent}
               price={roupa.price}
-              estacao={roupa.estacao}
+              estacao={roupa.season}
               gender={roupa.gender}
               type={roupa.type}
             />
