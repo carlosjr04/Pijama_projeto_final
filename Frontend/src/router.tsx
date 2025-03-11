@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import RootLayout from "./RootLayout";
 import Pijamas from "./pages/Pijamas/Pijamas";
+import HomePage from "./pages/HomePage/HomePage";
 
 const router = createBrowserRouter([
     {
@@ -41,7 +42,7 @@ const router = createBrowserRouter([
             },
             {
                 path:"/homepage",
-                element:<></>
+                element:<HomePage/>
             }
         ]
     }
