@@ -1,8 +1,11 @@
-import { Prisma } from "@prisma/client";
+import { Prisma, Sale } from "@prisma/client";
 import { prisma } from "@/lib/prisma";
 import { SalesRepository } from "../sales-repository";
 
 export class PrismaSalesRepository implements SalesRepository {
+    findById(id: string): Promise<Sale | null> {
+        throw new Error("Method not implemented.");
+    }
 
     async update(id: string, data: Prisma.SaleUncheckedUpdateInput) {
         const sale = await prisma.sale.update({

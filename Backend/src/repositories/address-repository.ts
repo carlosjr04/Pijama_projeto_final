@@ -11,4 +11,5 @@ export interface AddressUpdateInput {
 
 export interface AddressRepository {
     firstOrCreate(data: Prisma.AddressCreateInput): Promise<Address>
+    findById(id: string): Promise<Address | null>
 }

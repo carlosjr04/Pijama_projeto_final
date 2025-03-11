@@ -11,6 +11,7 @@ export interface SaleUpdateInput {
 }
 
 export interface SalesRepository {
+    findById(id: string): Promise<Sale | null>
     create(data: Prisma.SaleUncheckedCreateInput): Promise<Sale>
-    update(id: string, data: Prisma.SaleUncheckedUpdateInput):Promise<Sale>
+    update(id: string, data: Prisma.SaleUncheckedUpdateInput):Promise<Sale| null>
 }

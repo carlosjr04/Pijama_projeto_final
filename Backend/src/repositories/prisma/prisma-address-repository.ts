@@ -3,6 +3,15 @@ import { AddressRepository } from "../address-repository";
 import { prisma } from "@/lib/prisma";
 
 export class PrismaAddressRepository implements AddressRepository {
+
+    async findById(id: string) {
+        const address = await prisma.address.findUnique({
+            where: { id }
+        })
+
+        return address
+    }
+
     async firstOrCreate(data: Prisma.AddressCreateInput) {
         const address = await prisma.address.upsert({
             where: { 
