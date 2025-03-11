@@ -34,6 +34,16 @@ export class CreateUseCase {
             on_sale
         })
 
+        //em teste
+        const sizes: PajamaSize[] = ["PP", "P", "M", "G", "GG"].map(size => ({
+            stock_quantity: 0, // Define a quantidade inicial de estoque, se necessário
+            size,
+            pijamaId: pijama.id,
+        }))
+    
+        // Criação dos tamanhos associados ao pijama
+        await this.PijamasRepository.createSizes(sizes);
+
         return { pijama }
 
     }
