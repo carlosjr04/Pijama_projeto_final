@@ -3,8 +3,13 @@ import { prisma } from "@/lib/prisma";
 import { SalesRepository } from "../sales-repository";
 
 export class PrismaSalesRepository implements SalesRepository {
-    findById(id: string): Promise<Sale | null> {
-        throw new Error("Method not implemented.");
+    
+    async findById(id: string) {
+        const sale = await prisma.sale.findUnique({
+            where: {id}
+        })
+
+        return sale
     }
 
     async update(id: string, data: Prisma.SaleUncheckedUpdateInput) {
