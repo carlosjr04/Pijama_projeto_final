@@ -3,32 +3,41 @@ import { AddressRepository } from "../address-repository";
 import { prisma } from "@/lib/prisma";
 
 export class PrismaAddressRepository implements AddressRepository {
+  async findById(id: string) {
+    const address = await prisma.address.findUnique({
+      where: { id },
+    });
 
-    async findById(id: string) {
-        const address = await prisma.address.findUnique({
-            where: { id }
-        })
+    return address;
+  }
 
-        return address
+  async firstOrCreate(data: Prisma.AddressCreateInput) {
+    const address = await prisma.address.findUnique({
+      where: {
+        zip_code: data.zip_code,
+      },
+    });
+
+    if (!address) {
+      return await prisma.address.create({
+        data,
+      });
     }
 
-    async firstOrCreate(data: Prisma.AddressCreateInput) {
-        const address = await prisma.address.upsert({
-            where: { 
-                zip_code_state_city_neighborhood_address_number: {
-                    zip_code: data.zip_code,
-                    state: data.state,
-                    city: data.city,
-                    neighborhood: data.neighborhood,
-                    address: data.address,
-                    number: data.number
-                }
-             },
+    return address;
+  }
 
-             update: {},
-             create: data
-        })
+  async deleteById(id: string) {
+    const address = await prisma.address.findUnique({
+      where: { id },
+    });
 
-        return address
+    if (!address) {
+      return;
     }
+
+    await prisma.address.delete({
+      where: { id },
+    });
+  }
 }
