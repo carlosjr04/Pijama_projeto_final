@@ -1,4 +1,4 @@
-import { Pajamas, Prisma, User } from ".prisma/client";
+import { Pajamas, PajamaSize, Prisma, User } from ".prisma/client";
 
 export interface PijamaUpdateInput {
     name?: string,
