@@ -48,8 +48,11 @@ export default function Cart(){
                         ))
                     }
                 </ul>
-                <span>Total R$ </span>
-                <button>COMPRE TUDO</button>
+                <div id={styles.totalPrice}>
+                    <span>Total</span>
+                    <span>R$</span> 
+                </div>
+                <button id={styles.bigBlueButton}>COMPRE TUDO</button>
             </div>
         </>
     )

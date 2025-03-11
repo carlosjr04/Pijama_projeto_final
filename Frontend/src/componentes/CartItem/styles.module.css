@@ -4,6 +4,7 @@
 
 .cardContainer {
     display: flex;
+    justify-content: space-between;
     gap: 3vw;
 }
 
@@ -15,6 +16,7 @@
     font-size: 1.2rem;
     font-weight: 700;
     align-self: center;
+    min-width: 7rem;
 }
 
 .itemInfo {
@@ -88,5 +90,5 @@
 }
 
 .deleteButton:active {
-    background-color: var(--cinza0);
+    background-color: var(--azul100);
 }
