@@ -21,13 +21,6 @@
     transform: translate(-50%, -50%);
 }
 
-input {
-    border-radius: 0.125rem;
-    border: none;
-    padding: 1%;
-    margin: 2%;
-}
-
 .modalContent h3 {
     color: var(--branco);
     font-size: 2rem;
@@ -39,8 +32,21 @@ form {
     flex-direction: column;
 }
 
+input {
+    border-radius: 0.125rem;
+    border: none;
+    padding: 1%;
+    margin: 2%;
+    box-sizing: border-box;
+}
+
 .inputGroup {
     display: flex;
+}
+
+.inputGroup input {
+    box-sizing: border-box;
+    width: 100%;
 }
 
 .smallInput {
@@ -55,6 +61,7 @@ form {
     font-weight: 500;
     font-size: 1.2rem;
     border-radius: 0.625rem;
+    margin-top: 0.625rem;
 }
 
 #submitButton:hover {
