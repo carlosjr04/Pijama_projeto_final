@@ -16,7 +16,6 @@
     "@fastify/cors": "10.0.2",
     "@fastify/jwt": "9.0.4",
     "@prisma/client": "6.3.1",
-    "@types/bcryptjs": "2.4.6",
     "@types/node": "22.13.4",
     "bcrypt": "5.1.1",
     "bcryptjs": "3.0.1",
@@ -28,6 +27,7 @@
     "zod": "3.24.2"
   },
   "devDependencies": {
+    "@types/bcryptjs": "2.4.6",
     "prisma": "6.3.1"
   }
 }
