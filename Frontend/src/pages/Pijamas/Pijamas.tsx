@@ -1,6 +1,6 @@
 import style from "./style.module.css";
 import vector from "../../assets/Vector.png";
-import Roupa from "./componentes/roupa/roupa";
+import Roupa from "../../componentes/roupa/roupa";
 import anterior from "../../assets/anterior.png";
 import posterior from "../../assets/prox.png";
 
@@ -319,6 +319,8 @@ export default function Pijamas() {
   const [estacao, setEstacao] = useState(false);
 
   const { pijamaTipo } = useParams();
+
+  
   useEffect(() => {
     if (pijamaTipo === "masculino") {
       filtrarGenero("Masculino");
@@ -616,9 +618,11 @@ export default function Pijamas() {
                 on_sale={roupa.on_sale}
                 sale_percent={roupa.sale_percent}
                 price={roupa.price}
-                estacao={roupa.season}
+                season={roupa.season}
                 gender={roupa.gender}
                 type={roupa.type}
+                description={roupa.description}
+               size={roupa.size}
               />
             ))
           )
@@ -633,9 +637,11 @@ export default function Pijamas() {
               on_sale={roupa.on_sale}
               sale_percent={roupa.sale_percent}
               price={roupa.price}
-              estacao={roupa.season}
+              season={roupa.season}
               gender={roupa.gender}
               type={roupa.type}
+              description={roupa.description}
+              size={roupa.size}
             />
           ))
         ) : null}
