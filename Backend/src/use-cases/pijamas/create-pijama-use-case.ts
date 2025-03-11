@@ -46,10 +46,10 @@ export class CreateUseCase {
         });
 
         // Criando os tamanhos padrão associados ao pijama
-        const sizes: PajamaSize[] = ["PP", "P", "M", "G", "GG"].map((size) => ({
+        const sizes = ["PP", "P", "M", "G", "GG"].map((size) => ({ // ESTÁ SEM TIPO // FAZER DEPOIS!!!!
             stock_quantity: 0, // Definindo a quantidade inicial de estoque, se necessário
             size,
-            pijamaId: pijama.id,
+            pajamaId: pijama.id,
         }));
 
         // Criação dos tamanhos associados ao pijama

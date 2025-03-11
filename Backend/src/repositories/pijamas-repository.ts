@@ -19,8 +19,9 @@ export interface PijamasRepository {
     delete(id: string): Promise<void>
     findById(userId: string): Promise<Pajamas | null>
     //adição dos métodos de manipular os pijamas
-    createSizes(data: PajamaSize[]): Promise<PajamaSize[]>
+    createSizes(data: any): Promise<void> // ESTÁ SEM TIPO // FAZER DEPOIS!!!!
     updateSizes(pijamaId: string, sizes: PajamaSize[]): Promise<void>
     deleteSizes(pijamaId: string): Promise<void>
+    getSizes(pijamaId: string): Promise<PajamaSize[]>
 
 }

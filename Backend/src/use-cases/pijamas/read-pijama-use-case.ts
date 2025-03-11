@@ -1,7 +1,7 @@
 // src/use-cases/pijamas/read-pijama-use-case.ts
 
 import { PijamasRepository } from "@/repositories/pijamas-repository";
-import { Pajamas } from "@prisma/client";
+import { Pajamas, PajamaSize } from "@prisma/client";
 import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-fount-error";
 
 interface ReadPijamaUseCaseRequest {
@@ -10,6 +10,7 @@ interface ReadPijamaUseCaseRequest {
 
 interface ReadPijamaUseCaseResponse {
     pijama: Pajamas;
+    sizes: PajamaSize[]
 }
 
 export class ReadPijamaUseCase {
@@ -22,6 +23,8 @@ export class ReadPijamaUseCase {
             throw new ResourceNotFoundError("Pijama não encontrado.");
         }
 
-        return { pijama };
+        const sizes = await this.pijamasRepository.getSizes(pijamaId);
+
+        return { pijama, sizes };
     }
 }

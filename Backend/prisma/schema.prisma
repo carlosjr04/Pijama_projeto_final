@@ -39,7 +39,7 @@ model PajamaSize {
   size String
 
   pajamaId String
-  Pajama   Pajamas @relation(fields: [pajamaId], references: [id])
+  Pajama   Pajamas @relation(fields: [pajamaId], references: [id], onDelete: Cascade)
 }
 
 model Sale {
