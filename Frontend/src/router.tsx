@@ -25,7 +25,7 @@ const router = createBrowserRouter([
             },
             {
                 path:"/pijamas/:pijamaTipo",
-                element:<></>
+                element:<Pijamas/>
             },
             {
                 path:"/pijama",
