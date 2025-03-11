@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import RootLayout from "./RootLayout";
 import Cart from "./pages/Cart/Cart";
+import Favorites from "./pages/Favorites/Favorites";
 
 const router = createBrowserRouter([
     {
@@ -33,7 +34,7 @@ const router = createBrowserRouter([
             },
             {
                 path:"/favorito",
-                element:<></>
+                element:<Favorites/>
             },
             {
                 path:"/carrinho",
