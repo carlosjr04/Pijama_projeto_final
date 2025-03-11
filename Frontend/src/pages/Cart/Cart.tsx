@@ -1,8 +1,16 @@
 import SectionHeader from '../../componentes/SectionHeader/SectionHeader'
 import CartItem from '../../componentes/CartItem/CartItem'
+import Modal from '../../componentes/Modal/Modal'
 import styles from './styles.module.css'
+import { useState } from 'react';
 
 export default function Cart(){
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const openModal = () => {
+        setIsModalOpen(true);
+        window.scrollTo(0, 0);
+    }
+    const closeModal = () => setIsModalOpen(false);
     const itemsOnCart = [
         {
             id: 1,
@@ -52,7 +60,8 @@ export default function Cart(){
                     <span>Total</span>
                     <span>R$</span> 
                 </div>
-                <button id={styles.bigBlueButton}>COMPRE TUDO</button>
+                <button onClick={openModal} id={styles.bigBlueButton}>COMPRE TUDO</button>
+                <Modal isOpen={isModalOpen} handleClose={closeModal}/>
             </div>
         </>
     )
