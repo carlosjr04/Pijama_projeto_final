@@ -9,7 +9,7 @@ interface GetUseCaseRequest {
 
 interface GetUseCaseResponse{
     sale: Sale,
-    address: Address
+    address: Address,
 }
 
 export class GetSaleUseCase {
