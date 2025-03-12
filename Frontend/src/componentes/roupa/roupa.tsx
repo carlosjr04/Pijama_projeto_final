@@ -1,13 +1,15 @@
-import roupaImagem from "../../../../assets/roupa_teste.png";
-import favorito_cheio from "../../../../assets/favorito_cheio.png";
-import favorito_vazio from "../../../../assets/favorito_vazio.png";
-import desconto_imagem from "../../../../assets/desconto_imagem.png";
+import roupaImagem from "../../assets/roupa_teste.png";
+import favorito_cheio from "../../assets/favorito_cheio.png";
+import favorito_vazio from "../../assets/favorito_vazio.png";
+import desconto_imagem from "../../assets/desconto_imagem.png";
 import style from "./style.module.css";
-import { roupa_lista } from "../../../../types/types";
+import { pijama } from "../../types/types";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-export default function Roupa(roupa: roupa_lista) {
+export default function Roupa(roupa: pijama) {
   const [favorito, setFavorito] = useState(roupa.favorite);
+  const navigate = useNavigate();
 
   function parcelamento(preco: number): number {
     const precoParcelado = preco / 6;
@@ -22,10 +24,12 @@ export default function Roupa(roupa: roupa_lista) {
     partesLista.push(partes[1]);
     return partesLista;
   }
-
+  function navigatePijama(){
+    navigate(`/pijama/${roupa.id}`)
+  }
   return (
     <>
-      <div className={style.card}>
+      <div  className={style.card}>
         <div className={style.header}>
           <button
             onClick={() => setFavorito((prev) => !prev)}
@@ -42,7 +46,7 @@ export default function Roupa(roupa: roupa_lista) {
           ) : null}
         </div>
 
-        <img src={roupaImagem} alt="" className={style.imagem} />
+        <img onClick={()=>navigatePijama()} src={roupaImagem} alt="" className={style.imagem} />
         <div className={style.texto}>
           <h3>{roupa.name}</h3>
           <div className={style.preco}>

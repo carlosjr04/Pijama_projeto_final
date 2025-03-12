@@ -15,7 +15,7 @@ import { roupas_teste } from "../Pijamas/Pijamas";
 import SwiperCore from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { useRef } from "react";
-import Roupa from "../Pijamas/componentes/roupa/roupa";
+import Roupa from "../../componentes/roupa/roupa";
 import { feedback, pijama } from "../../types/types";
 import Feedback from "./componentes/Feedback";
 import { useNavigate } from "react-router-dom";
@@ -194,9 +194,11 @@ export default function HomePage() {
               on_sale={pijama.on_sale}
               sale_percent={pijama.sale_percent}
               price={pijama.price}
-              estacao={pijama.season}
+              season={pijama.season}
               gender={pijama.gender}
               type={pijama.type}
+              description={pijama.description}
+               size={pijama.size}
             />
           ))}
         </div>

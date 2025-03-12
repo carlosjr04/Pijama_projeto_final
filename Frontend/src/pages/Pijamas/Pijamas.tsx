@@ -1,6 +1,6 @@
 import style from "./style.module.css";
 import vector from "../../assets/Vector.png";
-import Roupa from "./componentes/roupa/roupa";
+import Roupa from "../../componentes/roupa/roupa";
 import anterior from "../../assets/anterior.png";
 import posterior from "../../assets/prox.png";
 
@@ -13,284 +13,101 @@ export const roupas_teste =  [
 
   {
     id: 1,
-    name: "Pijama feminino longo - estampa poá",
-    description:"oioi",
-    image: "../../../../assets/pijama_feminino_poa.png",
-    price: 78.8,
-    favorite: true,
-    on_sale: true,
-    sale_percent: 15.0,
-    type: "Adulto",
-    gender: "Feminino",
+    name: "Pijama de Algodão Azul",
+    description: "Pijama confortável de algodão com estampa minimalista.",
+    image: "pijama_algodao_azul.jpg",
+    price: 89.90,
     season: "Inverno",
-    size:"GG"
+    type: "Adulto",
+    gender: "Masculino",
+    size: [
+      { size: "PP", stock_quantity: 3 },
+      { size: "P", stock_quantity: 10 },
+      { size: "M", stock_quantity: 15 },
+      { size: "G", stock_quantity: 8 },
+      { size: "GG", stock_quantity: 5 }
+    ],
+    favorite: false,
+    on_sale: true,
+    sale_percent: 15
   },
   {
     id: 2,
-    name: "Camiseta masculina básica - branca",
-    description:"oioi",
-    image: "../../../../assets/camiseta_branca.png",
-    price: 39.9,
-    favorite: false,
-    on_sale: false,
-    sale_percent: 0,
-    type: "Todos",
-    gender: "Masculino",
+    name: "Pijama Rosa de Seda",
+    description: "Conjunto de pijama de seda macia e elegante.",
+    image: "pijama_seda_rosa.jpg",
+    price: 129.90,
     season: "Verão",
-    size:"GG"
+    type: "Adulto",
+    gender: "Feminino",
+    size: [
+      { size: "PP", stock_quantity: 0 },
+      { size: "P", stock_quantity: 6 },
+      { size: "M", stock_quantity: 4 },
+      { size: "G", stock_quantity: 13 },
+      { size: "GG", stock_quantity: 4 }
+    ],
+    favorite: true,
+    on_sale: false,
+    sale_percent: 0
   },
   {
     id: 3,
-    name: "Vestido floral midi",
-    description:"oioi",
-    image: "../../../../assets/vestido_floral.png",
-    price: 129.9,
-    favorite: true,
-    on_sale: true,
-    sale_percent: 20.0,
-    type: "Infantil",
-    gender: "Feminino",
+    name: "Pijama Infantil Estampado",
+    description: "Pijama divertido com estampas de personagens.",
+    image: "pijama_infantil.jpg",
+    price: 59.90,
     season: "Todos",
-    size:"GG"
+    type: "Infantil",
+    gender: "Unisex",
+    size: [
+      { size: "PP", stock_quantity: 20 },
+      { size: "P", stock_quantity: 18 },
+      { size: "M", stock_quantity: 15 },
+      { size: "G", stock_quantity: 12 },
+      { size: "GG", stock_quantity: 10 }
+    ],
+    favorite: false,
+    on_sale: true,
+    sale_percent: 10
   },
   {
     id: 4,
-    name: "Bermuda jeans masculina",
-    description:"oioi",
-    image: "../../../../assets/bermuda_jeans.png",
-    price: 89.9,
-    favorite: false,
-    on_sale: true,
-    sale_percent: 10.0,
+    name: "Pijama de Flanela Xadrez",
+    description: "Pijama quentinho de flanela, ideal para o inverno.",
+    image: "pijama_flanela.jpg",
+    price: 99.90,
+    season: "Inverno",
     type: "Adulto",
-    gender: "Feminino",
-    season: "Verão",
-    size:"GG"
+    gender: "Masculino",
+    size: [
+      { size: "M", stock_quantity: 14 },
+      { size: "G", stock_quantity: 10 },
+      { size: "GG", stock_quantity: 6 }
+    ],
+    favorite: true,
+    on_sale: false,
+    sale_percent: 0
   },
   {
     id: 5,
-    name: "Blusa de lã feminina - bege",
-    description:"oioi",
-    image: "../../../../assets/blusa_lã.png",
-    price: 149.9,
-    favorite: true,
-    on_sale: false,
-    sale_percent: 0,
-    type: "Todos",
-    gender: "Feminino",
-    season: "Inverno",
-    size:"GG"
-  },
-  {
-    id: 6,
-    name: "Jaqueta de couro masculina - preta",
-    description:"oioi",
-    image: "../../../../assets/jaqueta_couro.png",
-    price: 299.9,
-    favorite: false,
-    on_sale: true,
-    sale_percent: 25.0,
-    type: "Infantil",
-    gender: "Feminino",
-    season: "Todos",
-    size:"GG"
-  },
-  {
-    id: 7,
-    name: "Short esportivo feminino - rosa",
-    description:"oioi",
-    image: "../../../../assets/short_esportivo.png",
-    price: 59.9,
-    favorite: false,
-    on_sale: false,
-    sale_percent: 0,
-    type: "Todos",
-    gender: "Feminino",
+    name: "Pijama Curto de Malha",
+    description: "Conjunto de pijama curto e leve para noites quentes.",
+    image: "pijama_curto.jpg",
+    price: 79.90,
     season: "Verão",
-    size:"GG"
-  },
-  {
-    id: 8,
-    name: "Calça social masculina - preta",
-    description:"oioi",
-    image: "../../../../assets/calca_social.png",
-    price: 179.9,
-    favorite: true,
-    on_sale: true,
-    sale_percent: 15.0,
     type: "Adulto",
-    gender: "Feminino",
-    season: "Todas",
-    size:"GG"
-  },
-  {
-    id: 9,
-    name: "Blazer feminino - azul-marinho",
-    description:"oioi",
-    image: "../../../../assets/blazer.png",
-    price: 249.9,
+    gender: "Unisex",
+    size: [
+      { size: "P", stock_quantity: 10 },
+      { size: "M", stock_quantity: 12 },
+      { size: "G", stock_quantity: 8 }
+    ],
     favorite: false,
     on_sale: true,
-    sale_percent: 10.0,
-    type: "Infantil",
-    gender: "Feminino",
-    season: "Todos",
-    size:"GG"
+    sale_percent: 20
   },
-  {
-    id: 10,
-    name: "Regata masculina esportiva - preta",
-    description:"oioi",
-    image: "../../../../assets/regata_esportiva.png",
-    price: 29.9,
-    favorite: false,
-    on_sale: false,
-    sale_percent: 0,
-    type: "Todos",
-    gender: "Masculino",
-    season: "Verão",
-    size:"GG"
-  },
-  {
-    id: 11,
-    name: "Suéter feminino de tricô - cinza",
-    description:"oioi",
-    image: "../../../../assets/sueter_trico.png",
-    price: 119.9,
-    favorite: true,
-    on_sale: false,
-    sale_percent: 0,
-    type: "Infantil",
-    gender: "Feminino",
-    season: "Inverno",
-    size:"GG"
-  },
-  {
-    id: 12,
-    name: "Camisa social masculina - azul claro",
-    description:"oioi",
-    image: "../../../../assets/camisa_social.png",
-    price: 139.9,
-    favorite: false,
-    on_sale: true,
-    sale_percent: 20.0,
-    type: "Adulto",
-    gender: "Todos",
-    season: "Todas",
-    size:"GG"
-  },
-  {
-    id: 13,
-    name: "Jaqueta corta-vento unissex - cinza",
-    description:"oioi",
-    image: "../../../../assets/jaqueta_cortavento.png",
-    price: 199.9,
-    favorite: true,
-    on_sale: true,
-    sale_percent: 30.0,
-    type: "Todos",
-    gender: "Unissex",
-    season: "Todos",
-    size:"GG"
-  },
-  {
-    id: 14,
-    name: "Calça moletom masculina - preta",
-    description:"oioi",
-    image: "../../../../assets/calca_moletom.png",
-    price: 89.9,
-    favorite: false,
-    on_sale: false,
-    sale_percent: 0,
-    type: "Infantil",
-    gender: "Todos",
-    season: "Inverno",
-    size:"GG"
-  },
-  {
-    id: 15,
-    name: "Macacão jeans feminino",
-    description:"oioi",
-    image: "../../../../assets/macacao_jeans.png",
-    price: 159.9,
-    favorite: true,
-    on_sale: true,
-    sale_percent: 15.0,
-    type: "Todos",
-    gender: "Feminino",
-    season: "Todas",
-    size:"GG"
-  },
-  {
-    id: 16,
-    name: "Tênis esportivo unissex - branco",
-    description:"oioi",
-    image: "../../../../assets/tenis_esportivo.png",
-    price: 249.9,
-    favorite: true,
-    on_sale: true,
-    sale_percent: 10.0,
-    type: "Infantil",
-    gender: "Unissex",
-    season: "Todas",
-    size:"GG"
-  },
-  {
-    id: 17,
-    name: "Saia midi plissada - bege",
-    description:"oioi",
-    image: "../../../../assets/saia_midi.png",
-    price: 99.9,
-    favorite: false,
-    on_sale: false,
-    sale_percent: 0,
-    type: "Todos",
-    gender: "Feminino",
-    season: "Todos",
-    size:"GG"
-  },
-  {
-    id: 18,
-    name: "Casaco de lã masculino - cinza",
-    description:"oioi",
-    image: "../../../../assets/casaco_la.png",
-    price: 279.9,
-    favorite: true,
-    on_sale: false,
-    sale_percent: 0,
-    type: "Infantil",
-    gender: "Masculino",
-    season: "Inverno",
-    size:"GG"
-  },
-  {
-    id: 19,
-    name: "Casaco de lã masculino - cinza",
-    description:"oioi",
-    image: "../../../../assets/casaco_la.png",
-    price: 279.9,
-    favorite: true,
-    on_sale: false,
-    sale_percent: 0,
-    type: "Adulto",
-    gender: "Masculino",
-    season: "Inverno",
-    size:"GG"
-  },
-  {
-    id: 20,
-    name: "Casaco de lã masculino - cinza",
-    description:"oioi",
-    image: "../../../../assets/casaco_la.png",
-    price: 279.9,
-    favorite: true,
-    on_sale: false,
-    sale_percent: 0,
-    type: "Infantil",
-    gender: "Masculino",
-    season: "Inverno",
-    size:"GG"
-  },
+  
 ];
 
 const estacoes = ["Inverno", "Verão", "Todos"];
@@ -319,6 +136,8 @@ export default function Pijamas() {
   const [estacao, setEstacao] = useState(false);
 
   const { pijamaTipo } = useParams();
+
+  
   useEffect(() => {
     if (pijamaTipo === "masculino") {
       filtrarGenero("Masculino");
@@ -616,9 +435,11 @@ export default function Pijamas() {
                 on_sale={roupa.on_sale}
                 sale_percent={roupa.sale_percent}
                 price={roupa.price}
-                estacao={roupa.season}
+                season={roupa.season}
                 gender={roupa.gender}
                 type={roupa.type}
+                description={roupa.description}
+               size={roupa.size}
               />
             ))
           )
@@ -633,9 +454,11 @@ export default function Pijamas() {
               on_sale={roupa.on_sale}
               sale_percent={roupa.sale_percent}
               price={roupa.price}
-              estacao={roupa.season}
+              season={roupa.season}
               gender={roupa.gender}
               type={roupa.type}
+              description={roupa.description}
+              size={roupa.size}
             />
           ))
         ) : null}

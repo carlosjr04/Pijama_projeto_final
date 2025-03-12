@@ -1,0 +1,221 @@
+.card {
+  display: flex;
+  gap: 3rem;
+  justify-content: center;
+  margin-top: 6rem;
+}
+.imagem {
+  box-shadow: 16px 16px 16px 0px #00000040;
+  width: 554px;
+  height: 831px;
+}
+.cardInterno {
+  width: 545px;
+}
+.header {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+}
+.header h1 {
+  font-family: Numans;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 100%;
+  letter-spacing: 4%;
+  color: #274553;
+}
+.header p {
+  font-family: Numans;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 4%;
+
+  color: #4e8098;
+}
+.precos {
+  display: flex;
+  align-items: center;
+  gap:4.5rem;
+}
+.precos h3 {
+  font-family: Nunito Sans;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #5f6165;
+}
+.precos h3 span {
+  font-family: Nunito Sans;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #5f6165;
+}
+.precosMaior h1 {
+  font-family: Nunito Sans;
+  font-weight: 700;
+  font-size: 64px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #171717;
+  margin-bottom: 1.5rem;
+}
+.precosMaior h3 {
+  font-family: Nunito Sans;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #5f6165;
+}
+.precosMaior h3 span {
+  font-family: Nunito Sans;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+.tamanho {
+  font-family: Nunito;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  color: #5f6165;
+  margin-top: 3rem;
+  margin-bottom: 1rem;
+}
+.botaoTamanho {
+  width: 50px;
+  height: 50px;
+  background-color: #4e8098;
+  border: 0px;
+  margin-right: 1rem;
+  font-family: Numans;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  color: #fcf7f8;
+  margin-bottom: 1rem;
+}
+.botaoTamanhoEscolhido {
+  width: 50px;
+  height: 50px;
+  background-color: #97c3d8;
+  border: 0px;
+  margin-right: 1rem;
+  font-family: Numans;
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  color: #fcf7f8;
+}
+.tamanhoLista p {
+  font-family: Nunito;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  margin-bottom: 3rem;
+  width: 240px;
+}
+.tamanhoLista p span {
+  font-family: Nunito;
+  font-weight: 800;
+  font-style: italic;
+  font-size: 14px;
+  line-height: 100%;
+  letter-spacing: 0%;
+}
+.quantidade {
+  font-family: Nunito;
+  font-weight: 300;
+  font-style: italic;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  margin-bottom: 1rem;
+}
+.botaoQuant {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 151px;
+  height: 41px;
+  background-color: #fcf7f8;
+  border-width: 1px;
+  font-family: Nunito;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  border-radius: 4px;
+  border: 1px solid #565656;
+}
+.botaoQuant button {
+  width: 20px;
+  height: 20px;
+  border: 0px;
+  background-color: #fcf7f8;
+  cursor: pointer;
+}
+.botaoMenos {
+  background-image: url("../../assets/Subtract.png");
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+}
+.botaoMais {
+  background-image: url("../../assets/Plus Math.png");
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+.botoesFinal{
+  display: flex;
+  margin-top: 4rem;
+}
+.carrinho {
+  width: 534px;
+  height: 86px;
+  background-color: #72a8c1;
+  border-radius: 4px;
+  border: 0px;
+  font-family: Nunito Sans;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: middle;
+  color: #fcf7f8;
+  cursor: pointer;
+}
+.coracao{
+  border:0px;
+  background: none;
+  width: 86px;
+  height: 86px;
+}
+.elementos{
+  margin-top: 7rem;
+  margin-bottom: 3rem;
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  gap:10rem;
+}
+.tipo{
+  width: 100px;
+  height: 100px;
+}
