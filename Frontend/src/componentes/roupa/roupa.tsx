@@ -29,7 +29,7 @@ export default function Roupa(roupa: pijama) {
   }
   return (
     <>
-      <div onClick={()=>navigatePijama()} className={style.card}>
+      <div  className={style.card}>
         <div className={style.header}>
           <button
             onClick={() => setFavorito((prev) => !prev)}
@@ -46,7 +46,7 @@ export default function Roupa(roupa: pijama) {
           ) : null}
         </div>
 
-        <img src={roupaImagem} alt="" className={style.imagem} />
+        <img onClick={()=>navigatePijama()} src={roupaImagem} alt="" className={style.imagem} />
         <div className={style.texto}>
           <h3>{roupa.name}</h3>
           <div className={style.preco}>

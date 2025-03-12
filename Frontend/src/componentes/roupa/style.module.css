@@ -17,6 +17,7 @@
   width: 408px;
   height: 84px;
   margin-top: 1rem;
+  z-index: 3;
 }
 
 .botao {
