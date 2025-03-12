@@ -1,19 +1,71 @@
-import { Sale_pajamasRepository } from "@/repositories/sale_pajamas-repository"
-import { SalesRepository } from "@/repositories/sales-repository"
-import { Sale_Pajamas } from "@prisma/client"
+import { PijamasRepository } from "@/repositories/pijamas-repository";
+import { Sale_pajamasRepository } from "@/repositories/sale_pajamas-repository";
+import { ResourceNotFoundError } from "./errors/resource-not-fount-error";
+import { QuantityNotSufficientError } from "./errors/quantity-not-sufficient-error";
+
+interface Pajama {
+    pajamaId: string;
+    price: number;
+    quantity: number;
+    size: string;
+}
 
 interface CreateUseCaseRequest {
-    quantity: number
-    price: number
-
-    pajamaId: string
-    saleId: string
+    pajamas: Pajama[];
+    saleId: string;
 }
 
-interface CreateUseCaseResponse {
-    sale_pajamas: Sale_Pajamas
-}
+export class CreateSalePajamasUseCase {
+    constructor(
+        private salePajamasRepository: Sale_pajamasRepository,
+        private pajamasRepository: PijamasRepository
+    ) {}
 
-export class CreateSale_PajamasUseCase {
-    constructor (private sale_pajamasRepository: Sale_pajamasRepository, private pajamasRepository: pajamasRepository, private salesRepository: SalesRepository){}
+    async execute({ pajamas, saleId }: CreateUseCaseRequest) {
+        for (const pajama of pajamas) {
+            const pajamaExists = await this.pajamasRepository.findById(pajama.pajamaId);
+
+            const pajamaSize = await this.pajamasRepository.getSize(pajama.pajamaId, pajama.size)
+
+            if (pajamaSize === null || !pajamaExists){
+                throw new ResourceNotFoundError()
+            }
+
+            if (pajamaSize.stock_quantity < pajama.quantity){
+                throw new QuantityNotSufficientError()
+            }
+        }
+
+        for (const pajama of pajamas) {
+            const pajamaSize = await this.pajamasRepository.getSize(pajama.pajamaId, pajama.size)
+
+            pajamaSize!.stock_quantity = pajamaSize!.stock_quantity - pajama.quantity
+            await this.pajamasRepository.updateSize(pajama.pajamaId, pajamaSize!)
+        }
+
+        let pajamaList: Pajama[] = []
+
+        for (const pajama of pajamas) {
+            const samePajama = pajamaList.find((pjm)=>{
+                return pjm.pajamaId === pajama.pajamaId
+            })
+
+            if (samePajama === undefined) {
+                pajamaList.push(pajama)
+            } else {
+                const index = pajamaList.indexOf(samePajama)
+                pajamaList[index].quantity += pajama.quantity
+                pajamaList[index].price += pajama.price
+            }
+        }
+
+        await this.salePajamasRepository.createMany(
+            pajamaList.map(pajama => ({
+                pajamasId: pajama.pajamaId,
+                quantity: pajama.quantity,
+                price: pajama.price,
+            saleId
+            }))
+        )
+    }
 }

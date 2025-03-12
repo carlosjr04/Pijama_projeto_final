@@ -53,6 +53,13 @@ export class PrismaPijamasRepository implements PijamasRepository {
         });
     }
 
+    async updateSize(pajamaId: string, size: PajamaSize) {
+        await prisma.pajamaSize.update({
+            where: { id: pajamaId },
+            data: { stock_quantity: size.stock_quantity }
+        })
+    }
+
     async updateSizes(pijamaId: string, sizes: PajamaSize[]): Promise<void> {
         // Atualiza os tamanhos com base no pijamaId
         await prisma.pajamaSize.updateMany({
@@ -66,6 +73,17 @@ export class PrismaPijamasRepository implements PijamasRepository {
         await prisma.pajamaSize.deleteMany({
             where: { pajamaId: pijamaId }
         });
+    }
+
+    async getSize(pajamaId: string, size: string): Promise<PajamaSize | null> {
+        const pajamaSize = await prisma.pajamaSize.findFirst({
+            where: {
+                pajamaId,
+                size
+            }
+        })
+
+        return pajamaSize
     }
     
     async getSizes(pijamaId: string): Promise<PajamaSize[]> {

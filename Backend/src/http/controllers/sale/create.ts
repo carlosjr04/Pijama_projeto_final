@@ -1,6 +1,9 @@
 import { PrismaAddressRepository } from "@/repositories/prisma/prisma-address-repository";
+import { PrismaPijamasRepository } from "@/repositories/prisma/prisma-pijamas-repository";
+import { PrismaSale_PajamasRepository } from "@/repositories/prisma/prisma-sale_pajamas-repository";
 import { PrismaSalesRepository } from "@/repositories/prisma/prisma-sales-repository";
 import { CreateSaleUseCase } from "@/use-cases/create-sale-use-case";
+import { CreateSalePajamasUseCase } from "@/use-cases/create-sale_pajamas-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
@@ -17,18 +20,46 @@ export async function create(request: FastifyRequest, reply: FastifyReply){
         city: z.string(),
         neighborhood: z.string(),
         address: z.string(),
-        number: z.string()
+        number: z.string(),
+
+
+        pajamas: z.array(z.object({
+            pajamaId: z.string(),
+            price: z.number().nonnegative(),
+            quantity: z.number().int().nonnegative(),
+            size: z.enum(["PP", "P", "M", "G", "GG"])
+        }))
 
     })
 
-    const { buyer_name, cpf, price, payment_method, installments, card_number, zip_code, state, city, neighborhood, address, number } = createBodySchema.parse(request.body)
+    const { 
+        buyer_name,
+        cpf,
+        price, 
+        payment_method,
+        installments, 
+        card_number, 
+        zip_code, 
+        state, 
+        city, 
+        neighborhood, 
+        address, 
+        number,
+        
+        pajamas
+
+    } = createBodySchema.parse(request.body)
 
     try {
 
         const prismaSalesRepository = new PrismaSalesRepository()
         const prismaAddressRepository = new PrismaAddressRepository()
+        const prismaPajamasRepository = new PrismaPijamasRepository()
+        const prismaSales_PajamasRepository = new PrismaSale_PajamasRepository()
 
         const createSaleUseCase = new CreateSaleUseCase(prismaSalesRepository, prismaAddressRepository)
+        const createSalePajamasUseCase = new CreateSalePajamasUseCase(prismaSales_PajamasRepository, prismaPajamasRepository)
+
 
         const { sale } = await createSaleUseCase.execute(
             {
@@ -47,6 +78,13 @@ export async function create(request: FastifyRequest, reply: FastifyReply){
                 number
             }
         )
+
+
+        await createSalePajamasUseCase.execute({
+            pajamas,
+            saleId: sale.id
+        })
+
 
         return await reply.status(201).send(sale)
         

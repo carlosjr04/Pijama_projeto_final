@@ -55,6 +55,6 @@ export class CreateUseCase {
         // Criação dos tamanhos associados ao pijama
         await this.pijamasRepository.createSizes(sizes);
 
-        return { pijama };
+        return { pijama }
     }
 }
