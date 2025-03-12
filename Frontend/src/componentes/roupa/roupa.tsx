@@ -27,6 +27,9 @@ export default function Roupa(roupa: pijama) {
   function navigatePijama(){
     navigate(`/pijama/${roupa.id}`)
   }
+  // function favoritar(){
+  //   axios.patch(`http://localhost:3000/pijama/${roupa.id}`,{favorite:!roupa.favorite})
+  // }
   return (
     <>
       <div  className={style.card}>
