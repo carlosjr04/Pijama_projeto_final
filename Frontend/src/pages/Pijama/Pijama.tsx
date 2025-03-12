@@ -108,6 +108,14 @@ export default function Pijama() {
   function carrinho() {
     navigate("/carrinho");
   }
+  function formatarNumero(numero: number|undefined): string {
+    if(numero){
+      return numero.toFixed(2).toString().replace(".", ",");
+    }else{
+      return "0";
+    }
+    
+}
   return (
     <>
       <div className={style.card}>
@@ -119,13 +127,13 @@ export default function Pijama() {
           </div>
           <div className={style.precos}>
             <div className={style.precosMaior}>
-              <h1>{pijamaPagina?.price.toFixed(2)}</h1>
+              <h1>R$ {formatarNumero(pijamaPagina?.price)}</h1>
               <h3>
-                Ou por <span>R${calcularDesconto().toFixed(2)}</span> no PIX
+                Ou por <span>R${formatarNumero(calcularDesconto())}</span> no PIX
               </h3>
             </div>
             <h3>
-              6x de <span>R${calcularParcela().toFixed(2)}</span>
+              6x de <span>R${formatarNumero(calcularParcela())}</span>
             </h3>
           </div>
           <p className={style.tamanho}>Tamanhos:</p>

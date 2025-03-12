@@ -15,14 +15,12 @@ export default function Roupa(roupa: pijama) {
     const precoParcelado = preco / 6;
     return Number(precoParcelado);
   }
-  function colandoVirgula(preco: number) {
-    const numero = preco.toFixed(2);
-    const precoString = numero.toString();
-    const partes = precoString.split(".");
-    const partesLista = [];
-    partesLista.push(Number(partes[0]));
-    partesLista.push(partes[1]);
-    return partesLista;
+  function colandoVirgula(numero: number|undefined): string {
+    if(numero){
+      return numero.toFixed(2).toString().replace(".", ",");
+    }else{
+      return "0";
+    }
   }
   function navigatePijama(){
     navigate(`/pijama/${roupa.id}`)
@@ -55,19 +53,17 @@ export default function Roupa(roupa: pijama) {
           <div className={style.preco}>
             {roupa.on_sale ? (
               <p className={style.desconto_preco}>
-                R%{roupa.sale_percent.toFixed(2)}
+                R${colandoVirgula(roupa.sale_percent)}
               </p>
             ) : (
               <p className={style.desconto_preco}></p>
             )}
             {/* se tentar botar numero com virgula da ruim entao tem uma funçao que faz isso para ficar mais bonito  */}
             <h2>
-              R$ {colandoVirgula(roupa.price)[0]},
-              {colandoVirgula(roupa.price)[1]}
+              R$ {colandoVirgula(roupa.price)}
             </h2>
             <p>
-              6x de R${colandoVirgula(parcelamento(roupa.price))[0]},
-              {colandoVirgula(parcelamento(roupa.price))[1]}{" "}
+              6x de R${colandoVirgula(parcelamento(roupa.price))}
             </p>
           </div>
         </div>
