@@ -106,7 +106,7 @@ export default function Pijama() {
   //}
   //}
   function carrinho() {
-    navigate("/carrinho");
+    navigate("/homepage");
   }
   function formatarNumero(numero: number|undefined): string {
     if(numero){
