@@ -5,8 +5,9 @@ import { env } from "./env";
 import fastifyCookie from "@fastify/cookie";
 import fastifyCors from "@fastify/cors";
 import { userRoutes } from "./http/controllers/user/routes";
-import { feedbacksRoutes } from "./http/controllers/feedback/routes";
+import { saleRoutes } from "./http/controllers/sale/routes";
 import { pijamaRoutes } from "./http/controllers/pijama/routes";
+import { feedbacksRoutes } from "./http/controllers/feedback/routes";
 
 export const app = fastify();
 
@@ -31,6 +32,7 @@ app.register(fastifyJwt, {
 app.register(fastifyCookie);
 
 app.register(userRoutes);
+app.register(saleRoutes);
 app.register(pijamaRoutes);
 app.register(feedbacksRoutes);
 
@@ -40,6 +42,8 @@ app.setErrorHandler((error, request, reply) => {
       .status(400)
       .send({ message: "validation error", issues: error.format() });
   }
+
+  console.log(error);
 
   return reply.status(500).send({ message: "Internal server error" });
 });
