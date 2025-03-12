@@ -53,6 +53,11 @@ input {
     max-width: 4rem;
 }
 
+.warning {
+    color: var(--branco);
+    font-size: 0.5rem;
+}
+
 #submitButton {
     background-color: var(--azul400);
     border: none;
