@@ -19,7 +19,6 @@ export default function Feedback(feedback: feedback) {
         }
         rating -= 1; 
     }
-    console.log(listaEstrela)
     return listaEstrela;
   }
   return (
