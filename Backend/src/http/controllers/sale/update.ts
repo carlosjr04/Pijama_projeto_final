@@ -27,7 +27,7 @@ export async function update(request: FastifyRequest, reply: FastifyReply) {
         number: z.string().optional(),
 
         sale_pajamaId:  z.string().optional(),
-        quantity: z.number().optional()
+        quantity: z.number().nonnegative().optional()
     })
 
     const { saleId } = updateParamSchema.parse(request.params)
@@ -58,7 +58,7 @@ export async function update(request: FastifyRequest, reply: FastifyReply) {
         const prismaPajamasRepository = new PrismaPijamasRepository()
 
         const updateSaleUseCase = new UpdateSaleUseCase(prismaSalesRepository, prismaAddressRepository)
-        const updateSale_PajamasUseCase = new UpdateSale_PajamasUseCase(prismaSale_PajamasRepository, prismaPajamasRepository)
+        const updateSale_PajamasUseCase = new UpdateSale_PajamasUseCase(prismaSale_PajamasRepository, prismaPajamasRepository, prismaSalesRepository)
 
         const { sale } = await updateSaleUseCase.execute({
             saleId,
@@ -91,25 +91,26 @@ export async function update(request: FastifyRequest, reply: FastifyReply) {
 
         if (sale_pajamaId){
             const { sale_pajama } = await updateSale_PajamasUseCase.execute({
+                sale,
                 sale_pajamaId,
                 data: { quantity }
             })
 
-            const sale_pajamas = await prismaSale_PajamasRepository.getSale_PajamasBySaleId(saleId)
-            if (!sale_pajamas){
-                throw new ResourceNotFoundError()
-            }
-
-            let totalPrice:number = 0
-
-            for (const element of sale_pajamas){
-                totalPrice += element.price
-            }
-
-            sale.price = totalPrice
-
             return await reply.status(200).send({sale, sale_pajama})
         }
+
+        const sale_pajamas = await prismaSale_PajamasRepository.getBySaleId(sale.id)
+        if (!sale_pajamas){
+            throw new ResourceNotFoundError()
+        }
+
+        let totalPrice:number = 0
+
+        for (const element of sale_pajamas){
+            totalPrice += element.price
+        }
+
+        sale.price = totalPrice
 
         return await reply.status(200).send(sale)
         

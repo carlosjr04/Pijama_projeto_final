@@ -10,5 +10,4 @@ export interface Sale_pajamasRepository {
     getBySaleId(saleId: string): Promise<Sale_Pajamas[] | null>
     createMany(data: Prisma.Sale_PajamasCreateManyInput[]): Promise<void>
     update(id: string, data: Prisma.Sale_PajamasUpdateInput): Promise<Sale_Pajamas | null>
-    getSale_PajamasBySaleId(saleId: string): Promise<Sale_Pajamas[]| null>
 }

@@ -1,19 +1,23 @@
 import { Sale_pajamasRepository } from "@/repositories/sale_pajamas-repository";
-import { QuantityNotSufficientError } from "../errors/quantity-not-sufficient-error";
-import { ResourceNotFoundError } from "../errors/resource-not-fount-error";
 import { PijamaSizeRepository } from "@/repositories/pijamaSize-repository";
 import { PijamasRepository } from "@/repositories/pijamas-repository";
 
 
-interface Pajama {
+interface PajamaSize {
     pajamaId: string;
-    price: number;
     quantity: number;
     size: string;
 }
 
+interface Pajama {
+    pajamaId: string;
+    quantity: number;
+    price: number;
+    size: string;
+}
+
 interface CreateUseCaseRequest {
-    pajamas: Pajama[];
+    pajamas: PajamaSize[];
     saleId: string;
 }
 
@@ -25,19 +29,6 @@ export class CreateSalePajamasUseCase {
     ) {}
 
     async execute({ pajamas, saleId }: CreateUseCaseRequest) {
-        for (const pajama of pajamas) {
-            const pajamaExists = await this.pajamasRepository.findById(pajama.pajamaId);
-
-            const pajamaSize = await this.pajamaSizeRepository.getSize(pajama.pajamaId, pajama.size)
-
-            if (pajamaSize === null || !pajamaExists){
-                throw new ResourceNotFoundError()
-            }
-
-            if (pajamaSize.stock_quantity < pajama.quantity){
-                throw new QuantityNotSufficientError()
-            }
-        }
 
         for (const pajama of pajamas) {
             const pajamaSize = await this.pajamaSizeRepository.getSize(pajama.pajamaId, pajama.size)
@@ -53,12 +44,18 @@ export class CreateSalePajamasUseCase {
                 return pjm.pajamaId === pajama.pajamaId
             })
 
+            const pajamaPrice = await this.pajamasRepository.findById(pajama.pajamaId)
+
             if (samePajama === undefined) {
-                pajamaList.push(pajama)
+                pajamaList.push({
+                    ...pajama,
+                    price: pajamaPrice!.price * pajama.quantity
+
+                })
             } else {
                 const index = pajamaList.indexOf(samePajama)
                 pajamaList[index].quantity += pajama.quantity
-                pajamaList[index].price += pajama.price
+                pajamaList[index].price += pajamaPrice!.price * pajama.quantity
             }
         }
 

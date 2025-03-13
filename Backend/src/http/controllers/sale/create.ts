@@ -26,7 +26,6 @@ export async function create(request: FastifyRequest, reply: FastifyReply){
 
         pajamas: z.array(z.object({
             pajamaId: z.string(),
-            price: z.number().nonnegative(),
             quantity: z.number().int().nonnegative(),
             size: z.enum(["PP", "P", "M", "G", "GG"])
         }))
@@ -59,7 +58,12 @@ export async function create(request: FastifyRequest, reply: FastifyReply){
         const prismaSales_PajamasRepository = new PrismaSale_PajamasRepository()
         const prismaPajamaSizeRepository = new PrismaPijamaSizeRepository
 
-        const createSaleUseCase = new CreateSaleUseCase(prismaSalesRepository, prismaAddressRepository)
+        const createSaleUseCase = new CreateSaleUseCase(
+            prismaSalesRepository, 
+            prismaAddressRepository,
+            prismaPajamasRepository,
+            prismaPajamaSizeRepository
+        )
         const createSalePajamasUseCase = new CreateSalePajamasUseCase(prismaSales_PajamasRepository, prismaPajamasRepository, prismaPajamaSizeRepository)
 
 
@@ -77,7 +81,9 @@ export async function create(request: FastifyRequest, reply: FastifyReply){
                 city, 
                 address, 
                 neighborhood, 
-                number
+                number,
+
+                pajamas
             }
         )
 
