@@ -1,6 +1,6 @@
 .favContainer {
   display: flex;  
-  justify-content: center;
+  justify-content: space-around;
 }
 
 .favContainer > ul {
@@ -12,4 +12,17 @@
 .favContainer > button {
     border: transparent;
     background-color: transparent;
+}
+
+.emptyFavMessage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 50vh 0 50vh 0;
+}
+
+.emptyFavMessage > h2 {
+    color: var(--cinza200);
+    font-weight: 700;
+    font-size: 2rem;
 }

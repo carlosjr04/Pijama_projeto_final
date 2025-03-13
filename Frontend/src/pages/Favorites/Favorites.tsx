@@ -34,6 +34,8 @@ export default function Favorites() {
             </div> 
         </>
     ) : (
-        <h3>Você não tem pijamas favoritos</h3>
+        <div className={styles.emptyFavMessage}>   
+            <h2>Você não tem pijamas favoritos {":("}</h2>
+        </div>
     );
 }
