@@ -1,5 +1,6 @@
 import { PrismaAddressRepository } from "@/repositories/prisma/prisma-address-repository";
 import { PrismaPijamasRepository } from "@/repositories/prisma/prisma-pijamas-repository";
+import { PrismaPijamaSizeRepository } from "@/repositories/prisma/prisma-pijamaSize-repository";
 import { PrismaSale_PajamasRepository } from "@/repositories/prisma/prisma-sale_pajamas-repository";
 import { PrismaSalesRepository } from "@/repositories/prisma/prisma-sales-repository";
 import { CreateSalePajamasUseCase } from "@/use-cases/sale_pajamas/create-sale_pajamas-use-case";
@@ -56,9 +57,10 @@ export async function create(request: FastifyRequest, reply: FastifyReply){
         const prismaAddressRepository = new PrismaAddressRepository()
         const prismaPajamasRepository = new PrismaPijamasRepository()
         const prismaSales_PajamasRepository = new PrismaSale_PajamasRepository()
+        const prismaPajamaSizeRepository = new PrismaPijamaSizeRepository
 
         const createSaleUseCase = new CreateSaleUseCase(prismaSalesRepository, prismaAddressRepository)
-        const createSalePajamasUseCase = new CreateSalePajamasUseCase(prismaSales_PajamasRepository, prismaPajamasRepository)
+        const createSalePajamasUseCase = new CreateSalePajamasUseCase(prismaSales_PajamasRepository, prismaPajamasRepository, prismaPajamaSizeRepository)
 
 
         const { sale } = await createSaleUseCase.execute(

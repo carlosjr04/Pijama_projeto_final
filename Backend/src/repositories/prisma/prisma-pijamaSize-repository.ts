@@ -28,6 +28,17 @@ export class PrismaPijamaSizeRepository implements PijamaSizeRepository {
             where: { pajamaId: pijamaId }
         });
     }
+
+    async getSize(pajamaId: string, size: string): Promise<PajamaSize | null> {
+        const pajamaSize = await prisma.pajamaSize.findFirst({
+            where: {
+                pajamaId,
+                size
+            }
+        })
+
+        return pajamaSize
+    }
     
     async getSizes(pijamaId: string): Promise<PajamaSize[]> {
         const sizes = await prisma.pajamaSize.findMany({

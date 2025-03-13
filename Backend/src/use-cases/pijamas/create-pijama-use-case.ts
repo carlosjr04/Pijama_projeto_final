@@ -45,7 +45,7 @@ export class CreateUseCase {
         });
 
         const sizes: PijamaSizeCreateInput[] = ["PP", "P", "M", "G", "GG"].map((size) => ({
-            stock_quantity: 0,
+            stock_quantity: 5,
             size,
             pajamaId: pijama.id,
         }));

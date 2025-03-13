@@ -1,7 +1,8 @@
-import { PijamasRepository } from "@/repositories/pijamas-repository";
 import { Sale_pajamasRepository } from "@/repositories/sale_pajamas-repository";
 import { QuantityNotSufficientError } from "../errors/quantity-not-sufficient-error";
 import { ResourceNotFoundError } from "../errors/resource-not-fount-error";
+import { PijamaSizeRepository } from "@/repositories/pijamaSize-repository";
+import { PijamasRepository } from "@/repositories/pijamas-repository";
 
 
 interface Pajama {
@@ -19,14 +20,15 @@ interface CreateUseCaseRequest {
 export class CreateSalePajamasUseCase {
     constructor(
         private salePajamasRepository: Sale_pajamasRepository,
-        private pajamasRepository: PijamasRepository
+        private pajamasRepository: PijamasRepository,
+        private pajamaSizeRepository: PijamaSizeRepository
     ) {}
 
     async execute({ pajamas, saleId }: CreateUseCaseRequest) {
         for (const pajama of pajamas) {
             const pajamaExists = await this.pajamasRepository.findById(pajama.pajamaId);
 
-            const pajamaSize = await this.pajamasRepository.getSize(pajama.pajamaId, pajama.size)
+            const pajamaSize = await this.pajamaSizeRepository.getSize(pajama.pajamaId, pajama.size)
 
             if (pajamaSize === null || !pajamaExists){
                 throw new ResourceNotFoundError()
@@ -38,10 +40,10 @@ export class CreateSalePajamasUseCase {
         }
 
         for (const pajama of pajamas) {
-            const pajamaSize = await this.pajamasRepository.getSize(pajama.pajamaId, pajama.size)
+            const pajamaSize = await this.pajamaSizeRepository.getSize(pajama.pajamaId, pajama.size)
 
             pajamaSize!.stock_quantity = pajamaSize!.stock_quantity - pajama.quantity
-            await this.pajamasRepository.updateSize(pajama.pajamaId, pajamaSize!)
+            await this.pajamaSizeRepository.updateSize(pajama.pajamaId, pajamaSize!)
         }
 
         let pajamaList: Pajama[] = []
