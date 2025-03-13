@@ -28,8 +28,9 @@ CREATE TABLE "PajamaSize" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "stock_quantity" INTEGER NOT NULL,
     "created_at" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "size" TEXT NOT NULL,
     "pajamaId" TEXT NOT NULL,
-    CONSTRAINT "PajamaSize_pajamaId_fkey" FOREIGN KEY ("pajamaId") REFERENCES "Pajamas" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    CONSTRAINT "PajamaSize_pajamaId_fkey" FOREIGN KEY ("pajamaId") REFERENCES "Pajamas" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -53,7 +54,7 @@ CREATE TABLE "Sale_Pajamas" (
     "pajamasId" TEXT NOT NULL,
     "saleId" TEXT NOT NULL,
     CONSTRAINT "Sale_Pajamas_pajamasId_fkey" FOREIGN KEY ("pajamasId") REFERENCES "Pajamas" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
-    CONSTRAINT "Sale_Pajamas_saleId_fkey" FOREIGN KEY ("saleId") REFERENCES "Sale" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+    CONSTRAINT "Sale_Pajamas_saleId_fkey" FOREIGN KEY ("saleId") REFERENCES "Sale" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- CreateTable
@@ -77,10 +78,10 @@ CREATE TABLE "User" (
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Sale_cpf_key" ON "Sale"("cpf");
+CREATE UNIQUE INDEX "Address_zip_code_key" ON "Address"("zip_code");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Sale_addressId_key" ON "Sale"("addressId");
+CREATE UNIQUE INDEX "Address_zip_code_state_city_neighborhood_address_number_key" ON "Address"("zip_code", "state", "city", "neighborhood", "address", "number");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_username_key" ON "User"("username");

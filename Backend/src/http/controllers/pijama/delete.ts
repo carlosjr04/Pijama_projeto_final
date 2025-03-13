@@ -1,8 +1,9 @@
 import { PrismaPijamasRepository } from "@/repositories/prisma/prisma-pijamas-repository";
-import { DeletePijamaUseCase } from "@/use-cases/pijamas/delete-pijama-sue-case";
+import { DeletePijamaUseCase } from "@/use-cases/pijamas/delete-pijama-use-case";
 import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-fount-error";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
+import { PrismaPijamaSizeRepository } from "@/repositories/prisma/prisma-pijamaSize-repository";
 
 export async function deletePijama(request: FastifyRequest, reply: FastifyReply) {
     const getParamsSchema = z.object({
@@ -14,7 +15,8 @@ export async function deletePijama(request: FastifyRequest, reply: FastifyReply)
     try {
 
         const prismaPijamarepository = new PrismaPijamasRepository()
-        const deletePijamaUseCase = new DeletePijamaUseCase(prismaPijamarepository)
+        const prismaPijamaSizeRepository = new PrismaPijamaSizeRepository()
+        const deletePijamaUseCase = new DeletePijamaUseCase(prismaPijamarepository, prismaPijamaSizeRepository)
 
         const pijama = await deletePijamaUseCase.execute({
             pijamaId

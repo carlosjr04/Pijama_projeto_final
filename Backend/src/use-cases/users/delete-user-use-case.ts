@@ -1,6 +1,6 @@
 import { UsersRepository } from "@/repositories/users-repository"
 import { User } from "@prisma/client"
-import { ResourceNotFoundError } from "./errors/resource-not-fount-error"
+import { ResourceNotFoundError } from "../errors/resource-not-fount-error"
 
 interface DeleteUserUseCaseRequest {
     userId: string

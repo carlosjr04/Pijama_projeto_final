@@ -1,26 +1,29 @@
-import { PijamasRepository } from "@/repositories/pijamas-repository"
-import { Pajamas } from "@prisma/client"
-import { ResourceNotFoundError } from "../errors/resource-not-fount-error"
+import { PijamasRepository } from "@/repositories/pijamas-repository";
+import { Pajamas, PajamaSize } from "@prisma/client";
+import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-fount-error";
+import { PijamaSizeRepository } from "@/repositories/pijamaSize-repository";
 
 interface ReadPijamaUseCaseRequest {
-    pijamaId: string
+    pijamaId: string;
 }
 
 interface ReadPijamaUseCaseResponse {
-    pijama: Pajamas
+    pijama: Pajamas;
+    sizes: PajamaSize[]
 }
 
 export class ReadPijamaUseCase {
-    constructor (private PijamasRepository: PijamasRepository){}
+    constructor(private pijamasRepository: PijamasRepository, private pijamaSizeRepository: PijamaSizeRepository) {}
 
-    async execute ({pijamaId}: ReadPijamaUseCaseRequest): Promise<ReadPijamaUseCaseResponse> {
+    async execute({ pijamaId }: ReadPijamaUseCaseRequest): Promise<ReadPijamaUseCaseResponse> {
+        const pijama = await this.pijamasRepository.findById(pijamaId);
 
-        const pijama = await this.PijamasRepository.findById(userId)
-
-        if (!pijama){
-            throw new ResourceNotFoundError
+        if (!pijama) {
+            throw new ResourceNotFoundError("Pijama não encontrado.");
         }
 
-        return { pijama }
+        const sizes = await this.pijamaSizeRepository.getSizes(pijamaId);
+
+        return { pijama, sizes };
     }
 }

@@ -1,4 +1,4 @@
-import { Prisma, User } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { PijamasRepository } from "../pijamas-repository";
 import { prisma } from "@/lib/prisma";
 
@@ -44,5 +44,4 @@ export class PrismaPijamasRepository implements PijamasRepository {
 
         return pajamas
     }
-    
 }

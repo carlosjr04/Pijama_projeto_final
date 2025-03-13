@@ -1,4 +1,4 @@
-import { Pajamas, Prisma, User } from ".prisma/client";
+import { Pajamas, Prisma } from ".prisma/client";
 
 export interface PijamaUpdateInput {
     name?: string,
@@ -18,5 +18,4 @@ export interface PijamasRepository {
     update(id: string, data: Prisma.PajamasUpdateInput): Promise<Pajamas | null>
     delete(id: string): Promise<void>
     findById(userId: string): Promise<Pajamas | null>
-
 }
