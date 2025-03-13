@@ -1,0 +1,47 @@
+.feedbackUnidade {
+  display: flex;
+  flex-direction: column;
+  width: 405px;
+  box-shadow: 8.02px 8.02px 16.03px 0px #00000040;
+  z-index: 1;
+  gap: 2rem;
+  background: #fcf7f8;
+  min-height: 420px;
+  align-items: center;
+  
+  border-radius: 8px;
+}
+.estrelas{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap:15px;
+}
+
+.feedbackUnidade img{
+    
+    width: 60px;
+    height: 60px;
+}
+.feedbackUnidade h2 {
+  font-family: Numans;
+  font-weight: 400;
+  font-size: 40.08px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  margin-top: 2rem;
+}
+.feedbackUnidade p {
+  font-family: Nunito Sans;
+  font-weight: 400;
+  font-style: italic;
+  font-size: 16.03px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  vertical-align: bottom;
+  width: 350px;
+  margin-top: 2rem;
+}
+

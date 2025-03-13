@@ -1,0 +1,148 @@
+.apresentacao {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 90%;
+}
+.banner {
+  width: 100%;
+  height: 410px;
+  object-fit: fill;
+}
+.botoes {
+  position: absolute;
+  display: flex;
+  justify-content: space-around;
+  gap: 81%;
+  top: 898px;
+  width: 100%;
+}
+.voltar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: none;
+  cursor: pointer;
+  border: 0px;
+  z-index: 3;
+  background: none;
+}
+.avancar {
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+  cursor: pointer;
+  background-color: none;
+  border: 0px;
+  background: none;
+  z-index: 3;
+}
+.valores {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 140px;
+  margin-top: 90px;
+}
+.valores div {
+  height: 270px;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+.valores div img {
+  width: 150px;
+  height: 150px;
+}
+.valores div p {
+  font-family: Nunito Sans;
+  font-weight: 600;
+  font-style: italic;
+  font-size: 32px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  color: #171717;
+}
+.promocoes {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-top: 4rem;
+}
+.promocoes h1 {
+  margin-left: 2%;
+  font-family: Numans;
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  color: #74010b;
+  margin-bottom: 2.5rem;
+  
+}
+.promocoesPijama {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+}
+.feedback {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 3rem;
+}
+.feedbackElementos {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 1400px; /* Ajuste para um tamanho fixo se necessário */
+  margin: 0 auto; /* Centraliza no meio da tela */
+}
+
+.swiper {
+  width: 100%; /* Evita que o Swiper ultrapasse a div */
+}
+.voltarfeedback {
+  position: relative;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  cursor: pointer;
+  border: 0px;
+  z-index: 1;
+}
+.avancarfeedback {
+  position: relative;
+  margin-right: 1rem;
+  margin-left: 1rem;
+  cursor: pointer;
+  background-color: none;
+  border: 0px;
+  z-index: 1;
+}
+.botaoFeed {
+  align-self: center;
+  width: 772px;
+  height: 98px;
+  border: 0px;
+  background-color: #4e8098;
+  font-family: Montserrat;
+  font-weight: 400;
+  font-size: 36px;
+  line-height: 100%;
+  letter-spacing: 0%;
+  text-align: center;
+  color:white;
+  margin-bottom: 2rem;
+  cursor: pointer;
+}
