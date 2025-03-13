@@ -14,7 +14,7 @@
     cursor: pointer;
 }
 
-button:has(img) {
+.modalButton:has(img) {
     display: flex;
     align-items: center;
     gap: 1vw;
