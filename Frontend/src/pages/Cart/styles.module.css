@@ -1,0 +1,48 @@
+body {
+    background-image: url("../../assets/Background_azul.png");
+}
+
+.cartContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 5vh;
+    margin: 3vh 4vw ;
+}
+
+.cartItemsList {
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+    row-gap: 5vh;
+    width: 100%;
+}
+
+#totalPrice {
+    display: flex;
+    justify-content: center;
+    gap: 10vw;
+    font-family: "Outfit", sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+#bigBlueButton {
+    background-color: var(--azul100);
+    box-shadow: 0px 5px 6px 0px rgba(0, 0, 0, 0.25);
+    color: var(--branco);
+    border: none;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 0.625rem;
+    text-align: center;
+    font-weight: 500;
+    font-size: 1.5rem;
+    font-family: "Montserrat", sans-serif;
+}
+
+#bigBlueButton:hover {
+    cursor: pointer;
+    box-shadow: 0px 0px 0px 0px;
+    transition: 0.2s;
+}

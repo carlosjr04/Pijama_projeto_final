@@ -1,0 +1,35 @@
+.sectionHeaderContainer {
+    background-color: var(--branco);
+    font: Numans;
+    display: flex;
+}
+
+.sectionHeaderContainer svg {
+    height: 2.5rem;
+}
+
+.tabHighlight, .tabDefault {
+    display: flex;
+    align-items: center;
+    font-size: 1.8rem;
+    font-weight: 400;
+    padding-top: 6vh;
+    padding-bottom: 3vh;
+    padding-left: 4vw;
+}
+
+.tabHighlight {
+    color: var(--vermelho300);
+}
+
+.tabHighlight .strokeOnlyIcon {
+    stroke: var(--vermelho300);
+}
+
+.tabHighlight .fillOnlyIcon {
+    fill: var(--vermelho300);
+}
+
+.tabDefault {
+    color: var(--cinza200);
+}
