@@ -1,7 +1,8 @@
 import { PijamasRepository } from "@/repositories/pijamas-repository";
 import { Sale_pajamasRepository } from "@/repositories/sale_pajamas-repository";
-import { ResourceNotFoundError } from "./errors/resource-not-fount-error";
-import { QuantityNotSufficientError } from "./errors/quantity-not-sufficient-error";
+import { QuantityNotSufficientError } from "../errors/quantity-not-sufficient-error";
+import { ResourceNotFoundError } from "../errors/resource-not-fount-error";
+
 
 interface Pajama {
     pajamaId: string;

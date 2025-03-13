@@ -2,8 +2,8 @@ import { PrismaAddressRepository } from "@/repositories/prisma/prisma-address-re
 import { PrismaPijamasRepository } from "@/repositories/prisma/prisma-pijamas-repository";
 import { PrismaSale_PajamasRepository } from "@/repositories/prisma/prisma-sale_pajamas-repository";
 import { PrismaSalesRepository } from "@/repositories/prisma/prisma-sales-repository";
-import { CreateSaleUseCase } from "@/use-cases/create-sale-use-case";
-import { CreateSalePajamasUseCase } from "@/use-cases/create-sale_pajamas-use-case";
+import { CreateSalePajamasUseCase } from "@/use-cases/sale_pajamas/create-sale_pajamas-use-case";
+import { CreateSaleUseCase } from "@/use-cases/sales/create-sale-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 

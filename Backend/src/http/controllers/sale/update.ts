@@ -1,7 +1,7 @@
 import { PrismaAddressRepository } from "@/repositories/prisma/prisma-address-repository";
 import { PrismaSalesRepository } from "@/repositories/prisma/prisma-sales-repository";
 import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-fount-error";
-import { UpdateSaleUseCase } from "@/use-cases/update-sale-use-case";
+import { UpdateSaleUseCase } from "@/use-cases/sales/update-sale-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 

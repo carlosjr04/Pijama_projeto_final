@@ -2,8 +2,8 @@ import { PrismaAddressRepository } from "@/repositories/prisma/prisma-address-re
 import { PrismaSale_PajamasRepository } from "@/repositories/prisma/prisma-sale_pajamas-repository";
 import { PrismaSalesRepository } from "@/repositories/prisma/prisma-sales-repository";
 import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-fount-error";
-import { GetSaleUseCase } from "@/use-cases/get-sale-use-case";
-import { GetSale_PajamasUseCase } from "@/use-cases/get-sale_pajamas-use-case";
+import { GetSale_PajamasUseCase } from "@/use-cases/sale_pajamas/get-sale_pajamas-use-case";
+import { GetSaleUseCase } from "@/use-cases/sales/get-sale-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 

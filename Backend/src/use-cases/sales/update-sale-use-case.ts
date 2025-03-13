@@ -1,7 +1,7 @@
 import { AddressRepository, AddressUpdateInput } from "@/repositories/address-repository"
 import { SalesRepository, SaleUpdateInput } from "@/repositories/sales-repository"
 import { Sale } from "@prisma/client"
-import { ResourceNotFoundError } from "./errors/resource-not-fount-error"
+import { ResourceNotFoundError } from "../errors/resource-not-fount-error"
 
 interface UpdateUseCaseRequest {
     saleId: string
