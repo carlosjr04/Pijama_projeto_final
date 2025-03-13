@@ -40,6 +40,8 @@ model PajamaSize {
 
   pajamaId String
   Pajama   Pajamas @relation(fields: [pajamaId], references: [id], onDelete: Cascade)
+
+  @@unique ([pajamaId, size])
 }
 
 model Sale {
@@ -67,6 +69,7 @@ model Sale_Pajamas {
 
   saleId String
   Sale   Sale   @relation(fields: [saleId], references: [id], onDelete: Cascade)
+
 }
 
 model Address {

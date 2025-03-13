@@ -1,4 +1,4 @@
-import { Prisma, Sale } from "@prisma/client";
+import { Prisma, Sale, Sale_Pajamas } from "@prisma/client";
 
 export interface SaleUpdateInput {
   buyer_name?: string;
