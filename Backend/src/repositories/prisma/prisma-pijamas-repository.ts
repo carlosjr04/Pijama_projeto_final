@@ -1,4 +1,4 @@
-import { Prisma, User, PajamaSize } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { PijamasRepository } from "../pijamas-repository";
 import { prisma } from "@/lib/prisma";
 
@@ -43,35 +43,5 @@ export class PrismaPijamasRepository implements PijamasRepository {
         })
 
         return pajamas
-    }
-
-    //adição os métodos de criação pajamasizeby
-
-    async createSizes(data: any) { // FAZER DEPOIS!!!!
-        const pajamas = await prisma.pajamaSize.createMany({
-            data
-        });
-    }
-
-    async updateSizes(pijamaId: string, sizes: PajamaSize[]): Promise<void> {
-        // Atualiza os tamanhos com base no pijamaId
-        await prisma.pajamaSize.updateMany({
-            where: { pajamaId: pijamaId },
-            data: sizes.map(size => ({ stock_quantity: size.stock_quantity }))
-        });
-    }
-
-    async deleteSizes(pijamaId: string): Promise<void> {
-        // Deleta os tamanhos associados ao pijama
-        await prisma.pajamaSize.deleteMany({
-            where: { pajamaId: pijamaId }
-        });
-    }
-    
-    async getSizes(pijamaId: string): Promise<PajamaSize[]> {
-        const sizes = await prisma.pajamaSize.findMany({
-            where: { pajamaId: pijamaId }
-        })
-        return sizes
     }
 }
