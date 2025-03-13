@@ -17,7 +17,6 @@ interface cartItemProps {
 export default function CartItem(pijama : cartItemProps){
 
     const removeFromCart = useCartStore((state) => state.removeFromCart); 
-    const calcularTotal = useCartStore((state) => state.calcularTotal); 
     const [quantity, setQuantity] = useState(pijama.quantity);
     const inStock = 12;
 
