@@ -1,5 +1,3 @@
-// src/use-cases/pijamas/update-pijama-use-case.ts
-
 import { PijamasRepository, PijamaUpdateInput } from "@/repositories/pijamas-repository";
 import { Pajamas, PajamaSize } from "@prisma/client";
 import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-fount-error";

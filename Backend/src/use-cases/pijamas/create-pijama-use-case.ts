@@ -1,6 +1,5 @@
-// src/use-cases/pijamas/create-pijama-use-case.ts
-
 import { PijamasRepository } from "@/repositories/pijamas-repository";
+import { PijamaSizeCreateInput, PijamaSizeRepository } from "@/repositories/pijamaSize-repository";
 import { Pajamas, PajamaSize } from "@prisma/client";
 
 interface CreateUseCaseRequest {
@@ -20,7 +19,7 @@ interface CreateUseCaseResponse {
 }
 
 export class CreateUseCase {
-    constructor(private pijamasRepository: PijamasRepository) {}
+    constructor(private pijamasRepository: PijamasRepository, private pijamaSizeRepository: PijamaSizeRepository) {}
 
     async execute({
         name,
@@ -45,15 +44,13 @@ export class CreateUseCase {
             on_sale,
         });
 
-        // Criando os tamanhos padrão associados ao pijama
-        const sizes = ["PP", "P", "M", "G", "GG"].map((size) => ({ // ESTÁ SEM TIPO // FAZER DEPOIS!!!!
-            stock_quantity: 0, // Definindo a quantidade inicial de estoque, se necessário
+        const sizes: PijamaSizeCreateInput[] = ["PP", "P", "M", "G", "GG"].map((size) => ({
+            stock_quantity: 0,
             size,
             pajamaId: pijama.id,
         }));
 
-        // Criação dos tamanhos associados ao pijama
-        await this.pijamasRepository.createSizes(sizes);
+        await this.pijamaSizeRepository.createSizes(sizes);
 
         return { pijama }
     }
