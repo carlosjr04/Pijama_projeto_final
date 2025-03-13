@@ -8,7 +8,7 @@ import useCartStore from '../../stores/CartStore';
 export default function Cart(){
     const [isModalOpen, setIsModalOpen] = useState(false);
     const cart = useCartStore((state)=>state.cart)
-    const removeFromCart = useCartStore((state)=>state.removeFromCart)
+    
 
     const openModal = () => {
         setIsModalOpen(true);
