@@ -1,6 +1,5 @@
 import { AddressRepository } from "@/repositories/address-repository";
 import { SalesRepository } from "@/repositories/sales-repository";
-import { Address, Sale } from "@prisma/client";
 import { ResourceNotFoundError } from "./errors/resource-not-fount-error";
 
 interface DeleteUseCaseRequest {
@@ -37,10 +36,5 @@ export class DeleteSaleUseCase {
     } else if (sales.length > 1) {
       await this.salesRepository.deleteById(saleId);
     }
-
-    // const address = await this.addressRepository.findById(sale.addressId);
-    // if (!address) {
-    //   throw new ResourceNotFoundError();
-    // }
   }
 }

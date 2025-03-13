@@ -18,8 +18,8 @@ export interface PijamasRepository {
     update(id: string, data: Prisma.PajamasUpdateInput): Promise<Pajamas | null>
     delete(id: string): Promise<void>
     findById(userId: string): Promise<Pajamas | null>
-    //adição dos métodos de manipular os pijamas
-    createSizes(data: any): Promise<void> // ESTÁ SEM TIPO // FAZER DEPOIS!!!!
+
+    createSizes(data: Prisma.PajamaSizeCreateManyInput[]): Promise<PajamaSize[]>
     updateSize(pijamaId: string, size:PajamaSize): Promise<void>
     updateSizes(pijamaId: string, sizes: PajamaSize[]): Promise<void>
     deleteSizes(pijamaId: string): Promise<void>

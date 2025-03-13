@@ -47,10 +47,18 @@ export class PrismaPijamasRepository implements PijamasRepository {
 
     //adição os métodos de criação pajamasizeby
 
-    async createSizes(data: any) { // FAZER DEPOIS!!!!
-        const pajamas = await prisma.pajamaSize.createMany({
+    async createSizes(data: Prisma.PajamaSizeCreateManyInput[]) {
+        await prisma.pajamaSize.createMany({
             data
         });
+
+        const pajamas = await prisma.pajamaSize.findMany({
+            where: { 
+                pajamaId: { in: data.map(d => d.pajamaId) }
+             }
+        })
+
+        return pajamas
     }
 
     async updateSize(pajamaId: string, size: PajamaSize) {

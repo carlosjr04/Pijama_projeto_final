@@ -4,6 +4,15 @@ import { prisma } from "@/lib/prisma";
 
 export class PrismaSale_PajamasRepository implements Sale_pajamasRepository {
 
+    async update(id: string, data: Prisma.Sale_PajamasUncheckedCreateInput) {
+        const sale_pajama = prisma.sale_Pajamas.update({
+            where: { id },
+            data
+        })
+
+        return sale_pajama
+    }
+
     async getBySaleId(saleId: string) {
         const sale_Pajamas = await prisma.sale_Pajamas.findMany({
             where: { saleId }
