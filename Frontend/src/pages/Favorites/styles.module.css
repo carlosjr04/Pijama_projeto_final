@@ -1,0 +1,15 @@
+.favContainer {
+  display: flex;  
+  justify-content: center;
+}
+
+.favContainer > ul {
+    display: flex;
+    gap: 3%;
+    justify-content: center;
+}
+
+.favContainer > button {
+    border: transparent;
+    background-color: transparent;
+}
