@@ -21,7 +21,7 @@ body {
 #totalPrice {
     display: flex;
     justify-content: center;
-    gap: 10vw;
+    gap: 6rem;
     font-family: "Outfit", sans-serif;
     font-weight: 700;
     font-size: 2rem;

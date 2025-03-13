@@ -11,23 +11,29 @@ interface cartItemProps {
     code: number;
     size: size;
     price: number;
-    quantidade:number;
+    quantity:number;
 }
 
 export default function CartItem(pijama : cartItemProps){
+
     const removeFromCart = useCartStore((state) => state.removeFromCart); 
-    const [quantity, setQuantity] = useState(pijama.quantidade);
+    const calcularTotal = useCartStore((state) => state.calcularTotal); 
+    const [quantity, setQuantity] = useState(pijama.quantity);
     const inStock = 12;
 
     function handleIncrement() {
         if (quantity < inStock){
+            
             setQuantity(quantity + 1)
+            pijama.quantity=quantity
         }
     }
 
     function handleDecrement() {
         if (quantity > 1){
+            
             setQuantity(quantity - 1)
+            
         }
     }
     return(
@@ -36,20 +42,20 @@ export default function CartItem(pijama : cartItemProps){
 
             <div className={styles.itemInfo}>
                 <div className={styles.nameAndCodeGroup}>
-                    <h4>{pijama.name}</h4>
+                    <h1>{pijama.name}</h1>
                     <h6>#{pijama.code}</h6>
                 </div>
                 <p>{pijama.size.size}</p>
             </div>
             
             <div className={styles.quantityGroup}>
-                <p>Quantidade:</p>
+                <p className={styles.quantidadeP}>Quantidade:</p>
                 <div className={styles.inputGroup}>
                     <button onClick={handleDecrement} className={styles.button}>-</button>
                     <span className={styles.output}>{quantity}</span>
                     <button onClick={handleIncrement} className={styles.button}>+</button>
                 </div>
-                <h6>Não perca sua oportunidade! Há apenas mais <span>{pijama.size.stock_quantity}</span> peças disponíveis!</h6>
+                <p>Não perca sua oportunidade! Há apenas mais <span>{pijama.size.stock_quantity}</span> peças disponíveis!</p>
                 
             </div>
             <h2>R$ {formatPrice(quantity * pijama.price)}</h2>
