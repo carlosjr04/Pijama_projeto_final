@@ -1,6 +1,6 @@
 import { PrismaUsersRepository } from "@/repositories/prisma/prisma-users-repository";
-import { DeleteUserUseCase } from "@/use-cases/delete-user-use-case";
 import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-fount-error";
+import { DeleteUserUseCase } from "@/use-cases/users/delete-user-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 

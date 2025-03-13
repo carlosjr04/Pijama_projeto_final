@@ -1,4 +1,4 @@
-import { Pajamas, Prisma, User } from ".prisma/client";
+import { Pajamas, PajamaSize, Prisma, User } from ".prisma/client";
 
 export interface PijamaUpdateInput {
     name?: string,
@@ -18,5 +18,12 @@ export interface PijamasRepository {
     update(id: string, data: Prisma.PajamasUpdateInput): Promise<Pajamas | null>
     delete(id: string): Promise<void>
     findById(userId: string): Promise<Pajamas | null>
+
+    createSizes(data: Prisma.PajamaSizeCreateManyInput[]): Promise<PajamaSize[]>
+    updateSize(pijamaId: string, size:PajamaSize): Promise<void>
+    updateSizes(pijamaId: string, sizes: PajamaSize[]): Promise<void>
+    deleteSizes(pijamaId: string): Promise<void>
+    getSize(pijamaId: string, size: string): Promise<PajamaSize | null>
+    getSizes(pijamaId: string): Promise<PajamaSize[]>
 
 }

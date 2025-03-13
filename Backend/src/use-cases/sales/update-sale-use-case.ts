@@ -1,6 +1,7 @@
 import { AddressRepository, AddressUpdateInput } from "@/repositories/address-repository"
 import { SalesRepository, SaleUpdateInput } from "@/repositories/sales-repository"
 import { Sale } from "@prisma/client"
+import { ResourceNotFoundError } from "../errors/resource-not-fount-error"
 
 interface UpdateUseCaseRequest {
     saleId: string
@@ -9,13 +10,18 @@ interface UpdateUseCaseRequest {
 }
 
 interface UpdateUseCaseResponse {
-    sale: Sale
+    sale: Sale | null
 }
 
 export class UpdateSaleUseCase {
     constructor (private salesRepository: SalesRepository, private addressRepository: AddressRepository){}
 
     async execute({saleId, saleData, addressData}: UpdateUseCaseRequest): Promise<UpdateUseCaseResponse> {
+
+        const saleExists = await this.salesRepository.findById(saleId)
+        if (!saleExists){
+            throw new ResourceNotFoundError()
+        }
         
         if (saleData.card_number && !saleData.payment_method){
             throw new Error("Por favor, indique a forma de pagamento novamente")

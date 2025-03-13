@@ -1,5 +1,5 @@
 import { PrismaPijamasRepository } from "@/repositories/prisma/prisma-pijamas-repository";
-import { DeletePijamaUseCase } from "@/use-cases/pijamas/delete-pijama-sue-case";
+import { DeletePijamaUseCase } from "@/use-cases/pijamas/delete-pijama-use-case";
 import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-fount-error";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";

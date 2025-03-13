@@ -36,9 +36,10 @@ model PajamaSize {
   id             String   @id @default(uuid())
   stock_quantity Int
   created_at     DateTime @default(now())
+  size String
 
   pajamaId String
-  Pajama   Pajamas @relation(fields: [pajamaId], references: [id])
+  Pajama   Pajamas @relation(fields: [pajamaId], references: [id], onDelete: Cascade)
 }
 
 model Sale {
@@ -65,7 +66,7 @@ model Sale_Pajamas {
   Pajamas   Pajamas @relation(fields: [pajamasId], references: [id])
 
   saleId String
-  Sale   Sale   @relation(fields: [saleId], references: [id])
+  Sale   Sale   @relation(fields: [saleId], references: [id], onDelete: Cascade)
 }
 
 model Address {
