@@ -1,6 +1,6 @@
 import { Sale_pajamasRepository } from "@/repositories/sale_pajamas-repository"
 import { Sale_Pajamas } from "@prisma/client"
-import { ResourceNotFoundError } from "./errors/resource-not-fount-error"
+import { ResourceNotFoundError } from "../errors/resource-not-fount-error"
 
 interface GetUseCaseRequest {
     saleId: string

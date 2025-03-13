@@ -1,6 +1,6 @@
 import { AddressRepository } from "@/repositories/address-repository";
 import { SalesRepository } from "@/repositories/sales-repository";
-import { ResourceNotFoundError } from "./errors/resource-not-fount-error";
+import { ResourceNotFoundError } from "../errors/resource-not-fount-error";
 
 interface DeleteUseCaseRequest {
   saleId: string;

@@ -1,7 +1,7 @@
 import { AddressRepository } from "@/repositories/address-repository"
 import { SalesRepository } from "@/repositories/sales-repository"
 import { Address, Sale } from "@prisma/client"
-import { ResourceNotFoundError } from "./errors/resource-not-fount-error"
+import { ResourceNotFoundError } from "../errors/resource-not-fount-error"
 
 interface GetUseCaseRequest {
     saleId: string
