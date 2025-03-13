@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { formatPrice } from '../../utils/formatPrice'
 import styles from './styles.module.css'
+/* import useCartStore from '../../stores/CartStore'; */
 
 interface cartItemProps {
     name: string;
@@ -11,6 +12,7 @@ interface cartItemProps {
 }
 
 export default function CartItem({name, imgPath, code, size, price} : cartItemProps){
+    /* const removeFromCart = useCartStore((state) => state.removeFromCart); */
     const [quantity, setQuantity] = useState(1);
     const inStock = 12;
 
@@ -49,7 +51,7 @@ export default function CartItem({name, imgPath, code, size, price} : cartItemPr
                 
             </div>
             <h2>R$ {formatPrice(quantity * price)}</h2>
-            <button className={styles.deleteButton}>X</button>
+            <button /* onClick={removeFromCart} */ className={styles.deleteButton}>X</button>
         </div>
     )
 }
