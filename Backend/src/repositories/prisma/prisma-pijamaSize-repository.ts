@@ -9,6 +9,13 @@ export class PrismaPijamaSizeRepository implements PijamaSizeRepository {
         });
     }
 
+    async updateSize(pajamaId: string, size: PajamaSize) {
+        await prisma.pajamaSize.update({
+            where: { id: pajamaId },
+            data: { stock_quantity: size.stock_quantity }
+        })
+    }
+
     async updateSizes(pijamaId: string, sizes: PajamaSize[]): Promise<void> {
         await prisma.pajamaSize.updateMany({
             where: { pajamaId: pijamaId },
