@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { roupas_teste } from "../Pijamas/Pijamas";
-import { pijama } from "../../types/types";
+import { cartItemProps, pijama } from "../../types/types";
 import { useEffect, useState } from "react";
 import favoritoCheio from "../../assets/favorito_cheio.png";
 import favoritoVazio from "../../assets/favorito_vazio.png";
@@ -19,6 +19,7 @@ import infantil from "../../assets/Infantil.png";
 
 import image from "../../assets/roupa_teste.png";
 import style from "./style.module.css";
+import useCartStore from "../../stores/CartStore";
 
 const listaTamanhos = ["PP", "P", "M", "G", "GG"];
 
@@ -36,8 +37,7 @@ export default function Pijama() {
   }, []);
   
   const navigate = useNavigate();
-  //const removeFromCart = useCartStore((state)=>state.removeFromCart)
-
+  const addToCart = useCartStore((state)=>state.addToCart)
   const [quantidade, setQuantidade] = useState(1);
 
   const [tamanhoAtual, setTamanhoAtual] = useState<string>("P");
@@ -106,6 +106,22 @@ export default function Pijama() {
   //}
   //}
   function carrinho() {
+    for(let i=0;i<quantidade;i++){
+      if(pijamaPagina){
+        const cartItem: cartItemProps = {
+          name: pijamaPagina.name,
+          imgPath: pijamaPagina.image,
+          code: pijamaPagina.id,
+          size: 
+            { size: tamanhoAtual, stock_quantity: quantidadeTamanho() },
+            
+        
+          price: pijamaPagina.price
+      };
+        addToCart(cartItem)
+
+      }
+    }
     navigate("/homepage");
   }
   function formatarNumero(numero: number|undefined): string {

@@ -3,9 +3,13 @@ import CartItem from '../../componentes/CartItem/CartItem'
 import Modal from '../../componentes/Modal/Modal'
 import styles from './styles.module.css'
 import { useState } from 'react';
+import useCartStore from '../../stores/CartStore';
 
 export default function Cart(){
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const cart = useCartStore((state)=>state.cart)
+    const removeFromCart = useCartStore((state)=>state.removeFromCart)
+
     const openModal = () => {
         setIsModalOpen(true);
         window.scrollTo(0, 0);
@@ -43,8 +47,8 @@ export default function Cart(){
             <div className={styles.cartContainer}>
                 <ul className={styles.cartItemsList}>
                     {
-                        itemsOnCart.map((item) => (
-                            <li key={item.id}>
+                        cart.map((item) => (
+                            <li key={item.code}>
                                 <CartItem 
                                     name={item.name} 
                                     imgPath={item.imgPath} 
