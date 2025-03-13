@@ -20,6 +20,13 @@ export interface cartItemProps {
     price: number;
 }
 
+export interface favItemProps {
+    id: number;
+    name: string;
+    imgPath: string;
+    price: number;
+}
+
 export interface feedback{
     id:number
     name:string 
