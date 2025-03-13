@@ -162,7 +162,6 @@ export default function Pijamas() {
     gerarPagina();
   }, []);
   useEffect(() => {
-    console.log("Página Atualizada:", paginaPresente);
     gerarPagina();
   }, [paginaPresente]);
   useEffect(() => {
@@ -172,13 +171,10 @@ export default function Pijamas() {
   function gerarPagina() {
     let lista: pijama[] = [];
 
-    console.log(listaPijamas.length);
     for (let i = (paginaPresente - 1) * 5; i < paginaPresente * 5; i++) {
       if (i >= listaPijamas.length) {
-        console.log("deubrak");
         break;
       }
-      console.log(listaPijamas[i]);
       lista.push(listaPijamas[i]);
     }
 

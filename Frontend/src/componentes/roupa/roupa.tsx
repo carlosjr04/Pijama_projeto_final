@@ -47,11 +47,11 @@ export default function Roupa(roupa: pijama) {
 
                   price: roupa.price,
                 };
-                roupa.favorite=!roupa.favorite
+                
                 
                 addFavorite(cartItem);
               }else{
-                roupa.favorite=!roupa.favorite
+                
                 
                 removeFavorite(roupa.id)
               }
