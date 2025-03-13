@@ -114,6 +114,13 @@ const estacoes = ["Inverno", "Verão", "Todos"];
 const generos = ["Unisex", "Masculino", "Feminino", "Família", "Todos"];
 const tipos = ["Adulto", "Infantil", "Todos"];
 export default function Pijamas() {
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:3000")
+  //     .then((response) => setListaPijamas(response.data))
+  //     .catch((error) => console.log("algo deu errado" + error));
+  // }, []);
+
   const [listaPijamas, setListaPijamas] = useState<pijama[]>(roupas_teste);
   const [listaPijamasPagina, setListaPijamasPagina] =
     useState<pijama[]>(roupas_teste);

@@ -101,11 +101,27 @@ const feedbackList: feedback[] = [
 ];
 
 export default function HomePage() {
+
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:3000/pijama")
+  //     .then((response) => setListaPijamas(response.data))
+  //     .catch((error) => console.log("algo deu errado" + error));
+  // }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("http://localhost:3000/feedback")
+  //     .then((response) => setFeedbackList(response.data))
+  //     .catch((error) => console.log("algo deu errado" + error));
+  // }, []);
+  //const [listaPijama,setListaPijamas] = useState<pijama[]>()
+  //const [feedbackLista,setFeedbackList] = useState<feedback[]>()
   const navigate = useNavigate()
   const swiperRef1 = useRef<SwiperCore | null>(null);
   const swiperRef2 = useRef<SwiperCore | null>(null);
 
   function pijamaPromocao() {
+    // let lista_pijama = listaPijama.filter((pijama) => pijama.on_sale === true);
     let lista_pijama = roupas_teste.filter((pijama) => pijama.on_sale === true);
     let lista_random: pijama[] = [];
     while (lista_random.length < 3 && lista_pijama.length > 0) {
