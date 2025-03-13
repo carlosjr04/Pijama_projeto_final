@@ -18,6 +18,7 @@ export interface cartItemProps {
     code: number;
     size: size;
     price: number;
+    quantity:number;
 }
 
 export interface favItemProps {

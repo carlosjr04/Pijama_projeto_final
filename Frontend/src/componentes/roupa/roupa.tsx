@@ -33,7 +33,9 @@ export default function Roupa(roupa: pijama) {
       <div  className={style.card}>
         <div className={style.header}>
           <button
-            onClick={() => setFavorito((prev) => !prev)}
+            onClick={() => {setFavorito((prev) => !prev)
+              
+            }}
             className={style.botao}
           >
             {favorito ? (
