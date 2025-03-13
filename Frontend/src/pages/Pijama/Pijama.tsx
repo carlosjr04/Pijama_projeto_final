@@ -106,7 +106,7 @@ export default function Pijama() {
   //}
   //}
   function carrinho() {
-    for(let i=0;i<quantidade;i++){
+    
       if(pijamaPagina){
         const cartItem: cartItemProps = {
           name: pijamaPagina.name,
@@ -115,13 +115,13 @@ export default function Pijama() {
           size: 
             { size: tamanhoAtual, stock_quantity: quantidadeTamanho() },
             
-        
+          quantity:quantidade,
           price: pijamaPagina.price
       };
         addToCart(cartItem)
 
       }
-    }
+    
     navigate("/homepage");
   }
   function formatarNumero(numero: number|undefined): string {

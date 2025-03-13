@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { formatPrice } from '../../utils/formatPrice'
 import styles from './styles.module.css'
 import { size } from '../../types/types';
+import useCartStore from '../../stores/CartStore';
 /* import useCartStore from '../../stores/CartStore'; */
 
 interface cartItemProps {
@@ -10,11 +11,12 @@ interface cartItemProps {
     code: number;
     size: size;
     price: number;
+    quantidade:number;
 }
 
 export default function CartItem(pijama : cartItemProps){
-    /* const removeFromCart = useCartStore((state) => state.removeFromCart); */
-    const [quantity, setQuantity] = useState(1);
+    const removeFromCart = useCartStore((state) => state.removeFromCart); 
+    const [quantity, setQuantity] = useState(pijama.quantidade);
     const inStock = 12;
 
     function handleIncrement() {
@@ -28,7 +30,6 @@ export default function CartItem(pijama : cartItemProps){
             setQuantity(quantity - 1)
         }
     }
-    
     return(
         <div className={styles.cardContainer}>
             <img src={pijama.imgPath} alt=''></img>
@@ -38,7 +39,7 @@ export default function CartItem(pijama : cartItemProps){
                     <h4>{pijama.name}</h4>
                     <h6>#{pijama.code}</h6>
                 </div>
-                <p></p>
+                <p>{pijama.size.size}</p>
             </div>
             
             <div className={styles.quantityGroup}>
@@ -52,7 +53,7 @@ export default function CartItem(pijama : cartItemProps){
                 
             </div>
             <h2>R$ {formatPrice(quantity * pijama.price)}</h2>
-            <button /* onClick={removeFromCart} */ className={styles.deleteButton}>X</button>
+            <button  onClick={()=>removeFromCart(pijama.code)}  className={styles.deleteButton}>X</button>
         </div>
     )
 }

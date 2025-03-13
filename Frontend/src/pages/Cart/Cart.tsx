@@ -55,6 +55,7 @@ export default function Cart(){
                                     code={item.code} 
                                     size={item.size} 
                                     price={item.price}
+                                    quantidade={item.quantity}
                                 />
                             </li>
                         ))
