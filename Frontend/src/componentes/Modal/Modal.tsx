@@ -6,6 +6,7 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod';
 import ModalButton from '../ModalButton/ModalButton';
 import arrowIcon from '../../assets/left-arrow-icon.svg'
+import useCartStore from '../../stores/CartStore';
 
 interface ModalProps {
     isOpen: boolean;
@@ -30,6 +31,7 @@ export default function Modal({isOpen, handleClose} : ModalProps) {
     const [activeStep, setActiveStep] = useState(1);
     const [payment, setPayment] = useState('Forma de pagamento');
     const [creditPayment, setCreditPayment] = useState('Parcelamento 5x');
+    const clearCart = useCartStore((state)=>state.clearCart)
   
     const { register, handleSubmit, reset, formState: { errors } } = useForm({
         resolver: zodResolver(clientSchema)
@@ -43,6 +45,7 @@ export default function Modal({isOpen, handleClose} : ModalProps) {
 
     function sendOrder(){
         /* Faz alguma coisa */
+        clearCart()
         setActiveStep(3);
     }
 

@@ -12,6 +12,20 @@ export interface pijama{
     on_sale: boolean 
     sale_percent:number 
 }
+export interface cartItemProps {
+    name: string;
+    imgPath: string;
+    code: number;
+    size: size;
+    price: number;
+}
+
+export interface favItemProps {
+    id: number;
+    name: string;
+    imgPath: string;
+    price: number;
+}
 
 export interface feedback{
     id:number

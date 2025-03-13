@@ -1,12 +1,21 @@
 import { create } from "zustand"
+import { cartItemProps } from "../types/types";
 
-/* To-Do: tipagem */
+interface CartStore {
+    
+    cart:cartItemProps[]
+    addToCart:(item:cartItemProps)=>void;
+    removeFromCart:(id:number)=>void;
+    clearCart:()=>void;
+}
 
-const useCartStore = create((set) => (
+const useCartStore = create<CartStore>((set) => (
     {
+        
         cart: [],
         addToCart: (item) => set((state) => ({cart: [...state.cart, item]})),
-        removeFromCart: (id) => set((state) => ({cart: state.cart.filter((item) => item.id !== id)}))
+        removeFromCart: (id) => set((state) => ({cart: state.cart.filter((item) => item.code !== id)})),
+        clearCart: () => set({ cart: [] })
     }
 ))
 

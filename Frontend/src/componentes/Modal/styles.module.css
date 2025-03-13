@@ -28,12 +28,12 @@
     margin-bottom: 0.75rem;
 }
 
-form {
+.modalContent > form {
     display: flex;
     flex-direction: column;
 }
 
-input {
+.modalContent input {
     border-radius: 0.125rem;
     border: transparent;
     padding: 1%;
@@ -41,13 +41,18 @@ input {
     box-sizing: border-box;
 }
 
-select {
+.modalContent select {
     min-width: 80%;
     margin: 4%;
     border-radius: 0.125rem;
     border: transparent;
     background-color: var(--branco);
     box-shadow: 0px 5px 6px 0px rgba(0, 0, 0, 0.25);
+}
+
+.modalContent p {
+    color: var(--branco);
+    font-style: italic;
 }
 
 #cardNumberInput {
@@ -78,11 +83,6 @@ select {
     justify-content: center;
     align-items: center;
     gap: 3%;
-}
-
-p {
-    color: var(--branco);
-    font-style: italic;
 }
 
 .messageContainer {

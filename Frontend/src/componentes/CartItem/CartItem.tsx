@@ -1,17 +1,18 @@
 import { useState } from 'react';
 import { formatPrice } from '../../utils/formatPrice'
 import styles from './styles.module.css'
+import { size } from '../../types/types';
 /* import useCartStore from '../../stores/CartStore'; */
 
 interface cartItemProps {
     name: string;
     imgPath: string;
-    code: string;
-    size: string;
+    code: number;
+    size: size;
     price: number;
 }
 
-export default function CartItem({name, imgPath, code, size, price} : cartItemProps){
+export default function CartItem(pijama : cartItemProps){
     /* const removeFromCart = useCartStore((state) => state.removeFromCart); */
     const [quantity, setQuantity] = useState(1);
     const inStock = 12;
@@ -30,14 +31,14 @@ export default function CartItem({name, imgPath, code, size, price} : cartItemPr
     
     return(
         <div className={styles.cardContainer}>
-            <img src={imgPath} alt=''></img>
+            <img src={pijama.imgPath} alt=''></img>
 
             <div className={styles.itemInfo}>
                 <div className={styles.nameAndCodeGroup}>
-                    <h4>{name}</h4>
-                    <h6>{code}</h6>
+                    <h4>{pijama.name}</h4>
+                    <h6>#{pijama.code}</h6>
                 </div>
-                <p>{size}</p>
+                <p></p>
             </div>
             
             <div className={styles.quantityGroup}>
@@ -47,10 +48,10 @@ export default function CartItem({name, imgPath, code, size, price} : cartItemPr
                     <span className={styles.output}>{quantity}</span>
                     <button onClick={handleIncrement} className={styles.button}>+</button>
                 </div>
-                <h6>Não perca sua oportunidade! Há apenas mais <span>{inStock}</span> peças disponíveis!</h6>
+                <h6>Não perca sua oportunidade! Há apenas mais <span>{pijama.size.stock_quantity}</span> peças disponíveis!</h6>
                 
             </div>
-            <h2>R$ {formatPrice(quantity * price)}</h2>
+            <h2>R$ {formatPrice(quantity * pijama.price)}</h2>
             <button /* onClick={removeFromCart} */ className={styles.deleteButton}>X</button>
         </div>
     )

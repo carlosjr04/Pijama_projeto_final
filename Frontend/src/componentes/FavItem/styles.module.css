@@ -1,0 +1,31 @@
+.cardContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--azul0);
+    box-shadow: 12px 12px 12px 0px rgba(0, 0, 0, 0.25);
+}
+
+.cardIcon {
+    z-index: 1;
+    align-self: flex-start;
+}
+
+.cardImage {
+    z-index: -1;
+}
+
+.cardContainer > h3 {
+    align-self: flex-start;
+    font-family: "Numans";
+    color: var(--azul300);
+    font-weight: 400;
+    font-size: 0.75rem;
+}
+
+.cardContainer > h4 {
+    font-family: "Nunito Sans";
+    color: var(--azul400);
+    font-weight: 700;
+    font-size: 1.25rem;
+}
