@@ -3,38 +3,58 @@ import favorito_cheio from "../../assets/favorito_cheio.png";
 import favorito_vazio from "../../assets/favorito_vazio.png";
 import desconto_imagem from "../../assets/desconto_imagem.png";
 import style from "./style.module.css";
-import { pijama } from "../../types/types";
+import { favItemProps, pijama } from "../../types/types";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useFavStore from "../../stores/FavStore";
 
 export default function Roupa(roupa: pijama) {
   const [favorito, setFavorito] = useState(roupa.favorite);
+  const addFavorite = useFavStore((state) => state.addFavorite);
+  const removeFavorite = useFavStore((state) => state.removeFavorite);
   const navigate = useNavigate();
 
   function parcelamento(preco: number): number {
     const precoParcelado = preco / 6;
     return Number(precoParcelado);
   }
-  function colandoVirgula(numero: number|undefined): string {
-    if(numero){
+  function colandoVirgula(numero: number | undefined): string {
+    if (numero) {
       return numero.toFixed(2).toString().replace(".", ",");
-    }else{
+    } else {
       return "0";
     }
   }
-  function navigatePijama(){
-    navigate(`/pijama/${roupa.id}`)
+  function navigatePijama() {
+    navigate(`/pijama/${roupa.id}`);
   }
   // function favoritar(){
   //   axios.patch(`http://localhost:3000/pijama/${roupa.id}`,{favorite:!roupa.favorite})
   // }
   return (
     <>
-      <div  className={style.card}>
+      <div className={style.card}>
         <div className={style.header}>
           <button
-            onClick={() => {setFavorito((prev) => !prev)
-              
+            onClick={() => {
+              setFavorito((prev) => !prev);
+              if (!roupa.favorite) {
+                const cartItem: favItemProps = {
+                  name: roupa.name,
+                  imgPath: roupa.image,
+
+                  id: roupa.id,
+
+                  price: roupa.price,
+                };
+                roupa.favorite=!roupa.favorite
+                
+                addFavorite(cartItem);
+              }else{
+                roupa.favorite=!roupa.favorite
+                
+                removeFavorite(roupa.id)
+              }
             }}
             className={style.botao}
           >
@@ -49,7 +69,12 @@ export default function Roupa(roupa: pijama) {
           ) : null}
         </div>
 
-        <img onClick={()=>navigatePijama()} src={roupaImagem} alt="" className={style.imagem} />
+        <img
+          onClick={() => navigatePijama()}
+          src={roupaImagem}
+          alt=""
+          className={style.imagem}
+        />
         <div className={style.texto}>
           <h3>{roupa.name}</h3>
           <div className={style.preco}>
@@ -61,12 +86,8 @@ export default function Roupa(roupa: pijama) {
               <p className={style.desconto_preco}></p>
             )}
             {/* se tentar botar numero com virgula da ruim entao tem uma funçao que faz isso para ficar mais bonito  */}
-            <h2>
-              R$ {colandoVirgula(roupa.price)}
-            </h2>
-            <p>
-              6x de R${colandoVirgula(parcelamento(roupa.price))}
-            </p>
+            <h2>R$ {colandoVirgula(roupa.price)}</h2>
+            <p>6x de R${colandoVirgula(parcelamento(roupa.price))}</p>
           </div>
         </div>
       </div>

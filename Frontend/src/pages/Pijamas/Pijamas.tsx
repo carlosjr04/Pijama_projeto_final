@@ -47,7 +47,7 @@ export const roupas_teste =  [
       { size: "G", stock_quantity: 13 },
       { size: "GG", stock_quantity: 4 }
     ],
-    favorite: true,
+    favorite: false,
     on_sale: false,
     sale_percent: 0
   },
@@ -85,7 +85,7 @@ export const roupas_teste =  [
       { size: "G", stock_quantity: 10 },
       { size: "GG", stock_quantity: 6 }
     ],
-    favorite: true,
+    favorite: false,
     on_sale: false,
     sale_percent: 0
   },
