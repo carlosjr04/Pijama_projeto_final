@@ -1,4 +1,5 @@
 import { PrismaPijamasRepository } from "@/repositories/prisma/prisma-pijamas-repository";
+import { PrismaPijamaSizeRepository } from "@/repositories/prisma/prisma-pijamaSize-repository";
 import { CreateManyPajamasUseCase } from "@/use-cases/pijamas/create-many-pajamas-use-case";
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
@@ -19,7 +20,9 @@ export async function createMany(request: FastifyRequest, reply: FastifyReply) {
     const pajamas = registerBodySchema.parse(request.body)
 
     const prismaPajamasRepository = new PrismaPijamasRepository()
-    const createManyPajamasUseCase = new CreateManyPajamasUseCase(prismaPajamasRepository)
+    const prismaPajamaSizeRepository = new PrismaPijamaSizeRepository()
+
+    const createManyPajamasUseCase = new CreateManyPajamasUseCase(prismaPajamasRepository, prismaPajamaSizeRepository)
 
     await createManyPajamasUseCase.execute({
         pajamas

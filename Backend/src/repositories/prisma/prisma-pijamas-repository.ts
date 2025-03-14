@@ -4,12 +4,6 @@ import { prisma } from "@/lib/prisma";
 
 export class PrismaPijamasRepository implements PijamasRepository {
 
-    async createMany(data: Prisma.PajamasCreateInput[]){
-        await prisma.pajamas.createMany({
-            data
-        })
-    }
-
     async getAll(){
         const pajamas = await prisma.pajamas.findMany()
 
