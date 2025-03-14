@@ -106,12 +106,12 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  max-width: 1400px; /* Ajuste para um tamanho fixo se necessário */
-  margin: 0 auto; /* Centraliza no meio da tela */
+  max-width: 1400px; 
+  margin: 0 auto; 
 }
 
 .swiper {
-  width: 100%; /* Evita que o Swiper ultrapasse a div */
+  width: 100%;
 }
 .voltarfeedback {
   position: relative;

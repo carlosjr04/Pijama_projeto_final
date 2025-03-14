@@ -54,9 +54,15 @@ export default function Roupa(roupa: pijama) {
                     console.log("Pijama favoritado!")
                   )
                   .catch((error) => console.log("algo deu errado" + error));
-
+                setFavorito(!favorito)
                 addFavorite(cartItem);
               } else {
+                axios
+                  .patch(`http://localhost:3000/pijamas/${roupa.id}`,{ favorite: !favorito })
+                  .then((response) =>
+                    console.log("Pijama favoritado!")
+                  )
+                  .catch((error) => console.log("algo deu errado" + error));
                 removeFavorite(roupa.id);
               }
             }}

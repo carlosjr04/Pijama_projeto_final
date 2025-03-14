@@ -131,12 +131,12 @@ const estacoes = ["Inverno", "Verão", "Todos"];
 const generos = ["Unisex", "Masculino", "Feminino", "Família", "Todos"];
 const tipos = ["Adulto", "Infantil", "Todos"];
 export default function Pijamas() {
-   useEffect(() => {
-     axios
-       .post("http://localhost:3000/pijamas",novoPijama)
-       .then((response) => console.log("Pijama cadastrado com sucesso!"))
-       .catch((error) => console.log("algo deu errado" + error));
-   }, []);
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/pijamas/getAll")
+      .then((response) => {setListaPijamas(response.data); console.log(response.data) }) 
+      .catch((error) => console.log("Algo deu errado: " + error));
+  }, []);
 
   const [listaPijamas, setListaPijamas] = useState<pijama[]>(roupas_teste);
   const [listaPijamasPagina, setListaPijamasPagina] =

@@ -23,3 +23,20 @@
     font-weight: 700;
     font-size: 2rem;
 }
+.voltarfeedback {
+    position: relative;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    cursor: pointer;
+    border: 0px;
+    z-index: 1;
+  }
+  .avancarfeedback {
+    position: relative;
+    margin-right: 1rem;
+    margin-left: 1rem;
+    cursor: pointer;
+    background-color: none;
+    border: 0px;
+    z-index: 1;
+  }
