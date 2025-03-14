@@ -59,7 +59,7 @@ export interface size {
   size: string;
 }
 interface pijamaDados {
-  pijamaID: number;
+  pajamaId: number;
   size: string;
   quantity: number;
 }

@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 export interface pijamaDados {
-  pijamaID: number;
+  pajamaId: number;
   size: string;
   quantity: number;
 }
@@ -32,7 +32,7 @@ const useCartDados = create<CartDados>((set) => ({
     }),
   removeFromDados: (id: number) =>
     set((state) => {
-      const novoPijama = state.pijama.filter((item) => item.pijamaID !== id);
+      const novoPijama = state.pijama.filter((item) => item.pajamaId !== id);
       return {
         pijama: novoPijama,
       };

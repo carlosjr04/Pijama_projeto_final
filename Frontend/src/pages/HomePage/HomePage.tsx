@@ -102,13 +102,27 @@ const feedbackList: feedback[] = [
 ];
 
 export default function HomePage() {
-
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:3000/pijama")
-  //     .then((response) => setListaPijamas(response.data))
-  //     .catch((error) => console.log("algo deu errado" + error));
-  // }, []);
+  const [ Feedbacks,setFeedbacks] = useState<feedback[]>()
+   useEffect(() => {
+    
+     axios
+       .get("http://localhost:3000/feedbacks/getAll")
+       .then((response) => console.log("feedback adicionado"))
+      .catch((error) => console.log("algo deu errado" + error));
+   }, []);
+   useEffect(() => {
+    let feedbackTemp ={
+      id: 1,
+      name: "Ana",
+      description:
+        "Lorem ipsum dolor sit amet. Et voluptatem officia ad sint voluptate qui  voluptas sunt non fugiat labore et consequatur voluptatem sed optio  veniam aut perferendis delectus! Aut Quis impedit a quas animi 33 alias  provident et ipsum deleniti eos pariatur quibusdam.",
+      rating: 4.5,
+    }
+    axios
+      .post("http://localhost:3000/feedbacks",feedbackTemp)
+      .then((response) => console.log("feedback adicionado"))
+     .catch((error) => console.log("algo deu errado" + error));
+  }, []);
   // useEffect(() => {
   //   axios
   //     .get("http://localhost:3000/feedback")

@@ -69,7 +69,7 @@ export default function Modal({ isOpen, handleClose }: ModalProps) {
   function sendOrder(data: any) {
     /* Faz alguma coisa */
     const cartItemsSales: pijamaDados[] = cart.map((cartItem) => ({
-      pijamaID: cartItem.code,
+      pajamaId: cartItem.code,
       size: cartItem.size.size,
       quantity: cartItem.quantity,
     }));
