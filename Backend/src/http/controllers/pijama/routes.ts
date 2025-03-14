@@ -3,6 +3,7 @@ import { create } from "./create";
 import { update, updateSize } from "./update";
 import { deletePijama } from "./delete";
 import { read } from "./read";
+import { getAll } from "./getAll";
 
 export async function pijamaRoutes(app:FastifyInstance) {
     app.post('/pijamas', create)
@@ -10,4 +11,5 @@ export async function pijamaRoutes(app:FastifyInstance) {
     app.delete('/pijamas/:pijamaId', deletePijama)
     app.get('/pijamas/:pijamaId', read)
     app.patch('/pijamas/:pijamaId/:size', updateSize)
+    app.get('/pijamas/getAll', getAll)
 }

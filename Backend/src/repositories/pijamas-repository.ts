@@ -18,4 +18,5 @@ export interface PijamasRepository {
     update(id: string, data: Prisma.PajamasUpdateInput): Promise<Pajamas | null>
     delete(id: string): Promise<void>
     findById(userId: string): Promise<Pajamas | null>
+    getAll(): Promise<Pajamas[] | null>
 }

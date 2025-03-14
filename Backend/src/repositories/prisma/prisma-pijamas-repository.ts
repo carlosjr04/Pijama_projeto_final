@@ -1,8 +1,15 @@
-import { Prisma } from "@prisma/client";
+import { Pajamas, Prisma } from "@prisma/client";
 import { PijamasRepository } from "../pijamas-repository";
 import { prisma } from "@/lib/prisma";
 
 export class PrismaPijamasRepository implements PijamasRepository {
+
+    async getAll(){
+        const pajamas = await prisma.pajamas.findMany()
+
+        return pajamas
+    }
+    
 
     async create(data: Prisma.PajamasCreateInput){
         const pajama = await prisma.pajamas.create({

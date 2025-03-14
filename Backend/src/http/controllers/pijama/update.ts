@@ -79,6 +79,7 @@ export async function updateSize(request: FastifyRequest, reply: FastifyReply) {
             size
         })
 
+        return reply.status(200).send(pijamaSize)
 
     } catch (err) {
         if (err instanceof ResourceNotFoundError){
