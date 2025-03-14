@@ -37,7 +37,7 @@
 .precos {
   display: flex;
   align-items: center;
-  gap:4.5rem;
+  gap: 4.5rem;
 }
 .precos h3 {
   font-family: Nunito Sans;
@@ -181,7 +181,7 @@
   height: 20px;
   margin-right: 10px;
 }
-.botoesFinal{
+.botoesFinal {
   display: flex;
   margin-top: 4rem;
 }
@@ -201,21 +201,78 @@
   color: #fcf7f8;
   cursor: pointer;
 }
-.coracao{
-  border:0px;
+.coracao {
+  border: 0px;
   background: none;
   width: 86px;
   height: 86px;
 }
-.elementos{
+.elementos {
   margin-top: 7rem;
   margin-bottom: 3rem;
   display: flex;
   width: 100%;
   justify-content: center;
-  gap:10rem;
+  gap: 10rem;
 }
-.tipo{
+.tipo {
   width: 100px;
   height: 100px;
+}
+.footerPijama {
+  display: flex;
+  flex-direction: column;
+  padding-left: 5rem;
+  background-color: #3e677a;
+  
+}
+.footerPijama h1 {
+  font-family: Numans;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 100%;
+  letter-spacing: 4%;
+  padding-bottom: 0px;
+  color: #fcf7f8;
+}
+.footerPijama p {
+  font-family: Nunito Sans;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 4%;
+  color: #fcf7f8;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+.footerPijama h3 {
+  font-family: Nunito Sans;
+  font-weight: 600;
+  font-style: italic;
+  font-size: 28px;
+  line-height: 100%;
+  letter-spacing: 4%;
+  color: #fcf7f8;
+}
+.contem  {
+  font-family: Nunito Sans;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 4%;
+  color: #fcf7f8;
+  margin-bottom: 1.5rem;
+  margin-top: 1.5rem;
+}
+.composicao{
+  margin-bottom: 1.5rem;
+}
+.tecidos{
+  font-family: Nunito Sans;
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 100%;
+  letter-spacing: 4%;
+  color: #fcf7f8;
+  
 }
