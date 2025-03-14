@@ -122,11 +122,13 @@ export default function Pijamas() {
       .get("http://localhost:3000/pijamas/getAll")
       .then((response) => {
         setListaPijamas(response.data);
+        setListaTodosPijamas(response.data)
         setNumPijamas(response.data.length);
       })
       .catch((error) => console.log("Algo deu errado: " + error));
   }, []);
 
+  const [listaTodosPijamas,setListaTodosPijamas] = useState<pijama[]>()
   const [listaPijamas, setListaPijamas] = useState<pijama[]>();
   const [listaPijamasPagina, setListaPijamasPagina] = useState<pijama[]>();
   const [numPijamas, setNumPijamas] = useState(listaPijamasPagina?.length);
@@ -151,10 +153,16 @@ export default function Pijamas() {
 
   useEffect(() => {
     if (pijamaTipo === "masculino") {
+      setListaPijamas(listaTodosPijamas)
+      setListaPijamasPagina(listaTodosPijamas)
       filtrarGenero("Masculino");
     } else if (pijamaTipo === "feminino") {
+      setListaPijamas(listaTodosPijamas)
+      setListaPijamasPagina(listaTodosPijamas)
       filtrarGenero("Feminino");
     } else if (pijamaTipo === "infantil") {
+      setListaPijamas(listaTodosPijamas)
+      setListaPijamasPagina(listaTodosPijamas)
       filtrarTipo("Infantil");
     } else {
       setNumPijamas(listaPijamas?.length);
