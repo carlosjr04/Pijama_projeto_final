@@ -1,8 +1,14 @@
-import { Pajamas, Prisma } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 import { PijamasRepository } from "../pijamas-repository";
 import { prisma } from "@/lib/prisma";
 
 export class PrismaPijamasRepository implements PijamasRepository {
+
+    async createMany(data: Prisma.PajamasCreateInput[]){
+        await prisma.pajamas.createMany({
+            data
+        })
+    }
 
     async getAll(){
         const pajamas = await prisma.pajamas.findMany()
@@ -39,7 +45,7 @@ export class PrismaPijamasRepository implements PijamasRepository {
     }
 
     async delete(id: string) {
-        const pajamas = await prisma.pajamas.delete ({
+        await prisma.pajamas.delete ({
             where: {id}
         })
     }

@@ -4,6 +4,13 @@ import { SalesRepository } from "../sales-repository";
 import { ResourceNotFoundError } from "@/use-cases/errors/resource-not-fount-error";
 
 export class PrismaSalesRepository implements SalesRepository {
+
+  async getAll(){
+    const sales = prisma.sale.findMany()
+
+    return sales
+  }
+
   async findById(id: string) {
     const sale = await prisma.sale.findUnique({
       where: { id },

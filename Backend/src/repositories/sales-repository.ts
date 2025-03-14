@@ -19,4 +19,5 @@ export interface SalesRepository {
     data: Prisma.SaleUncheckedUpdateInput
   ): Promise<Sale | null>;
   deleteById(id: string): Promise<void>;
+  getAll():Promise<Sale[] | null>
 }

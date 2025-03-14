@@ -19,4 +19,5 @@ export interface PijamasRepository {
     delete(id: string): Promise<void>
     findById(userId: string): Promise<Pajamas | null>
     getAll(): Promise<Pajamas[] | null>
+    createMany(data:Prisma.PajamasCreateInput[]): Promise<void>
 }
