@@ -14,10 +14,11 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
             type: z.string(),
             gender: z.string(),
             favorite: z.boolean(),
-            on_sale: z.boolean()
+            on_sale: z.boolean(),
+            sale_percent: z.number().optional()
         })
     
-        const { name, description, image, price, season, type, gender, favorite, on_sale } = registerBodySchema.parse(request.body)
+        const { name, description, image, price, season, type, gender, favorite, on_sale, sale_percent } = registerBodySchema.parse(request.body)
 
     try {
 
@@ -34,7 +35,8 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
           type,
           gender,
           favorite,
-          on_sale
+          on_sale,
+          sale_percent
         })
 
         return reply.status(201).send(pijama)

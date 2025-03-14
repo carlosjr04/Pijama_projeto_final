@@ -10,6 +10,7 @@ interface Pajamas {
     gender: string;
     favorite: boolean;
     on_sale: boolean;
+    sale_percent?: number
 }
 
 interface CreateManyUseCaseRequest{

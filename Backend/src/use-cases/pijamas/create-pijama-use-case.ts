@@ -12,6 +12,7 @@ interface CreateUseCaseRequest {
     gender: string;
     favorite: boolean;
     on_sale: boolean;
+    sale_percent?: number;
 }
 
 interface CreateUseCaseResponse {
@@ -31,7 +32,17 @@ export class CreateUseCase {
         gender,
         favorite,
         on_sale,
+        sale_percent
     }: CreateUseCaseRequest): Promise<CreateUseCaseResponse> {
+
+        if (on_sale === true){
+            if (!sale_percent){
+                throw new Error("Informe a porcentagem de desconto")
+            }
+        }else{
+            sale_percent = undefined
+        }
+
         const pijama = await this.pijamasRepository.create({
             name,
             description,
@@ -42,6 +53,7 @@ export class CreateUseCase {
             gender,
             favorite,
             on_sale,
+            sale_percent
         });
 
         const sizes: PijamaSizeCreateInput[] = ["PP", "P", "M", "G", "GG"].map((size) => ({
