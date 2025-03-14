@@ -9,5 +9,5 @@ export async function getAll(request: FastifyRequest, reply: FastifyReply) {
 
     const { pajamas } = await getAllPajamasUseCase.execute()
 
-    return pajamas
+    return await reply.status(200).send(pajamas)
 }
