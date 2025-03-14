@@ -49,7 +49,7 @@ export default function Favorites() {
         ></img>
         <Swiper
           onSwiper={(swiper) => (swiperRef2.current = swiper)}
-          slidesPerView={pijamasFavoritos.length}
+          slidesPerView={pijamasFavoritos.length < 4 ? pijamasFavoritos.length : 4}
           className={styles.favContainer}
         >
           {pijamasFavoritos.map((item) => (

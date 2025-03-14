@@ -81,7 +81,7 @@ export default function Roupa(roupa: pijama) {
 
         <img
           onClick={() => navigatePijama()}
-          src={roupaImagem}
+          src={"https://photo-cdn2.icons8.com/Ud99xf8ebJW6EOZUG2Jw9uT-Vh4WNzthjhv2vamTFDQ/rs:fit:288:432/czM6Ly9pY29uczgu/bW9vc2UtcHJvZC5h/c3NldHMvYXNzZXRz/L3NhdGEvb3JpZ2lu/YWwvMzk0LzMyM2Vh/NzA3LTRkMWMtNDVj/My1iM2I0LTNiOWMz/NjMyNDBiNy5qcGc.webp"}
           alt=""
           className={style.imagem}
         />
