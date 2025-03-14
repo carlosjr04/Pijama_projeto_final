@@ -7,6 +7,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import ModalButton from '../ModalButton/ModalButton';
 import arrowIcon from '../../assets/left-arrow-icon.svg'
 import useCartStore from '../../stores/CartStore';
+import axios from 'axios';
+import useCartPreco from '../../stores/CartPreco';
 
 interface ModalProps {
     isOpen: boolean;
@@ -32,6 +34,7 @@ export default function Modal({isOpen, handleClose} : ModalProps) {
     const [payment, setPayment] = useState('Forma de pagamento');
     const [creditPayment, setCreditPayment] = useState('Parcelamento 5x');
     const clearCart = useCartStore((state)=>state.clearCart)
+    const clearPreco = useCartPreco((state)=>state.clearPreco)
   
     const { register, handleSubmit, reset, formState: { errors } } = useForm({
         resolver: zodResolver(clientSchema)
@@ -45,7 +48,12 @@ export default function Modal({isOpen, handleClose} : ModalProps) {
 
     function sendOrder(){
         /* Faz alguma coisa */
+        axios
+            .post("http://localhost:3000/sales")
+            .then(()=>console.log("compra realizada"))
+            .catch((error) => console.log("Algo deu errado: " + error));
         clearCart()
+        clearPreco()
         setActiveStep(3);
     }
 

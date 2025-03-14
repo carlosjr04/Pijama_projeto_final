@@ -2,20 +2,28 @@ import SectionHeader from '../../componentes/SectionHeader/SectionHeader'
 import CartItem from '../../componentes/CartItem/CartItem'
 import Modal from '../../componentes/Modal/Modal'
 import styles from './styles.module.css'
-import {  useState } from 'react';
+import {  useEffect, useState } from 'react';
 import useCartStore from '../../stores/CartStore';
+import useCartPreco from '../../stores/CartPreco';
 
 export default function Cart(){
     const [isModalOpen, setIsModalOpen] = useState(false);
     const cart = useCartStore((state)=>state.cart)
     const precoTotal = useCartStore((state)=>state.precoTotal)
+    useEffect(()=>{
+        precoInicial(precoTotal)
+    },[])
+    const precoInicial = useCartPreco((state)=>state.precoInicial)
+    const preco:number = useCartPreco((state)=>state.preco)
     
     const openModal = () => {
         setIsModalOpen(true);
         window.scrollTo(0, 0);
     }
     const closeModal = () => setIsModalOpen(false);
-    
+    function precoFloat(){
+        return preco.toFixed(2)
+    }
     return(
         <>
             <SectionHeader currentPage="cart"/>
@@ -38,7 +46,7 @@ export default function Cart(){
                 </ul>
                 <div id={styles.totalPrice}>
                     <span>Total</span>
-                    <span>R${precoTotal.toFixed(2)}</span> 
+                    <span>R${precoFloat()}</span> 
                 </div>
                 <button onClick={openModal} id={styles.bigBlueButton}>COMPRE TUDO</button>
                 <Modal isOpen={isModalOpen} handleClose={closeModal}/>
