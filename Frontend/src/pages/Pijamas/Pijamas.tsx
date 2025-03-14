@@ -7,7 +7,7 @@ import posterior from "../../assets/prox.png";
 import { useEffect, useState } from "react";
 import { pijama } from "../../types/types";
 import { useParams } from "react-router-dom";
-
+import axios from "axios"
 
 export const roupas_teste =  [
 
@@ -109,17 +109,34 @@ export const roupas_teste =  [
   },
   
 ];
-
+const novoPijama = {
+  
+  name: "Pijama Curto de Malha",
+  description: "Conjunto de pijama curto e leve para noites quentes.",
+  image: "https://picsum.photos/200/300",
+  price: 79.90,
+  season: "Verão",
+  type: "Adulto",
+  gender: "Unisex",
+  size: [
+    { size: "P", stock_quantity: 10 },
+    { size: "M", stock_quantity: 12 },
+    { size: "G", stock_quantity: 8 }
+  ],
+  favorite: false,
+  on_sale: true,
+  sale_percent: 20
+};
 const estacoes = ["Inverno", "Verão", "Todos"];
 const generos = ["Unisex", "Masculino", "Feminino", "Família", "Todos"];
 const tipos = ["Adulto", "Infantil", "Todos"];
 export default function Pijamas() {
-  // useEffect(() => {
-  //   axios
-  //     .get("http://localhost:3000")
-  //     .then((response) => setListaPijamas(response.data))
-  //     .catch((error) => console.log("algo deu errado" + error));
-  // }, []);
+   useEffect(() => {
+     axios
+       .post("http://localhost:3000/pijamas",novoPijama)
+       .then((response) => console.log("Pijama cadastrado com sucesso!"))
+       .catch((error) => console.log("algo deu errado" + error));
+   }, []);
 
   const [listaPijamas, setListaPijamas] = useState<pijama[]>(roupas_teste);
   const [listaPijamasPagina, setListaPijamasPagina] =

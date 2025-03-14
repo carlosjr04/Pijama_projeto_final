@@ -78,6 +78,9 @@ CREATE TABLE "User" (
 );
 
 -- CreateIndex
+CREATE UNIQUE INDEX "PajamaSize_pajamaId_size_key" ON "PajamaSize"("pajamaId", "size");
+
+-- CreateIndex
 CREATE UNIQUE INDEX "Address_zip_code_key" ON "Address"("zip_code");
 
 -- CreateIndex

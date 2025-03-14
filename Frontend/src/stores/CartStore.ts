@@ -31,7 +31,7 @@ const useCartStore = create<CartStore>((set) => (
                 precoTotal: novoCarrinho.reduce((acc, item) => acc + item.price * item.quantity, 0),
             };
         }),
-       
+    
         clearCart: () => set({ cart: [], precoTotal: 0 }),
         calcularTotal: () => set((state) => ({
             precoTotal: state.cart.reduce((acc, item) => acc + item.price * item.quantity, 0),

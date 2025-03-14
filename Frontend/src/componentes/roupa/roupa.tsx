@@ -7,6 +7,7 @@ import { favItemProps, pijama } from "../../types/types";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useFavStore from "../../stores/FavStore";
+import axios from "axios";
 
 export default function Roupa(roupa: pijama) {
   const [favorito, setFavorito] = useState(roupa.favorite);
@@ -47,13 +48,16 @@ export default function Roupa(roupa: pijama) {
 
                   price: roupa.price,
                 };
-                
-                
+                axios
+                  .patch(`http://localhost:3000/pijamas/${roupa.id}`,{ favorite: !favorito })
+                  .then((response) =>
+                    console.log("Pijama favoritado!")
+                  )
+                  .catch((error) => console.log("algo deu errado" + error));
+
                 addFavorite(cartItem);
-              }else{
-                
-                
-                removeFavorite(roupa.id)
+              } else {
+                removeFavorite(roupa.id);
               }
             }}
             className={style.botao}

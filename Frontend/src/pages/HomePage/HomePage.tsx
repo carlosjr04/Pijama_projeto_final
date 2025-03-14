@@ -9,7 +9,7 @@ import avancar from "../../assets/avancar.png";
 import delivery from "../../assets/Delivery.png";
 import people from "../../assets/People.png";
 import { register } from "swiper/element/bundle";
-import "swiper/css";
+import '../../../node_modules/swiper/swiper-bundle.min.css';
 import { roupas_teste } from "../Pijamas/Pijamas";
 
 import SwiperCore from "swiper";
