@@ -1,9 +1,9 @@
 import { PajamaSize } from ".prisma/client";
 
 export interface PijamaSizeCreateInput {
-    stock_quantity: Number,
-    size: String,
-    pajamaId: String,
+    stock_quantity: number,
+    size: string,
+    pajamaId: string,
 }
 
 export interface PijamaSizeRepository {
