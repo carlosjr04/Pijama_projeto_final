@@ -20,10 +20,9 @@ export default function CartItem(pijama : cartItemProps){
     const somarPreco = useCartPreco((state) => state.somarPreco);
     const diminuirPreco = useCartPreco((state) => state.diminuirPreco);
     const [quantity, setQuantity] = useState(pijama.quantity);
-    const inStock = 12;
 
     function handleIncrement() {
-        if (quantity < inStock){
+        if (quantity < pijama.quantity){
             
             setQuantity(quantity + 1)
             somarPreco(pijama.price)
