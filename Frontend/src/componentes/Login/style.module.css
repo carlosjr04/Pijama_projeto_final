@@ -13,7 +13,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    transform: scale(1.1);
+    transform: scale(1);
 }
 .mainDiv {
     display: flex;

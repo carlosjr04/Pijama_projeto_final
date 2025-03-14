@@ -7,16 +7,16 @@ import { useState } from "react"
 import axios from "axios"
 
 interface UserSchema {
-    userEmail: string;
+    email: string;
     password: string;
 }
 interface IUser {
-    userEmail: string,
+    email: string,
     password: string,
 }
 
 const UserSchema = z.object({
-    userEmail: z
+    email: z
         .string()
         .nonempty("• este campo não pode estar em branco")
         .refine(
@@ -49,8 +49,8 @@ export default function Login() {
         setUser(data)
         console.log(data)
         axios
-            .post("http://localhost:3000/autheticate", data)
-            .then(() => console.log("Logado com sucesso!!"))
+            .post("http://localhost:3000/authenticate", data)
+            .then(() => {console.log("Logado com sucesso!!");resetFields()})
             .catch((error) => console.log("Algo deu errado: " + error))
     }
 
@@ -68,11 +68,11 @@ export default function Login() {
                         className={style.userEmail}
                         placeholder="Usuário ou E-mail"
                         type="text"
-                        {...register("userEmail")}/>
-                        {errors.userEmail && 
+                        {...register("email")}/>
+                        {errors.email && 
                             <span
                                 className={style.errorMessageUserEmail}> 
-                                {errors.userEmail.message}
+                                {errors.email.message}
                             </span>
                         }
 
@@ -94,7 +94,7 @@ export default function Login() {
                     <button 
                         className={`${isSubmitting ? style.disabledEnterButton : style.enabledEnterButton}`}
                         type="submit"
-                        onClick={() => settingUser(user!)}
+                        onClick={() => handleSubmit(settingUser)}
                         disabled={isSubmitting}>
                         {isSubmitting ? "AGUARDE..." : "ENTRAR"}
                         </button>

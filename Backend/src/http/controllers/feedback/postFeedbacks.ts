@@ -8,13 +8,12 @@ export async function postFeedbacks(
   reply: FastifyReply
 ) {
   const feedbackBodySchema = z.object({
-    userId: z.string(),
     name: z.string(),
     description: z.string(),
     rating: z.number().min(0).max(5),
   });
 
-  const { userId, name, description, rating } = feedbackBodySchema.parse(
+  const { name, description, rating } = feedbackBodySchema.parse(
     request.body
   );
 
@@ -25,7 +24,6 @@ export async function postFeedbacks(
     );
 
     const feedback = await postFeedbackUseCase.execute({
-      userId,
       name,
       description,
       rating,
