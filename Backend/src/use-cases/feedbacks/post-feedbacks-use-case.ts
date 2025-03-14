@@ -1,5 +1,4 @@
 interface PostFeedbackUseCaseRequest {
-  userId: string;
   name: string;
   description: string;
   rating: number;
@@ -11,7 +10,6 @@ export class PostFeedbackUseCase {
   constructor(private feedbacksRepository: FeedbacksRepository) {}
 
   async execute({
-    userId,
     name,
     description,
     rating,
@@ -21,7 +19,6 @@ export class PostFeedbackUseCase {
     }
 
     const feedback = await this.feedbacksRepository.create({
-      user: { connect: { id: userId } },
       name,
       description,
       rating,

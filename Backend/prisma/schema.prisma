@@ -12,8 +12,7 @@ model Feedback {
   name        String
   description String
   rating      Float
-  userId      String
-  user        User   @relation(fields: [userId], references: [id])
+
 }
 
 model Pajamas {
@@ -91,5 +90,5 @@ model User {
   username String     @unique
   email    String     @unique
   password String
-  feedback Feedback[]
+
 }
