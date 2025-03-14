@@ -1,6 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import RootLayout from "./RootLayout";
 import Pijamas from "./pages/Pijamas/Pijamas";
+import Feedback from "./pages/Feedback";
+import Login from "./pages/Login";
+import Cadastro from "./pages/Cadastro";
 
 const router = createBrowserRouter([
     {
@@ -13,19 +16,19 @@ const router = createBrowserRouter([
             },
             {
                 path:"/feedback",
-                element:<></>
+                element: <Feedback />
             },
             {
-                path:"/cadrasto",
-                element:<></>
+                path:"/cadastro",
+                element:<Cadastro />
             },
             {
                 path:"/pijamas",
-                element:<Pijamas/>
+                element:<Pijamas />
             },
             {
                 path:"/pijamas/:pijamaTipo",
-                element:<Pijamas/>
+                element:<Pijamas />
             },
             {
                 path:"/pijama",
@@ -42,6 +45,10 @@ const router = createBrowserRouter([
             {
                 path:"/homepage",
                 element:<></>
+            },
+            {
+                path:"/login",
+                element:<Login />
             }
         ]
     }
