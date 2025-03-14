@@ -2,6 +2,9 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import style from "./style.module.css"
 import { z } from "zod"
+import { useState } from "react"
+import axios from "axios"
+
 
 const UserSchema = z.object({
     name: z
@@ -28,15 +31,29 @@ const UserSchema = z.object({
         path: ["confirmPassword"]
     })
 
+interface IUserType {
+    name: string,
+    username: string,
+    email: string,
+    password: string,
+    confirmPassword?: string
+}
+
 export default function Cadastro() {
     
-    const { register, reset, handleSubmit, formState: {errors, isSubmitting}} = useForm({
+    const [user, setUser] = useState<IUserType>()
+    const { register, handleSubmit, formState: {errors, isSubmitting}} = useForm({
         resolver: zodResolver(UserSchema)
     })
-
-    async function resetFields() {
-        await new Promise(resolve => setTimeout(resolve, 3500))
-        reset()
+    
+    function settingUser (data: IUserType) {
+        delete data.confirmPassword
+        setUser(data)
+        console.log(data)
+        axios
+            .post("http://localhost:3000/users", data)
+            .then(() => console.log("Registrado com sucesso!!"))
+            .catch((error) => console.log("Algo deu errado: " + error))
     }
 
     return (
@@ -45,7 +62,7 @@ export default function Cadastro() {
 
                 <h1>Registre-se</h1>
 
-                <form onSubmit={handleSubmit(resetFields)}>
+                <form onSubmit={handleSubmit(settingUser)}>
                     
                     <div>
                         <input
@@ -107,6 +124,7 @@ export default function Cadastro() {
                     <button
                         className={isSubmitting ? style.disabledRegisterButton : style.enabledRegisterButton}
                         disabled={isSubmitting}
+                        onClick={() => settingUser(user!)}
                         type="submit">
                         {isSubmitting ? "♥ REGISTRADO ♥" : "REGISTRAR"}
                     </button>
