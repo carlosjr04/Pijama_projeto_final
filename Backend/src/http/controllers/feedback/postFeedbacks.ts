@@ -30,6 +30,7 @@ export async function postFeedbacks(
     });
     return feedback;
   } catch (err: any) {
+    console.log(err)
     return reply.status(409).send({ message: err.message });
   }
 }

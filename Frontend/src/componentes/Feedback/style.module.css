@@ -13,7 +13,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
-    transform: scale(1.1);
+    transform: scale(1);
 }
 .mainDiv {
     display: flex;
@@ -81,6 +81,30 @@
     &:focus {
         outline: none;
     }
+}
+.estrelas{
+    display: flex;
+    height: 58px;
+}
+.divEstrelaPai{
+    display: flex;
+    flex: 0;
+    position: relative;
+}
+.divEstrelaPai img{
+    width: 58px;
+    height: 58px;
+}
+.meiaDiv{
+    position: absolute;
+    width: 30px;
+    height: 56px;
+}
+.meiaDivDireita{
+    position: absolute;
+    right: 0px;
+    width: 30px;
+    height: 56px;
 }
 .description {
     display: flexbox;

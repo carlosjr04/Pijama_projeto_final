@@ -101,16 +101,26 @@ const feedbackList: feedback[] = [
   },
 ];
 
+
 export default function HomePage() {
-  const [ Feedbacks,setFeedbacks] = useState<feedback[]>()
+  const [ Feedbacks,setFeedbacks] = useState<feedback[]>(feedbackList)
    useEffect(() => {
     
      axios
        .get("http://localhost:3000/feedbacks/getAll")
-       .then((response) => console.log("feedback adicionado"))
+       .then((response) => {console.log(response.data);setFeedbacks(response.data.feedbacks)})
       .catch((error) => console.log("algo deu errado" + error));
    }, []);
-   
+   useEffect(() => {
+    axios
+      .get("http://localhost:3000/pijamas/getAll")
+      .then((response) => {
+        setListaPijamas(response.data);
+        
+      })
+      .catch((error) => console.log("Algo deu errado: " + error));
+  }, []);
+
   
   const navigate = useNavigate()
   const swiperRef1 = useRef<SwiperCore | null>(null);
@@ -136,8 +146,13 @@ export default function HomePage() {
     
   }
   function feedbacksAvaliados(){
-    let listaFeddback = feedbackList.filter((feedback)=> feedback.rating>=4)
-    return listaFeddback
+    if(feedbackList){
+      let listaFeddback = Feedbacks.filter((feedback)=> feedback.rating>=4)
+      return listaFeddback
+    }else{
+      return []
+    }
+    
   }
 
   function navigateFeedback(){
@@ -228,7 +243,7 @@ export default function HomePage() {
               onClick={() => swiperRef2.current?.slidePrev()}
             ></img>
             <Swiper
-              slidesPerView={3}
+              slidesPerView={Feedbacks.length>3?3:Feedbacks.length}
               onSwiper={(swiper) => (swiperRef2.current = swiper)}
             >
               {feedbacksAvaliados().map((feedback) => (
