@@ -16,7 +16,6 @@ export default function Cart(){
     }
     const closeModal = () => setIsModalOpen(false);
     
-    
     return(
         <>
             <SectionHeader currentPage="cart"/>

@@ -1,6 +1,5 @@
 import FavItem from "../../componentes/FavItem/FavItem";
 import SectionHeader from "../../componentes/SectionHeader/SectionHeader";
-import useFavStore from "../../stores/FavStore";
 import styles from "./styles.module.css";
 
 import { Swiper, SwiperSlide } from "swiper/react";

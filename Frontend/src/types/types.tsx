@@ -12,6 +12,25 @@ export interface pijama{
     on_sale: boolean 
     sale_percent:number 
 }
+export interface pijamaEstranho {
+    pijama: {
+      id: number;
+      name: string;
+      description: string;
+      image: string;
+      price: number;
+      season: "Inverno" | "Verão" | "Todos";
+      type: "Adulto" | "Infantil" | "Todos";
+      gender: "Unisex" | "Masculino" | "Feminino" | "Família" | "Todos";
+      favorite: boolean;
+      on_sale: boolean;
+      sale_percent: number;
+    };
+    size: {
+      size: string;
+      stock_quantity: number;
+    }[];
+  }
 export interface cartItemProps {
     name: string;
     imgPath: string;

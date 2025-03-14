@@ -16,7 +16,7 @@ export default function FavItem({id, name, imgPath, price,favorite} : favItemPro
                 <button onClick={() => {removeFavorite(id); 
                     axios
                     .patch(`http://localhost:3000/pijamas/${id}`,{ favorite: !favorite })
-                    .then((response) =>{
+                    .then(() =>{
                       console.log("Pijama desfavoritado!")
                       setFavoriteItem(!favorite)
                 })

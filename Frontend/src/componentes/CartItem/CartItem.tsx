@@ -3,7 +3,6 @@ import { formatPrice } from '../../utils/formatPrice'
 import styles from './styles.module.css'
 import { size } from '../../types/types';
 import useCartStore from '../../stores/CartStore';
-/* import useCartStore from '../../stores/CartStore'; */
 
 interface cartItemProps {
     name: string;

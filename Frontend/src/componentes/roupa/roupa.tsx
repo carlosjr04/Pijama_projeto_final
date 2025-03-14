@@ -1,4 +1,3 @@
-import roupaImagem from "../../assets/roupa_teste.png";
 import favorito_cheio from "../../assets/favorito_cheio.png";
 import favorito_vazio from "../../assets/favorito_vazio.png";
 import desconto_imagem from "../../assets/desconto_imagem.png";
@@ -29,9 +28,7 @@ export default function Roupa(roupa: pijama) {
   function navigatePijama() {
     navigate(`/pijama/${roupa.id}`);
   }
-  // function favoritar(){
-  //   axios.patch(`http://localhost:3000/pijama/${roupa.id}`,{favorite:!roupa.favorite})
-  // }
+
   return (
     <>
       <div className={style.card}>
@@ -50,7 +47,7 @@ export default function Roupa(roupa: pijama) {
                 };
                 axios
                   .patch(`http://localhost:3000/pijamas/${roupa.id}`,{ favorite: !favorito })
-                  .then((response) =>
+                  .then(() =>
                     console.log("Pijama favoritado!")
                   )
                   .catch((error) => console.log("algo deu errado" + error));
@@ -59,8 +56,8 @@ export default function Roupa(roupa: pijama) {
               } else {
                 axios
                   .patch(`http://localhost:3000/pijamas/${roupa.id}`,{ favorite: !favorito })
-                  .then((response) =>
-                    console.log("Pijama favoritado!")
+                  .then(() =>
+                    console.log("Pijama desfavoritado!")
                   )
                   .catch((error) => console.log("algo deu errado" + error));
                 removeFavorite(roupa.id);

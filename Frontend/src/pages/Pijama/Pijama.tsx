@@ -1,6 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { roupas_teste } from "../Pijamas/Pijamas";
-import { cartItemProps, pijama } from "../../types/types";
+import { cartItemProps, pijama, pijamaEstranho } from "../../types/types";
 import { useEffect, useState } from "react";
 import favoritoCheio from "../../assets/favorito_cheio.png";
 import favoritoVazio from "../../assets/favorito_vazio.png";
@@ -20,54 +19,54 @@ import infantil from "../../assets/Infantil.png";
 import image from "../../assets/roupa_teste.png";
 import style from "./style.module.css";
 import useCartStore from "../../stores/CartStore";
+import axios from "axios";
 
 const listaTamanhos = ["PP", "P", "M", "G", "GG"];
 
 export default function Pijama() {
   useEffect(() => {
-    if (getPijamaPagina()) {
-      //   axios
-    //     .get("http://localhost:3000/pijama")
-    //     .then((response) => setpijamaPagina(response.data))
-    //     .catch((error) => console.log("algo deu errado" + error));
-      setpijamaPagina(getPijamaPagina());
-      setFavorito(pijamaPagina?.favorite);
-      gerarAtributos();
-    }
+    axios
+      .get(`http://localhost:3000/pijamas/${pijamaId}`)
+      .then((response) =>{ setpijamaPagina(response.data);})
+      .catch((error) => console.log("algo deu errado" + error));
+
+    setFavorito(pijamaPagina?.pijama.favorite);
+    gerarAtributos();
   }, []);
-  
+
   const navigate = useNavigate();
-  const addToCart = useCartStore((state)=>state.addToCart)
+  const addToCart = useCartStore((state) => state.addToCart);
   const [quantidade, setQuantidade] = useState(1);
 
   const [tamanhoAtual, setTamanhoAtual] = useState<string>("P");
   const { pijamaId } = useParams();
-  const [pijamaPagina, setpijamaPagina] = useState<pijama>();
+  const [pijamaPagina, setpijamaPagina] = useState<pijamaEstranho>();
   const [favorito, setFavorito] = useState<boolean>();
-  function getPijamaPagina() {
 
-    let pijama = roupas_teste.find((pijama) => pijama.id === Number(pijamaId));
-    return pijama;
-  }
   function calcularDesconto() {
     if (pijamaPagina) {
-      let desconto = pijamaPagina.price - pijamaPagina.price / 10;
+      let desconto = pijamaPagina.pijama.price - pijamaPagina.pijama.price / 10;
       return desconto;
     }
     return 0;
   }
   function calcularParcela() {
     if (pijamaPagina) {
-      let parcela = pijamaPagina.price / 6;
+      let parcela = pijamaPagina.pijama.price / 6;
       return parcela;
     }
     return 0;
   }
   function quantidadeTamanho() {
-    let num =
+    if(pijamaPagina?.size){
+      let num =
       pijamaPagina?.size.find((s) => s.size === tamanhoAtual)?.stock_quantity ||
       0;
     return num;
+    }else{
+      return 0
+    }
+    
   }
   function gerarAtributos(): string[] {
     if (!pijamaPagina) return [];
@@ -93,59 +92,62 @@ export default function Pijama() {
     };
 
     const listaElementos: string[] = [
-      map.season[pijamaPagina.season] || "",
-      map.gender[pijamaPagina.gender] || "",
-      map.type[pijamaPagina.type] || "",
+      map.season[pijamaPagina.pijama.season] || "",
+      map.gender[pijamaPagina.pijama.gender] || "",
+      map.type[pijamaPagina.pijama.type] || "",
     ].filter(Boolean);
 
     return listaElementos;
   }
-  //function adicionarCarrinho(){
-  //  for(let i=0;i<quantidade;i++){
-  //    removeFromCart(pijamaPagina)
-  //}
-  //}
+  
   function carrinho() {
     
-      if(pijamaPagina){
-        const cartItem: cartItemProps = {
-          name: pijamaPagina.name,
-          imgPath: pijamaPagina.image,
-          code: pijamaPagina.id,
-          size: 
-            { size: tamanhoAtual, stock_quantity: quantidadeTamanho() },
-            
-          quantity:quantidade,
-          price: pijamaPagina.price
-      };
-        addToCart(cartItem)
-
-      }
-    
-    navigate("/homepage");
-  }
-  function formatarNumero(numero: number|undefined): string {
-    if(numero){
-      return numero.toFixed(2).toString().replace(".", ",");
-    }else{
-      return "0";
+    if (!pijamaPagina) {
+      console.error("Erro: pijamaPagina não está definido.");
+      return;
+    }
+  
+    if (!tamanhoAtual || !quantidade) {
+      console.error("Erro: tamanho ou quantidade inválidos.");
+      return;
     }
     
-}
+    if (pijamaPagina) {
+      let cartItem: cartItemProps = {
+        name: pijamaPagina?.pijama.name,
+        imgPath: pijamaPagina?.pijama.image,
+        code: pijamaPagina.pijama.id,
+        size: { size: tamanhoAtual, stock_quantity: 5 },
+        quantity: quantidade,
+        price: pijamaPagina.pijama.price,
+      };
+      addToCart(cartItem);
+    }
+
+    navigate("/homepage");
+  }
+  function formatarNumero(numero: number | undefined): string {
+    if (numero) {
+      return numero.toFixed(2).toString().replace(".", ",");
+    } else {
+      return "0";
+    }
+  }
   return (
     <>
       <div className={style.card}>
         <img src={image} className={style.imagem} alt="Foto de pijama" />
         <div className={style.cardInterno}>
           <div className={style.header}>
-            <h1>{pijamaPagina?.name}</h1>
-            <p>#REF:{pijamaPagina?.id}</p>
+            <h1>{pijamaPagina?.pijama.name}</h1>
+            <p>#REF:{pijamaPagina?.pijama.id}</p>
           </div>
           <div className={style.precos}>
             <div className={style.precosMaior}>
-              <h1>R$ {formatarNumero(pijamaPagina?.price)}</h1>
+              <h1>R$ {formatarNumero(pijamaPagina?.pijama.price)}</h1>
               <h3>
-                Ou por <span>R${formatarNumero(calcularDesconto())}</span> no PIX
+                Ou por <span>R${formatarNumero(calcularDesconto())}</span> no
+                PIX
               </h3>
             </div>
             <h3>
