@@ -1,0 +1,29 @@
+import { PrismaPijamasRepository } from "@/repositories/prisma/prisma-pijamas-repository";
+import { CreateManyPajamasUseCase } from "@/use-cases/pijamas/create-many-pajamas-use-case";
+import { FastifyReply, FastifyRequest } from "fastify";
+import { z } from "zod";
+
+export async function createMany(request: FastifyRequest, reply: FastifyReply) {
+    const registerBodySchema = z.array(z.object({
+        name: z.string(),
+        description: z.string(),
+        image: z.string(),
+        price: z.number(),
+        season: z.enum(["Verão", "Inverno", "Todos"]),
+        type: z.enum(["Todos", "Adulto", "Infantil"]),
+        gender: z.enum(["Todos", "Unisex", "Masculino", "Feminino", "Família"]),
+        favorite: z.boolean(),
+        on_sale: z.boolean(),
+    }))
+
+    const pajamas = registerBodySchema.parse(request.body)
+
+    const prismaPajamasRepository = new PrismaPijamasRepository()
+    const createManyPajamasUseCase = new CreateManyPajamasUseCase(prismaPajamasRepository)
+
+    await createManyPajamasUseCase.execute({
+        pajamas
+    })
+
+
+}
