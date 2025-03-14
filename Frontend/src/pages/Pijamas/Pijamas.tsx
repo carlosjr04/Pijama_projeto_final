@@ -155,23 +155,28 @@ export default function Pijamas() {
     if (pijamaTipo === "masculino") {
       setListaPijamas(listaTodosPijamas)
       setListaPijamasPagina(listaTodosPijamas)
+      setFiltros(0)
       filtrarGenero("Masculino");
     } else if (pijamaTipo === "feminino") {
       setListaPijamas(listaTodosPijamas)
       setListaPijamasPagina(listaTodosPijamas)
+      setFiltros(0)
       filtrarGenero("Feminino");
     } else if (pijamaTipo === "infantil") {
       setListaPijamas(listaTodosPijamas)
       setListaPijamasPagina(listaTodosPijamas)
+      setFiltros(0)
       filtrarTipo("Infantil");
     } else {
-      setNumPijamas(listaPijamas?.length);
+      setNumPijamas(listaTodosPijamas?.length);
       gerarPagina();
     }
   }, [pijamaTipo]);
+
   useEffect(() => {
     gerarPagina();
   }, []);
+
   useEffect(() => {
     gerarPagina();
   }, [paginaPresente]);
@@ -209,16 +214,18 @@ export default function Pijamas() {
   }
   function filtrarGenero(genero: string) {
     setPaginaPresente(1);
-    let lista = [];
+    let lista:pijama[] = [];
     let reset = false;
     if (generoFiltro === true) {
-      setFiltros(0);
+      
       reset = true;
     }
-    if ((filtros === 0 || reset === true)&& listaPijamas)  {
-      let listaTemp = listaPijamas.filter((roupa) => roupa.gender == genero);
-
-      lista = listaTemp;
+    if ((filtros === 0 || reset === true))  {
+      let listaTemp = listaTodosPijamas?.filter((roupa) => roupa.gender == genero);
+      if(listaTemp){
+        lista = listaTemp;
+      }
+      
 
       let num = filtros + 1;
       setFiltros(num);
@@ -237,24 +244,27 @@ export default function Pijamas() {
     }
 
     setNumPijamas(lista.length);
+    
     setListaPijamas(lista);
 
     setGeneroFiltro(true);
   }
 
   function filtrarTipo(tipo: string) {
-    let lista = [];
+    let lista:pijama[] = [];
     setPaginaPresente(1);
     let reset = false;
 
     if (tipoFiltro === true) {
-      setFiltros(0);
+      
       reset = true;
     }
-    if ((filtros === 0 || reset === true)&&listaPijamas) {
-      let listaTemp = listaPijamas.filter((roupa) => roupa.type == tipo);
+    if ((filtros === 0 || reset === true)) {
+      let listaTemp = listaTodosPijamas?.filter((roupa) => roupa.type == tipo);
 
-      lista = listaTemp;
+      if(listaTemp){
+        lista = listaTemp;
+      }
 
       let num = filtros + 1;
       setFiltros(num);
@@ -280,16 +290,17 @@ export default function Pijamas() {
 
   function filtrarEstacao(estacao: string) {
     setPaginaPresente(1);
-    let lista = [];
+    let lista:pijama[] = [];
     let reset = false;
     if (estacaoFiltro === true) {
-      setFiltros(0);
       reset = true;
     }
-    if ((filtros === 0 || reset === true)&&listaPijamas) {
-      let listaTemp = listaPijamas.filter((roupa) => roupa.season == estacao);
+    if ((filtros === 0 || reset === true)) {
+      let listaTemp = listaTodosPijamas?.filter((roupa) => roupa.season == estacao);
 
-      lista = listaTemp;
+      if(listaTemp){
+        lista = listaTemp;
+      }
 
       let num = filtros + 1;
       setFiltros(num);
