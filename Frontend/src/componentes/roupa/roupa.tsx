@@ -28,7 +28,6 @@ export default function Roupa(roupa: pijama) {
   function navigatePijama() {
     navigate(`/pijama/${roupa.id}`);
   }
-
   return (
     <>
       <div className={style.card}>

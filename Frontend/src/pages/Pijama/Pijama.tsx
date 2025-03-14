@@ -1,5 +1,5 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { cartItemProps, pijama, pijamaEstranho } from "../../types/types";
+import { cartItemProps,  pijamaEstranho } from "../../types/types";
 import { useEffect, useState } from "react";
 import favoritoCheio from "../../assets/favorito_cheio.png";
 import favoritoVazio from "../../assets/favorito_vazio.png";
@@ -99,7 +99,6 @@ export default function Pijama() {
 
     return listaElementos;
   }
-  
   function carrinho() {
     
     if (!pijamaPagina) {
