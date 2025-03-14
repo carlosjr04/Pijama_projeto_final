@@ -3,7 +3,7 @@ import { formatPrice } from '../../utils/formatPrice'
 import styles from './styles.module.css'
 import { size } from '../../types/types';
 import useCartStore from '../../stores/CartStore';
-/* import useCartStore from '../../stores/CartStore'; */
+import useCartPreco from '../../stores/CartPreco';
 
 interface cartItemProps {
     name: string;
@@ -17,6 +17,8 @@ interface cartItemProps {
 export default function CartItem(pijama : cartItemProps){
 
     const removeFromCart = useCartStore((state) => state.removeFromCart); 
+    const somarPreco = useCartPreco((state) => state.somarPreco);
+    const diminuirPreco = useCartPreco((state) => state.diminuirPreco);
     const [quantity, setQuantity] = useState(pijama.quantity);
     const inStock = 12;
 
@@ -24,13 +26,13 @@ export default function CartItem(pijama : cartItemProps){
         if (quantity < inStock){
             
             setQuantity(quantity + 1)
-            pijama.quantity=quantity
+            somarPreco(pijama.price)
         }
     }
 
     function handleDecrement() {
         if (quantity > 1){
-            
+            diminuirPreco(pijama.price)
             setQuantity(quantity - 1)
             
         }

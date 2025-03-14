@@ -7,16 +7,16 @@ import posterior from "../../assets/prox.png";
 import { useEffect, useState } from "react";
 import { pijama } from "../../types/types";
 import { useParams } from "react-router-dom";
-import axios from "axios"
+import axios from "axios";
 
-export const roupas_teste =  [
-
+export const roupas_teste = [
   {
     id: 1,
     name: "Pijama de Algodão Azul",
     description: "Pijama confortável de algodão com estampa minimalista.",
-    image: "https://picsum.photos/200/300",
-    price: 89.90,
+    image:
+      "https://photo-cdn2.icons8.com/Ud99xf8ebJW6EOZUG2Jw9uT-Vh4WNzthjhv2vamTFDQ/rs:fit:288:432/czM6Ly9pY29uczgu/bW9vc2UtcHJvZC5h/c3NldHMvYXNzZXRz/L3NhdGEvb3JpZ2lu/YWwvMzk0LzMyM2Vh/NzA3LTRkMWMtNDVj/My1iM2I0LTNiOWMz/NjMyNDBiNy5qcGc.webp",
+    price: 89.9,
     season: "Inverno",
     type: "Adulto",
     gender: "Masculino",
@@ -25,18 +25,19 @@ export const roupas_teste =  [
       { size: "P", stock_quantity: 10 },
       { size: "M", stock_quantity: 15 },
       { size: "G", stock_quantity: 8 },
-      { size: "GG", stock_quantity: 5 }
+      { size: "GG", stock_quantity: 5 },
     ],
     favorite: false,
     on_sale: true,
-    sale_percent: 15
+    sale_percent: 15,
   },
   {
     id: 2,
     name: "Pijama Rosa de Seda",
     description: "Conjunto de pijama de seda macia e elegante.",
-    image: "https://photo-cdn2.icons8.com/Ud99xf8ebJW6EOZUG2Jw9uT-Vh4WNzthjhv2vamTFDQ/rs:fit:288:432/czM6Ly9pY29uczgu/bW9vc2UtcHJvZC5h/c3NldHMvYXNzZXRz/L3NhdGEvb3JpZ2lu/YWwvMzk0LzMyM2Vh/NzA3LTRkMWMtNDVj/My1iM2I0LTNiOWMz/NjMyNDBiNy5qcGc.webp",
-    price: 129.90,
+    image:
+      "https://photo-cdn2.icons8.com/Ud99xf8ebJW6EOZUG2Jw9uT-Vh4WNzthjhv2vamTFDQ/rs:fit:288:432/czM6Ly9pY29uczgu/bW9vc2UtcHJvZC5h/c3NldHMvYXNzZXRz/L3NhdGEvb3JpZ2lu/YWwvMzk0LzMyM2Vh/NzA3LTRkMWMtNDVj/My1iM2I0LTNiOWMz/NjMyNDBiNy5qcGc.webp",
+    price: 129.9,
     season: "Verão",
     type: "Adulto",
     gender: "Feminino",
@@ -45,18 +46,19 @@ export const roupas_teste =  [
       { size: "P", stock_quantity: 6 },
       { size: "M", stock_quantity: 4 },
       { size: "G", stock_quantity: 13 },
-      { size: "GG", stock_quantity: 4 }
+      { size: "GG", stock_quantity: 4 },
     ],
     favorite: false,
     on_sale: false,
-    sale_percent: 0
+    sale_percent: 0,
   },
   {
     id: 3,
     name: "Pijama Infantil Estampado",
     description: "Pijama divertido com estampas de personagens.",
-    image: "https://picsum.photos/200/300",
-    price: 59.90,
+    image:
+      "https://photo-cdn2.icons8.com/Ud99xf8ebJW6EOZUG2Jw9uT-Vh4WNzthjhv2vamTFDQ/rs:fit:288:432/czM6Ly9pY29uczgu/bW9vc2UtcHJvZC5h/c3NldHMvYXNzZXRz/L3NhdGEvb3JpZ2lu/YWwvMzk0LzMyM2Vh/NzA3LTRkMWMtNDVj/My1iM2I0LTNiOWMz/NjMyNDBiNy5qcGc.webp",
+    price: 59.9,
     season: "Todos",
     type: "Infantil",
     gender: "Unisex",
@@ -65,267 +67,71 @@ export const roupas_teste =  [
       { size: "P", stock_quantity: 18 },
       { size: "M", stock_quantity: 15 },
       { size: "G", stock_quantity: 12 },
-      { size: "GG", stock_quantity: 10 }
+      { size: "GG", stock_quantity: 10 },
     ],
     favorite: false,
     on_sale: true,
-    sale_percent: 10
+    sale_percent: 10,
   },
   {
     id: 4,
     name: "Pijama de Flanela Xadrez",
     description: "Pijama quentinho de flanela, ideal para o inverno.",
-    image: "https://picsum.photos/200/300",
-    price: 99.90,
+    image:
+      "https://photo-cdn2.icons8.com/Ud99xf8ebJW6EOZUG2Jw9uT-Vh4WNzthjhv2vamTFDQ/rs:fit:288:432/czM6Ly9pY29uczgu/bW9vc2UtcHJvZC5h/c3NldHMvYXNzZXRz/L3NhdGEvb3JpZ2lu/YWwvMzk0LzMyM2Vh/NzA3LTRkMWMtNDVj/My1iM2I0LTNiOWMz/NjMyNDBiNy5qcGc.webp",
+    price: 99.9,
     season: "Inverno",
     type: "Adulto",
     gender: "Masculino",
     size: [
       { size: "M", stock_quantity: 14 },
       { size: "G", stock_quantity: 10 },
-      { size: "GG", stock_quantity: 6 }
+      { size: "GG", stock_quantity: 6 },
     ],
     favorite: false,
     on_sale: false,
-    sale_percent: 0
+    sale_percent: 0,
   },
   {
     id: 5,
     name: "Pijama Curto de Malha",
     description: "Conjunto de pijama curto e leve para noites quentes.",
-    image: "https://picsum.photos/200/300",
-    price: 79.90,
+    image:
+      "https://photo-cdn2.icons8.com/Ud99xf8ebJW6EOZUG2Jw9uT-Vh4WNzthjhv2vamTFDQ/rs:fit:288:432/czM6Ly9pY29uczgu/bW9vc2UtcHJvZC5h/c3NldHMvYXNzZXRz/L3NhdGEvb3JpZ2lu/YWwvMzk0LzMyM2Vh/NzA3LTRkMWMtNDVj/My1iM2I0LTNiOWMz/NjMyNDBiNy5qcGc.webp",
+    price: 79.9,
     season: "Verão",
     type: "Adulto",
     gender: "Unisex",
     size: [
       { size: "P", stock_quantity: 10 },
       { size: "M", stock_quantity: 12 },
-      { size: "G", stock_quantity: 8 }
+      { size: "G", stock_quantity: 8 },
     ],
     favorite: false,
     on_sale: true,
-    sale_percent: 20
+    sale_percent: 20,
   },
-  
 ];
-const pijamasLista: pijama[] = [
-  {
-    id: 1,
-    name: "Pijama Azul Confortável",
-    description: "Conjunto de pijama azul feito de algodão leve.",
-    image: "https://photo-cdn2.icons8.com/Ud99xf8ebJW6EOZUG2Jw9uT-Vh4WNzthjhv2vamTFDQ/rs:fit:288:432/czM6Ly9pY29uczgu/bW9vc2UtcHJvZC5h/c3NldHMvYXNzZXRz/L3NhdGEvb3JpZ2lu/YWwvMzk0LzMyM2Vh/NzA3LTRkMWMtNDVj/My1iM2I0LTNiOWMz/NjMyNDBiNy5qcGc.webp",
-    price: 99.90,
-    season: "Verão",
-    type: "Adulto",
-    gender: "Unisex",
-    size: [
-      { size: "PP", stock_quantity: 5 },
-      { size: "P", stock_quantity: 8 },
-      { size: "M", stock_quantity: 10 },
-      { size: "G", stock_quantity: 4 },
-      { size: "GG", stock_quantity: 2 }
-    ],
-    favorite: true,
-    on_sale: false,
-    sale_percent: 0
-  },
-  {
-    id: 2,
-    name: "Pijama Rosa de Seda",
-    description: "Conjunto de pijama de seda macia e elegante.",
-    image: "https://photo-cdn2.icons8.com/Ud99xf8ebJW6EOZUG2Jw9uT-Vh4WNzthjhv2vamTFDQ/rs:fit:288:432/czM6Ly9pY29uczgu/bW9vc2UtcHJvZC5h/c3NldHMvYXNzZXRz/L3NhdGEvb3JpZ2lu/YWwvMzk0LzMyM2Vh/NzA3LTRkMWMtNDVj/My1iM2I0LTNiOWMz/NjMyNDBiNy5qcGc.webp",
-    price: 129.90,
-    season: "Verão",
-    type: "Adulto",
-    gender: "Feminino",
-    size: [
-      { size: "PP", stock_quantity: 0 },
-      { size: "P", stock_quantity: 6 },
-      { size: "M", stock_quantity: 4 },
-      { size: "G", stock_quantity: 13 },
-      { size: "GG", stock_quantity: 4 }
-    ],
-    favorite: false,
-    on_sale: false,
-    sale_percent: 0
-  },
-  {
-    id: 3,
-    name: "Pijama Infantil de Algodão",
-    description: "Pijama confortável para crianças, feito de algodão.",
-    image: "https://photo-cdn2.icons8.com/Ud99xf8ebJW6EOZUG2Jw9uT-Vh4WNzthjhv2vamTFDQ/rs:fit:288:432/czM6Ly9pY29uczgu/bW9vc2UtcHJvZC5h/c3NldHMvYXNzZXRz/L3NhdGEvb3JpZ2lu/YWwvMzk0LzMyM2Vh/NzA3LTRkMWMtNDVj/My1iM2I0LTNiOWMz/NjMyNDBiNy5qcGc.webp",
-    price: 79.90,
-    season: "Inverno",
-    type: "Infantil",
-    gender: "Todos",
-    size: [
-      { size: "PP", stock_quantity: 2 },
-      { size: "P", stock_quantity: 7 },
-      { size: "M", stock_quantity: 3 },
-      { size: "G", stock_quantity: 9 },
-      { size: "GG", stock_quantity: 5 }
-    ],
-    favorite: true,
-    on_sale: true,
-    sale_percent: 15
-  },
-  {
-    id: 4,
-    name: "Pijama Família Flanelado",
-    description: "Pijama flanelado quentinho para toda a família.",
-    image: "https://photo-cdn2.icons8.com/Ud99xf8ebJW6EOZUG2Jw9uT-Vh4WNzthjhv2vamTFDQ/rs:fit:288:432/czM6Ly9pY29uczgu/bW9vc2UtcHJvZC5h/c3NldHMvYXNzZXRz/L3NhdGEvb3JpZ2lu/YWwvMzk0LzMyM2Vh/NzA3LTRkMWMtNDVj/My1iM2I0LTNiOWMz/NjMyNDBiNy5qcGc.webp",
-    price: 199.90,
-    season: "Inverno",
-    type: "Todos",
-    gender: "Família",
-    size: [
-      { size: "PP", stock_quantity: 3 },
-      { size: "P", stock_quantity: 6 },
-      { size: "M", stock_quantity: 8 },
-      { size: "G", stock_quantity: 10 },
-      { size: "GG", stock_quantity: 5 }
-    ],
-    favorite: false,
-    on_sale: true,
-    sale_percent: 20
-  },
-  {
-    id: 5,
-    name: "Pijama Clássico de Inverno",
-    description: "Conjunto de pijama quentinho para noites frias.",
-    image: "https://photo-cdn2.icons8.com/Ud99xf8ebJW6EOZUG2Jw9uT-Vh4WNzthjhv2vamTFDQ/rs:fit:288:432/czM6Ly9pY29uczgu/bW9vc2UtcHJvZC5h/c3NldHMvYXNzZXRz/L3NhdGEvb3JpZ2lu/YWwvMzk0LzMyM2Vh/NzA3LTRkMWMtNDVj/My1iM2I0LTNiOWMz/NjMyNDBiNy5qcGc.webp",
-    price: 149.90,
-    season: "Inverno",
-    type: "Adulto",
-    gender: "Masculino",
-    size: [
-      { size: "PP", stock_quantity: 0 },
-      { size: "P", stock_quantity: 10 },
-      { size: "M", stock_quantity: 6 },
-      { size: "G", stock_quantity: 3 },
-      { size: "GG", stock_quantity: 4 }
-    ],
-    favorite: true,
-    on_sale: false,
-    sale_percent: 0
-  },
-  {
-    id: 6,
-    name: "Pijama Divertido Infantil",
-    description: "Pijama colorido e divertido para crianças.",
-    image: "https://photo-cdn2.icons8.com/Ud99xf8ebJW6EOZUG2Jw9uT-Vh4WNzthjhv2vamTFDQ/rs:fit:288:432/czM6Ly9pY29uczgu/bW9vc2UtcHJvZC5h/c3NldHMvYXNzZXRz/L3NhdGEvb3JpZ2lu/YWwvMzk0LzMyM2Vh/NzA3LTRkMWMtNDVj/My1iM2I0LTNiOWMz/NjMyNDBiNy5qcGc.webp",
-    price: 89.90,
-    season: "Verão",
-    type: "Infantil",
-    gender: "Todos",
-    size: [
-      { size: "PP", stock_quantity: 4 },
-      { size: "P", stock_quantity: 5 },
-      { size: "M", stock_quantity: 3 },
-      { size: "G", stock_quantity: 2 },
-      { size: "GG", stock_quantity: 7 }
-    ],
-    favorite: false,
-    on_sale: true,
-    sale_percent: 10
-  },{
-    id: 7,
-    name: "Pijama Xadrez Inverno",
-    description: "Pijama longo com estampa xadrez, ideal para o inverno.",
-    image: "https://photo-cdn2.icons8.com/Ud99xf8ebJW6EOZUG2Jw9uT-Vh4WNzthjhv2vamTFDQ/rs:fit:288:432/czM6Ly9pY29uczgu/bW9vc2UtcHJvZC5h/c3NldHMvYXNzZXRz/L3NhdGEvb3JpZ2lu/YWwvMzk0LzMyM2Vh/NzA3LTRkMWMtNDVj/My1iM2I0LTNiOWMz/NjMyNDBiNy5qcGc.webp",
-    price: 159.90,
-    season: "Inverno",
-    type: "Adulto",
-    gender: "Masculino",
-    size: [
-      { size: "PP", stock_quantity: 2 },
-      { size: "P", stock_quantity: 8 },
-      { size: "M", stock_quantity: 5 },
-      { size: "G", stock_quantity: 10 },
-      { size: "GG", stock_quantity: 3 }
-    ],
-    favorite: true,
-    on_sale: false,
-    sale_percent: 0
-  },
-  {
-    id: 8,
-    name: "Pijama Leve de Verão",
-    description: "Pijama curto e leve, ideal para noites quentes.",
-    image: "https://photo-cdn2.icons8.com/Ud99xf8ebJW6EOZUG2Jw9uT-Vh4WNzthjhv2vamTFDQ/rs:fit:288:432/czM6Ly9pY29uczgu/bW9vc2UtcHJvZC5h/c3NldHMvYXNzZXRz/L3NhdGEvb3JpZ2lu/YWwvMzk0LzMyM2Vh/NzA3LTRkMWMtNDVj/My1iM2I0LTNiOWMz/NjMyNDBiNy5qcGc.webp",
-    price: 119.90,
-    season: "Verão",
-    type: "Adulto",
-    gender: "Unisex",
-    size: [
-      { size: "PP", stock_quantity: 4 },
-      { size: "P", stock_quantity: 7 },
-      { size: "M", stock_quantity: 6 },
-      { size: "G", stock_quantity: 5 },
-      { size: "GG", stock_quantity: 2 }
-    ],
-    favorite: false,
-    on_sale: true,
-    sale_percent: 12
-  },
-  {
-    id: 9,
-    name: "Pijama Família Divertido",
-    description: "Conjunto de pijamas combinando para toda a família.",
-    image: "https://photo-cdn2.icons8.com/Ud99xf8ebJW6EOZUG2Jw9uT-Vh4WNzthjhv2vamTFDQ/rs:fit:288:432/czM6Ly9pY29uczgu/bW9vc2UtcHJvZC5h/c3NldHMvYXNzZXRz/L3NhdGEvb3JpZ2lu/YWwvMzk0LzMyM2Vh/NzA3LTRkMWMtNDVj/My1iM2I0LTNiOWMz/NjMyNDBiNy5qcGc.webp",
-    price: 189.90,
-    season: "Todos",
-    type: "Todos",
-    gender: "Família",
-    size: [
-      { size: "PP", stock_quantity: 5 },
-      { size: "P", stock_quantity: 9 },
-      { size: "M", stock_quantity: 8 },
-      { size: "G", stock_quantity: 7 },
-      { size: "GG", stock_quantity: 6 }
-    ],
-    favorite: true,
-    on_sale: false,
-    sale_percent: 0
-  },
-  {
-    id: 10,
-    name: "Pijama Infantil Estampado",
-    description: "Pijama fofo com estampas divertidas para crianças.",
-    image: "https://photo-cdn2.icons8.com/Ud99xf8ebJW6EOZUG2Jw9uT-Vh4WNzthjhv2vamTFDQ/rs:fit:288:432/czM6Ly9pY29uczgu/bW9vc2UtcHJvZC5h/c3NldHMvYXNzZXRz/L3NhdGEvb3JpZ2lu/YWwvMzk0LzMyM2Vh/NzA3LTRkMWMtNDVj/My1iM2I0LTNiOWMz/NjMyNDBiNy5qcGc.webp",
-    price: 89.90,
-    season: "Todos",
-    type: "Infantil",
-    gender: "Todos",
-    size: [
-      { size: "PP", stock_quantity: 3 },
-      { size: "P", stock_quantity: 6 },
-      { size: "M", stock_quantity: 4 },
-      { size: "G", stock_quantity: 5 },
-      { size: "GG", stock_quantity: 2 }
-    ],
-    favorite: false,
-    on_sale: true,
-    sale_percent: 10
-  }
-];
+
 const estacoes = ["Inverno", "Verão", "Todos"];
 const generos = ["Unisex", "Masculino", "Feminino", "Família", "Todos"];
 const tipos = ["Adulto", "Infantil", "Todos"];
 export default function Pijamas() {
-  
   useEffect(() => {
     axios
       .get("http://localhost:3000/pijamas/getAll")
-      .then((response) => {setListaPijamas(response.data); console.log(response.data) }) 
+      .then((response) => {
+        setListaPijamas(response.data);
+        setListaTodosPijamas(response.data)
+        setNumPijamas(response.data.length);
+      })
       .catch((error) => console.log("Algo deu errado: " + error));
   }, []);
 
-  const [listaPijamas, setListaPijamas] = useState<pijama[]>(roupas_teste);
-  const [listaPijamasPagina, setListaPijamasPagina] =
-    useState<pijama[]>(roupas_teste);
-  const [numPijamas, setNumPijamas] = useState(roupas_teste.length);
+  const [listaTodosPijamas,setListaTodosPijamas] = useState<pijama[]>()
+  const [listaPijamas, setListaPijamas] = useState<pijama[]>();
+  const [listaPijamasPagina, setListaPijamasPagina] = useState<pijama[]>();
+  const [numPijamas, setNumPijamas] = useState(listaPijamasPagina?.length);
 
   const [filtros, setFiltros] = useState(0);
 
@@ -345,19 +151,23 @@ export default function Pijamas() {
 
   const { pijamaTipo } = useParams();
 
-  
   useEffect(() => {
     if (pijamaTipo === "masculino") {
+      setListaPijamas(listaTodosPijamas)
+      setListaPijamasPagina(listaTodosPijamas)
       filtrarGenero("Masculino");
     } else if (pijamaTipo === "feminino") {
+      setListaPijamas(listaTodosPijamas)
+      setListaPijamasPagina(listaTodosPijamas)
       filtrarGenero("Feminino");
-    } else if (pijamaTipo === "infantil"){ 
-      filtrarTipo("Infantil")
-    }else{
-      setListaPijamas(roupas_teste)
-      setNumPijamas(listaPijamas.length)
-      gerarPagina()
-    };
+    } else if (pijamaTipo === "infantil") {
+      setListaPijamas(listaTodosPijamas)
+      setListaPijamasPagina(listaTodosPijamas)
+      filtrarTipo("Infantil");
+    } else {
+      setNumPijamas(listaPijamas?.length);
+      gerarPagina();
+    }
   }, [pijamaTipo]);
   useEffect(() => {
     gerarPagina();
@@ -371,14 +181,15 @@ export default function Pijamas() {
 
   function gerarPagina() {
     let lista: pijama[] = [];
+    if (listaPijamas) {
+      for (let i = (paginaPresente - 1) * 12; i < paginaPresente * 12; i++) {
+        if (i >= listaPijamas?.length) {
+          break;
+        }
 
-    for (let i = (paginaPresente - 1) * 12; i < paginaPresente * 12; i++) {
-      if (i >= listaPijamas.length) {
-        break;
+        lista.push(listaPijamas[i]);
       }
-      lista.push(listaPijamas[i]);
     }
-
     setListaPijamasPagina(lista);
 
     return lista;
@@ -386,7 +197,7 @@ export default function Pijamas() {
 
   function paginaTotal(): number {
     let num = 1;
-    if (listaPijamas) {
+    if (listaPijamas && numPijamas) {
       num = Math.ceil(numPijamas / 12);
     } else {
       return num;
@@ -404,8 +215,8 @@ export default function Pijamas() {
       setFiltros(0);
       reset = true;
     }
-    if (filtros === 0 || reset === true) {
-      let listaTemp = roupas_teste.filter((roupa) => roupa.gender == genero);
+    if ((filtros === 0 || reset === true)&& listaPijamas)  {
+      let listaTemp = listaPijamas.filter((roupa) => roupa.gender == genero);
 
       lista = listaTemp;
 
@@ -440,8 +251,8 @@ export default function Pijamas() {
       setFiltros(0);
       reset = true;
     }
-    if (filtros === 0 || reset === true) {
-      let listaTemp = roupas_teste.filter((roupa) => roupa.type == tipo);
+    if ((filtros === 0 || reset === true)&&listaPijamas) {
+      let listaTemp = listaPijamas.filter((roupa) => roupa.type == tipo);
 
       lista = listaTemp;
 
@@ -475,8 +286,8 @@ export default function Pijamas() {
       setFiltros(0);
       reset = true;
     }
-    if (filtros === 0 || reset === true) {
-      let listaTemp = roupas_teste.filter((roupa) => roupa.season == estacao);
+    if ((filtros === 0 || reset === true)&&listaPijamas) {
+      let listaTemp = listaPijamas.filter((roupa) => roupa.season == estacao);
 
       lista = listaTemp;
 
@@ -484,9 +295,7 @@ export default function Pijamas() {
       setFiltros(num);
     } else {
       if (listaPijamas) {
-        let listaTemp = listaPijamas.filter(
-          (roupa) => roupa.season == estacao
-        );
+        let listaTemp = listaPijamas.filter((roupa) => roupa.season == estacao);
 
         lista = listaTemp;
       } else {
@@ -503,11 +312,15 @@ export default function Pijamas() {
     setEstacaoFiltro(true);
   }
   function buscarPijama(): pijama[] {
-    let pijamaBuscar = listaPijamas.filter((pijama) =>
+    let pijamaBuscar = listaPijamas?.filter((pijama) =>
       pijama.name.toLowerCase().includes(Busca)
     );
-
-    return pijamaBuscar;
+    if(pijamaBuscar){
+      return pijamaBuscar;
+    }else{
+      return []
+    }
+    
   }
   function handleClick() {
     setPesquisa(true);
@@ -643,7 +456,7 @@ export default function Pijamas() {
                 gender={roupa.gender}
                 type={roupa.type}
                 description={roupa.description}
-               size={roupa.size}
+                size={roupa.size}
               />
             ))
           )

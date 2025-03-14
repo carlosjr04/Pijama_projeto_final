@@ -14,11 +14,12 @@ import { roupas_teste } from "../Pijamas/Pijamas";
 
 import SwiperCore from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Roupa from "../../componentes/roupa/roupa";
 import { feedback, pijama } from "../../types/types";
 import Feedback from "./componentes/Feedback";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 register();
 const Banners = [
@@ -116,24 +117,34 @@ export default function HomePage() {
   // }, []);
   //const [listaPijama,setListaPijamas] = useState<pijama[]>()
   //const [feedbackLista,setFeedbackList] = useState<feedback[]>()
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/pijamas/getAll")
+      .then((response) => {setListaPijamas(response.data);  }) 
+      .catch((error) => console.log("Algo deu errado: " + error));
+  }, []);
   const navigate = useNavigate()
   const swiperRef1 = useRef<SwiperCore | null>(null);
   const swiperRef2 = useRef<SwiperCore | null>(null);
-
+  const [listaPijamas,setListaPijamas] = useState<pijama[]>()
   function pijamaPromocao() {
-    // let lista_pijama = listaPijama.filter((pijama) => pijama.on_sale === true);
-    let lista_pijama = roupas_teste.filter((pijama) => pijama.on_sale === true);
-    let lista_random: pijama[] = [];
-    while (lista_random.length < 3 && lista_pijama.length > 0) {
-      let num = Math.floor(Math.random() * lista_pijama.length);
-      let repetido = lista_random.find(
-        (pijama) => pijama.id === lista_pijama[num].id
-      );
-      if (!repetido) {
-        lista_random.push(lista_pijama[num]);
+    if(listaPijamas){
+      let lista_pijama = listaPijamas.filter((pijama) => pijama.on_sale === true);
+      let lista_random: pijama[] = [];
+      while (lista_random.length < 3 && lista_pijama.length > 0) {
+        let num = Math.floor(Math.random() * lista_pijama.length);
+        let repetido = lista_random.find(
+          (pijama) => pijama.id === lista_pijama[num].id
+        );
+        if (!repetido) {
+          lista_random.push(lista_pijama[num]);
+        }
       }
+      return lista_random;
+    }else{
+      return []
     }
-    return lista_random;
+    
   }
   function feedbacksAvaliados(){
     let listaFeddback = feedbackList.filter((feedback)=> feedback.rating>=4)
