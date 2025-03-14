@@ -59,11 +59,11 @@ export default function Login() {
             <div className={style.mainDiv}>
 
                 <section className={style.text}>
-                    <h1 >Login</h1>
-                    <p >Faça login para ter acesso aos pijamas dos seus <span>sonhos!</span></p>
+                    <h1 className={style.title}> Login </h1>
+                    <p className={style.innerText}> Faça login para ter acesso aos pijamas dos seus <span className={style.innerSpan}>sonhos!</span></p>
                 </section>
 
-                <form onSubmit={handleSubmit(resetFields)}>
+                <form onSubmit={handleSubmit(resetFields)} className={style.form}>
                     <input
                         className={style.userEmail}
                         placeholder="Usuário ou E-mail"
@@ -98,7 +98,7 @@ export default function Login() {
                         disabled={isSubmitting}>
                         {isSubmitting ? "AGUARDE..." : "ENTRAR"}
                         </button>
-                    <hr />
+                    <hr className={style.hr}/>
 
                 </form>
 

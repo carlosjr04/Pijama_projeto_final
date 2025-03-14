@@ -5,7 +5,6 @@ import { z } from "zod"
 import { useState } from "react"
 import axios from "axios"
 
-
 const UserSchema = z.object({
     name: z
         .string()
@@ -34,7 +33,7 @@ const UserSchema = z.object({
 interface IUserType {
     name: string,
     username: string,
-    email: string,
+    email:  string,
     password: string,
     confirmPassword?: string
 }
@@ -60,12 +59,13 @@ export default function Cadastro() {
         <div className={style.container}>
             <div className={style.mainDiv}>
 
-                <h1>Registre-se</h1>
+                <h1 className={style.title}>Registre-se</h1>
 
-                <form onSubmit={handleSubmit(settingUser)}>
+                <form onSubmit={handleSubmit(settingUser)} className={style.form1}>
                     
-                    <div>
+                    <div className={style.innerDiv}>
                         <input
+                            className={style.inputs}
                             placeholder="Nome"
                             type="name"
                             {...register("name")}/>
@@ -77,6 +77,7 @@ export default function Cadastro() {
                             }
 
                         <input
+                            className={style.inputs}
                             placeholder="Nome de Usuário"
                             type="username"
                             {...register("username")}/>
@@ -88,6 +89,7 @@ export default function Cadastro() {
                             }
 
                         <input
+                            className={style.inputs}
                             placeholder="E-mail"
                             type="email"
                             {...register("email")}/>
@@ -99,6 +101,7 @@ export default function Cadastro() {
                             }
 
                         <input
+                            className={style.inputs}
                             placeholder="Senha"
                             type="password"
                             {...register("password")}/>
@@ -110,6 +113,7 @@ export default function Cadastro() {
                             }
 
                         <input
+                            className={style.inputs}
                             placeholder="Confirmar Senha"
                             type="confirmPassword"
                             {...register("confirmPassword")}/>
@@ -122,9 +126,8 @@ export default function Cadastro() {
                     </div>
 
                     <button
-                        className={isSubmitting ? style.disabledRegisterButton : style.enabledRegisterButton}
+                        className={`${isSubmitting ? style.disabledRegisterButton : style.enabledRegisterButton}`}
                         disabled={isSubmitting}
-                        onClick={() => settingUser(user!)}
                         type="submit">
                         {isSubmitting ? "♥ REGISTRADO ♥" : "REGISTRAR"}
                     </button>

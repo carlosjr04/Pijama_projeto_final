@@ -13,9 +13,9 @@ export default function Header() {
 
     function navigation (pathing: string) {
         switch (pathing) {
-            case "carrinho": navigate("/carrinho"); break
-            case "favorito": navigate("/favorito"); break
-            case "login": navigate("/login"); break
+            case "carrinho": if(!isLoginPage) navigate("/carrinho"); break
+            case "favorito": if(!isLoginPage) navigate("/favorito"); break
+            case "login": if(!isLoginPage) navigate("/login"); break
             case "home": if(!isLoginPage) navigate("/homepage"); break
         }
     }

@@ -1,7 +1,89 @@
+import { useForm } from "react-hook-form"
+import style from "./style.module.css"
+import { useState } from "react"
+import axios from "axios"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { z } from "zod"
+
+interface IFeedback {
+    name: string,
+    description: string,
+}
+
+const FeedbackSchema = z.object({
+    name: z
+        .string()
+        .nonempty("• o nome não pode estar em branco"),
+    description: z
+        .string()
+        .nonempty("• a descrição não pode estar em branco")
+})
+
 export default function Feedback() {
+
+    const [feedback, setFeedback] = useState<IFeedback>()
+    const { register, handleSubmit, formState: {errors, isSubmitting}} = useForm({
+        resolver: zodResolver(FeedbackSchema)
+    })
+    
+    function settingFeedback (data: IFeedback) {
+        setFeedback(data)
+        console.log(data)
+        axios
+            .post("http://localhost:3000/feedbacks", data)
+            .then(() => console.log("Feedback registrado!!!!"))
+            .catch((error) => console.log("Algo deu errado: " + error))
+    }
+
     return (
-        <div>
-            {/* código */}
+        <div className={style.container}>
+            <div className={style.mainDiv}>
+                <div className={style.subMainDiv}>
+
+                    <h1 className={style.title}> Feedback </h1>
+                    <p className={style.innerText}> Fale um pouco sobre a sua experiência com a nossa loja! </p>
+
+                    <form onSubmit={handleSubmit(settingFeedback)} className={style.form}>
+
+                        <input
+                            className={style.name}
+                            placeholder="Nome completo"
+                            type="text"
+                            {...register("name")} />
+                            {errors.name && 
+                                <span 
+                                    className={style.errorMessage}> 
+                                    {errors.name.message} 
+                                </span>
+                            }
+
+                        <input
+                            className={style.description}
+                            placeholder="Descrição detalhada"
+                            type="text"
+                            {...register("description")} />
+                            {errors.description && 
+                                <span 
+                                    className={style.errorMessage}> 
+                                    {errors.description.message} 
+                                </span>
+                            }
+
+                        <div className={style.stars}>
+                            {/* estrelas */}
+                        </div>
+
+                        <button
+                            className={`${isSubmitting ? style.disabledSendButton : style.enabledSendButton}`}
+                            disabled={isSubmitting}
+                            type="submit">
+                            {isSubmitting ? "ENVIADO" : "ENVIAR"}
+                        </button>
+
+                    </form>
+
+                </div>
+            </div>
         </div>
     )
 }

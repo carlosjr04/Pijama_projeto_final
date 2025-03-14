@@ -36,15 +36,16 @@
     letter-spacing: 0.04em;
     width: 350px;
     padding-bottom: 30px;
+    gap: 30px;
 }
-.text h1 {
+.title {
     font-family: 'Numans';
     font-weight: 400;
     font-size: 48px;
     line-height: 100%;
     letter-spacing: 0.04em;
 }
-.text p {
+.innerText {
     font-family: 'Roboto Serif';
     font-weight: 500;
     font-size: 23px;
@@ -52,15 +53,17 @@
     line-height: 100%;
     letter-spacing: 0.04em;
 }
-.text p span {
+.innerSpan {
     display: inline;
     font-family: 'Roboto Serif';
     font-weight: bolder;
     font-style: italic;
     font-size: 23px;
 }
-form {
-    gap: 0px !important;
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 0px;
 }
 .userEmail, .password {
     color: #00000040;
@@ -78,6 +81,10 @@ form {
     
     &:hover {
         cursor: pointer;
+    }
+    &:focus {
+        cursor: pointer;
+        outline: none;
     }
 }
 .userEmail {
@@ -158,11 +165,12 @@ form {
     letter-spacing: 0.05em;
     cursor: not-allowed;
 }
-hr {
+.hr {
     width: 390px;
     border: 1px solid #FFFFFF;
     margin-top: 30px;
 }
 .registerButton {
     width: 220px;
+    margin: 45px 0px 0px;
 }
