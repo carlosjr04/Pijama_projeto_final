@@ -3,13 +3,16 @@ import { useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import style from "./style.module.css"
 import { z } from "zod"
-
-// "• digite um email válido"
-// "• o usuário não pode conter espaços ou acentos"
+import { useState } from "react"
+import axios from "axios"
 
 interface UserSchema {
     userEmail: string;
     password: string;
+}
+interface IUser {
+    userEmail: string,
+    password: string,
 }
 
 const UserSchema = z.object({
@@ -29,6 +32,7 @@ type User = z.infer<typeof UserSchema>
 
 export default function Login() {
     
+    const [user, setUser] = useState<IUser>()
     const navigate = useNavigate()
     const { register, handleSubmit, reset, formState: {errors, isSubmitting} } = useForm<User>( {
         resolver: zodResolver(UserSchema)
@@ -41,7 +45,14 @@ export default function Login() {
         navigate("/homepage")
     }
 
-    
+    function settingUser (data: IUser) {
+        setUser(data)
+        console.log(data)
+        axios
+            .post("http://localhost:3000/autheticate", data)
+            .then(() => console.log("Logado com sucesso!!"))
+            .catch((error) => console.log("Algo deu errado: " + error))
+    }
 
     return (
         <div className={style.container}>
@@ -83,6 +94,7 @@ export default function Login() {
                     <button 
                         className={`${isSubmitting ? style.disabledEnterButton : style.enabledEnterButton}`}
                         type="submit"
+                        onClick={() => settingUser(user!)}
                         disabled={isSubmitting}>
                         {isSubmitting ? "AGUARDE..." : "ENTRAR"}
                         </button>
