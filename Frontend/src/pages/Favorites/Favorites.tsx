@@ -13,7 +13,6 @@ import voltar from "../../assets/anterior.png";
 import avancar from "../../assets/avancar.png";
 
 export default function Favorites() {
-  const swiperRef1 = useRef<SwiperCore | null>(null);
   const swiperRef2 = useRef<SwiperCore | null>(null);
   const favorites = useFavStore((state) => state.favorites);
   const [favorite, setFavorites] = useState<pijama[]>([]);
@@ -38,7 +37,7 @@ export default function Favorites() {
   useEffect(() => {
     setPijamasFavoritos(favorite);
   });
-  return favorites.length > 0 ? (
+  return favorite.length > 0 ? (
     <>
       <SectionHeader currentPage="favorites" />
       <div className={styles.wrapper}>
