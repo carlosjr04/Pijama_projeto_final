@@ -5,15 +5,10 @@ import { GetFeedbackUseCase } from "@/use-cases/feedbacks/get-feedbacks-use-case
 import { FastifyReply, FastifyRequest } from "fastify";
 import { z } from "zod";
 
-export async function getFeedbacksByUserId(
+export async function getAll(
   request: FastifyRequest,
   reply: FastifyReply
 ) {
-  const getParamsSchema = z.object({
-    userId: z.string(),
-  });
-
-  const { userId } = getParamsSchema.parse(request.params);
 
   try {
     const prismaFeedbacksRepository = new PrismaFeedbacksRepository();
@@ -21,10 +16,9 @@ export async function getFeedbacksByUserId(
       prismaFeedbacksRepository
     );
 
-    const feedbacks = await getFeedbackUseCase.execute({
-      userId,
-    });
+    const feedbacks = await getFeedbackUseCase.execute();
     return feedbacks;
+    
   } catch (err) {
     if (err instanceof ResourceNotFoundError) {
       return reply.status(404).send({ message: err.message });
