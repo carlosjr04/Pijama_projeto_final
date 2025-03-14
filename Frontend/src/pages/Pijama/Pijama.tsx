@@ -58,9 +58,9 @@ export default function Pijama() {
     return 0;
   }
   function quantidadeTamanho() {
-    if(pijamaPagina?.size){
+    if(pijamaPagina?.sizes){
       let num =
-      pijamaPagina?.size.find((s) => s.size === tamanhoAtual)?.stock_quantity ||
+      pijamaPagina?.sizes.find((s) => s.size === tamanhoAtual)?.stock_quantity ||
       0;
     return num;
     }else{
@@ -68,6 +68,7 @@ export default function Pijama() {
     }
     
   }
+  
   function gerarAtributos(): string[] {
     if (!pijamaPagina) return [];
 
@@ -99,6 +100,7 @@ export default function Pijama() {
 
     return listaElementos;
   }
+  console.log(pijamaPagina)
   function carrinho() {
     
     if (!pijamaPagina) {

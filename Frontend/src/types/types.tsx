@@ -26,7 +26,7 @@ export interface pijamaEstranho {
     on_sale: boolean;
     sale_percent: number;
   };
-  size: {
+  sizes: {
     size: string;
     stock_quantity: number;
   }[];
