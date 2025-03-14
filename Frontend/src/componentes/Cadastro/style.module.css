@@ -9,8 +9,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: url("../../assets/zzz_background.png");
-    background-position: 110px;
+    background-image: url("../../assets/zzz.svg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    transform: scale(1.1);
 }
 .mainDiv {
     background-color: #74010B;
