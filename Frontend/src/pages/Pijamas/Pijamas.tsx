@@ -1,253 +1,115 @@
 import style from "./style.module.css";
 import vector from "../../assets/Vector.png";
-import Roupa from "./componentes/roupa/roupa";
+import Roupa from "../../componentes/roupa/roupa";
 import anterior from "../../assets/anterior.png";
 import posterior from "../../assets/prox.png";
 
 import { useEffect, useState } from "react";
-import { roupa_lista } from "../../types/types";
+import { pijama } from "../../types/types";
 import { useParams } from "react-router-dom";
+import axios from "axios";
 
-const roupas_teste = [
+export const roupas_teste = [
   {
     id: 1,
-    name: "Pijama feminino longo - estampa poá",
-    image: "../../../../assets/pijama_feminino_poa.png",
-    price: 78.8,
-    favorite: true,
-    on_sale: true,
-    sale_percent: 15.0,
+    name: "Pijama de Algodão Azul",
+    description: "Pijama confortável de algodão com estampa minimalista.",
+    image:
+      "https://photo-cdn2.icons8.com/Ud99xf8ebJW6EOZUG2Jw9uT-Vh4WNzthjhv2vamTFDQ/rs:fit:288:432/czM6Ly9pY29uczgu/bW9vc2UtcHJvZC5h/c3NldHMvYXNzZXRz/L3NhdGEvb3JpZ2lu/YWwvMzk0LzMyM2Vh/NzA3LTRkMWMtNDVj/My1iM2I0LTNiOWMz/NjMyNDBiNy5qcGc.webp",
+    price: 89.9,
+    season: "Inverno",
     type: "Adulto",
-    gender: "Feminino",
-    estacao: "Inverno",
+    gender: "Masculino",
+    size: [
+      { size: "PP", stock_quantity: 3 },
+      { size: "P", stock_quantity: 10 },
+      { size: "M", stock_quantity: 15 },
+      { size: "G", stock_quantity: 8 },
+      { size: "GG", stock_quantity: 5 },
+    ],
+    favorite: false,
+    on_sale: true,
+    sale_percent: 15,
   },
   {
     id: 2,
-    name: "Camiseta masculina básica - branca",
-    image: "../../../../assets/camiseta_branca.png",
-    price: 39.9,
+    name: "Pijama Rosa de Seda",
+    description: "Conjunto de pijama de seda macia e elegante.",
+    image:
+      "https://photo-cdn2.icons8.com/Ud99xf8ebJW6EOZUG2Jw9uT-Vh4WNzthjhv2vamTFDQ/rs:fit:288:432/czM6Ly9pY29uczgu/bW9vc2UtcHJvZC5h/c3NldHMvYXNzZXRz/L3NhdGEvb3JpZ2lu/YWwvMzk0LzMyM2Vh/NzA3LTRkMWMtNDVj/My1iM2I0LTNiOWMz/NjMyNDBiNy5qcGc.webp",
+    price: 129.9,
+    season: "Verão",
+    type: "Adulto",
+    gender: "Feminino",
+    size: [
+      { size: "PP", stock_quantity: 0 },
+      { size: "P", stock_quantity: 6 },
+      { size: "M", stock_quantity: 4 },
+      { size: "G", stock_quantity: 13 },
+      { size: "GG", stock_quantity: 4 },
+    ],
     favorite: false,
     on_sale: false,
     sale_percent: 0,
-    type: "Todos",
-    gender: "Masculino",
-    estacao: "Verão",
   },
   {
     id: 3,
-    name: "Vestido floral midi",
-    image: "../../../../assets/vestido_floral.png",
-    price: 129.9,
-    favorite: true,
-    on_sale: true,
-    sale_percent: 20.0,
+    name: "Pijama Infantil Estampado",
+    description: "Pijama divertido com estampas de personagens.",
+    image:
+      "https://photo-cdn2.icons8.com/Ud99xf8ebJW6EOZUG2Jw9uT-Vh4WNzthjhv2vamTFDQ/rs:fit:288:432/czM6Ly9pY29uczgu/bW9vc2UtcHJvZC5h/c3NldHMvYXNzZXRz/L3NhdGEvb3JpZ2lu/YWwvMzk0LzMyM2Vh/NzA3LTRkMWMtNDVj/My1iM2I0LTNiOWMz/NjMyNDBiNy5qcGc.webp",
+    price: 59.9,
+    season: "Todos",
     type: "Infantil",
-    gender: "Feminino",
-    estacao: "Todos",
+    gender: "Unisex",
+    size: [
+      { size: "PP", stock_quantity: 20 },
+      { size: "P", stock_quantity: 18 },
+      { size: "M", stock_quantity: 15 },
+      { size: "G", stock_quantity: 12 },
+      { size: "GG", stock_quantity: 10 },
+    ],
+    favorite: false,
+    on_sale: true,
+    sale_percent: 10,
   },
   {
     id: 4,
-    name: "Bermuda jeans masculina",
-    image: "../../../../assets/bermuda_jeans.png",
-    price: 89.9,
-    favorite: false,
-    on_sale: true,
-    sale_percent: 10.0,
+    name: "Pijama de Flanela Xadrez",
+    description: "Pijama quentinho de flanela, ideal para o inverno.",
+    image:
+      "https://photo-cdn2.icons8.com/Ud99xf8ebJW6EOZUG2Jw9uT-Vh4WNzthjhv2vamTFDQ/rs:fit:288:432/czM6Ly9pY29uczgu/bW9vc2UtcHJvZC5h/c3NldHMvYXNzZXRz/L3NhdGEvb3JpZ2lu/YWwvMzk0LzMyM2Vh/NzA3LTRkMWMtNDVj/My1iM2I0LTNiOWMz/NjMyNDBiNy5qcGc.webp",
+    price: 99.9,
+    season: "Inverno",
     type: "Adulto",
-    gender: "Feminino",
-    estacao: "Verão",
+    gender: "Masculino",
+    size: [
+      { size: "M", stock_quantity: 14 },
+      { size: "G", stock_quantity: 10 },
+      { size: "GG", stock_quantity: 6 },
+    ],
+    favorite: false,
+    on_sale: false,
+    sale_percent: 0,
   },
   {
     id: 5,
-    name: "Blusa de lã feminina - bege",
-    image: "../../../../assets/blusa_lã.png",
-    price: 149.9,
-    favorite: true,
-    on_sale: false,
-    sale_percent: 0,
-    type: "Todos",
-    gender: "Feminino",
-    estacao: "Inverno",
-  },
-  {
-    id: 6,
-    name: "Jaqueta de couro masculina - preta",
-    image: "../../../../assets/jaqueta_couro.png",
-    price: 299.9,
-    favorite: false,
-    on_sale: true,
-    sale_percent: 25.0,
-    type: "Infantil",
-    gender: "Feminino",
-    estacao: "Todos",
-  },
-  {
-    id: 7,
-    name: "Short esportivo feminino - rosa",
-    image: "../../../../assets/short_esportivo.png",
-    price: 59.9,
-    favorite: false,
-    on_sale: false,
-    sale_percent: 0,
-    type: "Todos",
-    gender: "Feminino",
-    estacao: "Verão",
-  },
-  {
-    id: 8,
-    name: "Calça social masculina - preta",
-    image: "../../../../assets/calca_social.png",
-    price: 179.9,
-    favorite: true,
-    on_sale: true,
-    sale_percent: 15.0,
+    name: "Pijama Curto de Malha",
+    description: "Conjunto de pijama curto e leve para noites quentes.",
+    image:
+      "https://photo-cdn2.icons8.com/Ud99xf8ebJW6EOZUG2Jw9uT-Vh4WNzthjhv2vamTFDQ/rs:fit:288:432/czM6Ly9pY29uczgu/bW9vc2UtcHJvZC5h/c3NldHMvYXNzZXRz/L3NhdGEvb3JpZ2lu/YWwvMzk0LzMyM2Vh/NzA3LTRkMWMtNDVj/My1iM2I0LTNiOWMz/NjMyNDBiNy5qcGc.webp",
+    price: 79.9,
+    season: "Verão",
     type: "Adulto",
-    gender: "Feminino",
-    estacao: "Todas",
-  },
-  {
-    id: 9,
-    name: "Blazer feminino - azul-marinho",
-    image: "../../../../assets/blazer.png",
-    price: 249.9,
+    gender: "Unisex",
+    size: [
+      { size: "P", stock_quantity: 10 },
+      { size: "M", stock_quantity: 12 },
+      { size: "G", stock_quantity: 8 },
+    ],
     favorite: false,
     on_sale: true,
-    sale_percent: 10.0,
-    type: "Infantil",
-    gender: "Feminino",
-    estacao: "Todos",
-  },
-  {
-    id: 10,
-    name: "Regata masculina esportiva - preta",
-    image: "../../../../assets/regata_esportiva.png",
-    price: 29.9,
-    favorite: false,
-    on_sale: false,
-    sale_percent: 0,
-    type: "Todos",
-    gender: "Masculino",
-    estacao: "Verão",
-  },
-  {
-    id: 11,
-    name: "Suéter feminino de tricô - cinza",
-    image: "../../../../assets/sueter_trico.png",
-    price: 119.9,
-    favorite: true,
-    on_sale: false,
-    sale_percent: 0,
-    type: "Infantil",
-    gender: "Feminino",
-    estacao: "Inverno",
-  },
-  {
-    id: 12,
-    name: "Camisa social masculina - azul claro",
-    image: "../../../../assets/camisa_social.png",
-    price: 139.9,
-    favorite: false,
-    on_sale: true,
-    sale_percent: 20.0,
-    type: "Adulto",
-    gender: "Todos",
-    estacao: "Todas",
-  },
-  {
-    id: 13,
-    name: "Jaqueta corta-vento unissex - cinza",
-    image: "../../../../assets/jaqueta_cortavento.png",
-    price: 199.9,
-    favorite: true,
-    on_sale: true,
-    sale_percent: 30.0,
-    type: "Todos",
-    gender: "Unissex",
-    estacao: "Todos",
-  },
-  {
-    id: 14,
-    name: "Calça moletom masculina - preta",
-    image: "../../../../assets/calca_moletom.png",
-    price: 89.9,
-    favorite: false,
-    on_sale: false,
-    sale_percent: 0,
-    type: "Infantil",
-    gender: "Todos",
-    estacao: "Inverno",
-  },
-  {
-    id: 15,
-    name: "Macacão jeans feminino",
-    image: "../../../../assets/macacao_jeans.png",
-    price: 159.9,
-    favorite: true,
-    on_sale: true,
-    sale_percent: 15.0,
-    type: "Todos",
-    gender: "Feminino",
-    estacao: "Todas",
-  },
-  {
-    id: 16,
-    name: "Tênis esportivo unissex - branco",
-    image: "../../../../assets/tenis_esportivo.png",
-    price: 249.9,
-    favorite: true,
-    on_sale: true,
-    sale_percent: 10.0,
-    type: "Infantil",
-    gender: "Unissex",
-    estacao: "Todas",
-  },
-  {
-    id: 17,
-    name: "Saia midi plissada - bege",
-    image: "../../../../assets/saia_midi.png",
-    price: 99.9,
-    favorite: false,
-    on_sale: false,
-    sale_percent: 0,
-    type: "Todos",
-    gender: "Feminino",
-    estacao: "Todos",
-  },
-  {
-    id: 18,
-    name: "Casaco de lã masculino - cinza",
-    image: "../../../../assets/casaco_la.png",
-    price: 279.9,
-    favorite: true,
-    on_sale: false,
-    sale_percent: 0,
-    type: "Infantil",
-    gender: "Masculino",
-    estacao: "Inverno",
-  },
-  {
-    id: 19,
-    name: "Casaco de lã masculino - cinza",
-    image: "../../../../assets/casaco_la.png",
-    price: 279.9,
-    favorite: true,
-    on_sale: false,
-    sale_percent: 0,
-    type: "Adulto",
-    gender: "Masculino",
-    estacao: "Inverno",
-  },
-  {
-    id: 20,
-    name: "Casaco de lã masculino - cinza",
-    image: "../../../../assets/casaco_la.png",
-    price: 279.9,
-    favorite: true,
-    on_sale: false,
-    sale_percent: 0,
-    type: "Infantil",
-    gender: "Masculino",
-    estacao: "Inverno",
+    sale_percent: 20,
   },
 ];
 
@@ -255,10 +117,21 @@ const estacoes = ["Inverno", "Verão", "Todos"];
 const generos = ["Unisex", "Masculino", "Feminino", "Família", "Todos"];
 const tipos = ["Adulto", "Infantil", "Todos"];
 export default function Pijamas() {
-  const [listaPijamas, setListaPijamas] = useState<roupa_lista[]>(roupas_teste);
-  const [listaPijamasPagina, setListaPijamasPagina] =
-    useState<roupa_lista[]>(roupas_teste);
-  const [numPijamas, setNumPijamas] = useState(roupas_teste.length);
+  useEffect(() => {
+    axios
+      .get("http://localhost:3000/pijamas/getAll")
+      .then((response) => {
+        setListaPijamas(response.data);
+        setListaTodosPijamas(response.data)
+        setNumPijamas(response.data.length);
+      })
+      .catch((error) => console.log("Algo deu errado: " + error));
+  }, []);
+
+  const [listaTodosPijamas,setListaTodosPijamas] = useState<pijama[]>()
+  const [listaPijamas, setListaPijamas] = useState<pijama[]>();
+  const [listaPijamasPagina, setListaPijamasPagina] = useState<pijama[]>();
+  const [numPijamas, setNumPijamas] = useState(listaPijamasPagina?.length);
 
   const [filtros, setFiltros] = useState(0);
 
@@ -268,7 +141,7 @@ export default function Pijamas() {
   const [tipoFiltro, setTipoFiltro] = useState(false);
   const [estacaoFiltro, setEstacaoFiltro] = useState(false);
 
-  const [pijamaBusca, setPijamaBusca] = useState<roupa_lista[]>();
+  const [pijamaBusca, setPijamaBusca] = useState<pijama[]>();
   const [Pesquisa, setPesquisa] = useState(false);
   const [Busca, setBusca] = useState("");
 
@@ -277,24 +150,34 @@ export default function Pijamas() {
   const [estacao, setEstacao] = useState(false);
 
   const { pijamaTipo } = useParams();
+
   useEffect(() => {
     if (pijamaTipo === "masculino") {
+      setListaPijamas(listaTodosPijamas)
+      setListaPijamasPagina(listaTodosPijamas)
+      setFiltros(0)
       filtrarGenero("Masculino");
     } else if (pijamaTipo === "feminino") {
+      setListaPijamas(listaTodosPijamas)
+      setListaPijamasPagina(listaTodosPijamas)
+      setFiltros(0)
       filtrarGenero("Feminino");
-    } else if (pijamaTipo === "infantil"){ 
-      filtrarTipo("Infantil")
-    }else{
-      setListaPijamas(roupas_teste)
-      setNumPijamas(roupas_teste.length)
-      gerarPagina()
-    };
+    } else if (pijamaTipo === "infantil") {
+      setListaPijamas(listaTodosPijamas)
+      setListaPijamasPagina(listaTodosPijamas)
+      setFiltros(0)
+      filtrarTipo("Infantil");
+    } else {
+      setNumPijamas(listaTodosPijamas?.length);
+      gerarPagina();
+    }
   }, [pijamaTipo]);
+
   useEffect(() => {
     gerarPagina();
   }, []);
+
   useEffect(() => {
-    console.log("Página Atualizada:", paginaPresente);
     gerarPagina();
   }, [paginaPresente]);
   useEffect(() => {
@@ -302,18 +185,16 @@ export default function Pijamas() {
   }, [listaPijamas, filtros]);
 
   function gerarPagina() {
-    let lista: roupa_lista[] = [];
+    let lista: pijama[] = [];
+    if (listaPijamas) {
+      for (let i = (paginaPresente - 1) * 12; i < paginaPresente * 12; i++) {
+        if (i >= listaPijamas?.length) {
+          break;
+        }
 
-    console.log(listaPijamas.length);
-    for (let i = (paginaPresente - 1) * 5; i < paginaPresente * 5; i++) {
-      if (i >= listaPijamas.length) {
-        console.log("deubrak");
-        break;
+        lista.push(listaPijamas[i]);
       }
-      console.log(listaPijamas[i]);
-      lista.push(listaPijamas[i]);
     }
-
     setListaPijamasPagina(lista);
 
     return lista;
@@ -321,8 +202,8 @@ export default function Pijamas() {
 
   function paginaTotal(): number {
     let num = 1;
-    if (listaPijamas) {
-      num = Math.ceil(numPijamas / 5);
+    if (listaPijamas && numPijamas) {
+      num = Math.ceil(numPijamas / 12);
     } else {
       return num;
     }
@@ -333,16 +214,18 @@ export default function Pijamas() {
   }
   function filtrarGenero(genero: string) {
     setPaginaPresente(1);
-    let lista = [];
+    let lista:pijama[] = [];
     let reset = false;
     if (generoFiltro === true) {
-      setFiltros(0);
+      
       reset = true;
     }
-    if (filtros === 0 || reset === true) {
-      let listaTemp = roupas_teste.filter((roupa) => roupa.gender == genero);
-
-      lista = listaTemp;
+    if ((filtros === 0 || reset === true))  {
+      let listaTemp = listaTodosPijamas?.filter((roupa) => roupa.gender == genero);
+      if(listaTemp){
+        lista = listaTemp;
+      }
+      
 
       let num = filtros + 1;
       setFiltros(num);
@@ -361,24 +244,27 @@ export default function Pijamas() {
     }
 
     setNumPijamas(lista.length);
+    
     setListaPijamas(lista);
 
     setGeneroFiltro(true);
   }
 
   function filtrarTipo(tipo: string) {
-    let lista = [];
+    let lista:pijama[] = [];
     setPaginaPresente(1);
     let reset = false;
 
     if (tipoFiltro === true) {
-      setFiltros(0);
+      
       reset = true;
     }
-    if (filtros === 0 || reset === true) {
-      let listaTemp = roupas_teste.filter((roupa) => roupa.type == tipo);
+    if ((filtros === 0 || reset === true)) {
+      let listaTemp = listaTodosPijamas?.filter((roupa) => roupa.type == tipo);
 
-      lista = listaTemp;
+      if(listaTemp){
+        lista = listaTemp;
+      }
 
       let num = filtros + 1;
       setFiltros(num);
@@ -404,24 +290,23 @@ export default function Pijamas() {
 
   function filtrarEstacao(estacao: string) {
     setPaginaPresente(1);
-    let lista = [];
+    let lista:pijama[] = [];
     let reset = false;
     if (estacaoFiltro === true) {
-      setFiltros(0);
       reset = true;
     }
-    if (filtros === 0 || reset === true) {
-      let listaTemp = roupas_teste.filter((roupa) => roupa.estacao == estacao);
+    if ((filtros === 0 || reset === true)) {
+      let listaTemp = listaTodosPijamas?.filter((roupa) => roupa.season == estacao);
 
-      lista = listaTemp;
+      if(listaTemp){
+        lista = listaTemp;
+      }
 
       let num = filtros + 1;
       setFiltros(num);
     } else {
       if (listaPijamas) {
-        let listaTemp = listaPijamas.filter(
-          (roupa) => roupa.estacao == estacao
-        );
+        let listaTemp = listaPijamas.filter((roupa) => roupa.season == estacao);
 
         lista = listaTemp;
       } else {
@@ -437,12 +322,16 @@ export default function Pijamas() {
     setListaPijamas(lista);
     setEstacaoFiltro(true);
   }
-  function buscarPijama(): roupa_lista[] {
-    let pijamaBuscar = listaPijamas.filter((pijama) =>
+  function buscarPijama(): pijama[] {
+    let pijamaBuscar = listaPijamas?.filter((pijama) =>
       pijama.name.toLowerCase().includes(Busca)
     );
-
-    return pijamaBuscar;
+    if(pijamaBuscar){
+      return pijamaBuscar;
+    }else{
+      return []
+    }
+    
   }
   function handleClick() {
     setPesquisa(true);
@@ -574,9 +463,11 @@ export default function Pijamas() {
                 on_sale={roupa.on_sale}
                 sale_percent={roupa.sale_percent}
                 price={roupa.price}
-                estacao={roupa.estacao}
+                season={roupa.season}
                 gender={roupa.gender}
                 type={roupa.type}
+                description={roupa.description}
+                size={roupa.size}
               />
             ))
           )
@@ -591,9 +482,11 @@ export default function Pijamas() {
               on_sale={roupa.on_sale}
               sale_percent={roupa.sale_percent}
               price={roupa.price}
-              estacao={roupa.estacao}
+              season={roupa.season}
               gender={roupa.gender}
               type={roupa.type}
+              description={roupa.description}
+              size={roupa.size}
             />
           ))
         ) : null}

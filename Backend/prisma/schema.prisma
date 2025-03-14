@@ -36,19 +36,22 @@ model PajamaSize {
   id             String   @id @default(uuid())
   stock_quantity Int
   created_at     DateTime @default(now())
+  size String
 
   pajamaId String
-  Pajama   Pajamas @relation(fields: [pajamaId], references: [id])
+  Pajama   Pajamas @relation(fields: [pajamaId], references: [id], onDelete: Cascade)
+
+  @@unique ([pajamaId, size])
 }
 
 model Sale {
   id         String         @id @default(uuid())
   buyer_name String
-  cpf        String         @unique
+  cpf        String
   price      Float
   pajamas    Sale_Pajamas[]
 
-  addressId String  @unique
+  addressId String
   Address   Address @relation(fields: [addressId], references: [id])
 
   payment_method String
@@ -65,18 +68,21 @@ model Sale_Pajamas {
   Pajamas   Pajamas @relation(fields: [pajamasId], references: [id])
 
   saleId String
-  Sale   Sale   @relation(fields: [saleId], references: [id])
+  Sale   Sale   @relation(fields: [saleId], references: [id], onDelete: Cascade)
+
 }
 
 model Address {
   id           String @id @default(uuid())
-  zip_code     String
+  zip_code     String @unique
   state        String
   city         String
   neighborhood String
   address      String
   number       String
   sale         Sale[]
+
+  @@unique([zip_code, state, city, neighborhood, address, number])
 }
 
 model User {
