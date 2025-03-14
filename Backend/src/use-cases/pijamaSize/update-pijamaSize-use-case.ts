@@ -1,6 +1,7 @@
 import { PijamasRepository } from "@/repositories/pijamas-repository";
 import { PijamaSizeCreateInput, PijamaSizeRepository } from "@/repositories/pijamaSize-repository";
 import { PajamaSize } from "@prisma/client";
+import { ResourceNotFoundError } from "../errors/resource-not-fount-error";
 
 interface UpdatePijamaSizeCaseRequest {
     pajamaId: string,
@@ -21,6 +22,10 @@ export class UpdatePijamaSizeUseCase {
         size
     }: UpdatePijamaSizeCaseRequest): Promise<void> {
         let data = await this.pijamaSizeRepository.getSize(pajamaId, size)
+        if (!data){
+            throw new ResourceNotFoundError()
+        }
+
         data!.stock_quantity = stock_quantity
         await this.pijamaSizeRepository.updateSize(pajamaId, data!)
     }
