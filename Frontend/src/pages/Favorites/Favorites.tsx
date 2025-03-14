@@ -14,7 +14,6 @@ import avancar from "../../assets/avancar.png";
 
 export default function Favorites() {
   const swiperRef2 = useRef<SwiperCore | null>(null);
-  const favorites = useFavStore((state) => state.favorites);
   const [favorite, setFavorites] = useState<pijama[]>([]);
   const [pijamasFavoritos, setPijamasFavoritos] = useState<pijama[]>([]);
   useEffect(() => {
@@ -57,6 +56,7 @@ export default function Favorites() {
                 id={item.id}
                 name={item.name}
                 imgPath={item.image}
+                favorite={item.favorite}
                 price={item.price}
               />
             </SwiperSlide>

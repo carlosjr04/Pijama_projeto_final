@@ -26,6 +26,7 @@ export interface favItemProps {
     name: string;
     imgPath: string;
     price: number;
+    favorite:boolean
 }
 
 export interface feedback{

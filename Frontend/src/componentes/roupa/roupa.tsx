@@ -45,7 +45,7 @@ export default function Roupa(roupa: pijama) {
                   imgPath: roupa.image,
 
                   id: roupa.id,
-
+                  favorite:roupa.favorite,
                   price: roupa.price,
                 };
                 axios
