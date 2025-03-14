@@ -1,38 +1,33 @@
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../assets/lobo_header.png";
 import compras from "../../assets/Compras.png";
 import favorito from "../../assets/Favorito.png";
 import user from "../../assets/User.png";
 import style from "./style.module.css";
-import { useState } from "react";
 
 export default function Header() {
 
     const navigate = useNavigate();
-    const {login} = useParams()
-    const [isLogin, setIsLogin] = useState("false")
-
-    if(login === "login") { setIsLogin("true") }
-    console.log(isLogin)
+    const location = useLocation()
+    const isLoginPage = (location.pathname === "/login") ? true : false
 
     function navigation (pathing: string) {
         switch (pathing) {
             case "carrinho": navigate("/carrinho"); break
             case "favorito": navigate("/favorito"); break
             case "login": navigate("/login"); break
-            case "home": navigate("/homepage"); break
+            case "home": if(!isLoginPage) navigate("/homepage"); break
         }
     }
 
     return (
         <div className={style.header}>
             
-            {login === "login" ? (
-                <img className={style.logo} onClick={() => (navigation("home"))} src={logo} alt="Logo" />
-            ) : (
-                <img className={style.logo} src={logo} alt="Logo" />
-            )}
-            
+            <img 
+                src={logo} alt="Logo"
+                className={`${isLoginPage ? style.logoLoginPage : style.logoNotLoginPage}`} 
+                onClick={() => navigation("home")} />
+
             <nav className={style.links}>
                 <Link to={"/pijamas"}>PIJAMAS</Link>
                 <Link to={`/pijamas/${"feminino"}`}>FEMININO</Link>

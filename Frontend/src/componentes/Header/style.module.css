@@ -5,9 +5,20 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
+    z-index: 3
 }
-.logo{
+.logoLoginPage{
     margin-left: 3rem;
+}
+.logoNotLoginPage {
+    margin-left: 3rem;
+    transition: 0.2s ease-in-out;
+    
+    &:hover {
+        transform: scale(1.1);
+        cursor: pointer;
+    }
 }
 .links{
     font-family: Nunito Sans;
@@ -20,15 +31,17 @@
     color:#FCF7F8;
     text-decoration: none;
     margin-left: 2.5rem;
+
 }
 .links a{
     color:#FCF7F8;
     text-decoration: none;
-    cursor: pointer;
     transition: color 0.3s ease-in-out;
-}
-.links a:hover{
-    color:#4E8098;
+    cursor: pointer;
+    
+    &:hover{
+        color:#4E8098;
+    }
 }
 .perfil{
     display: flex;
