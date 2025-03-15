@@ -22,7 +22,7 @@ import useCartStore from "../../stores/CartStore";
 import axios from "axios";
 
 const listaTamanhos = ["PP", "P", "M", "G", "GG"];
-const tecidos = ["Algodão", "Seda", "Flanela", "Viscose"];
+const tecidos = ["Algodão", "Algodão com elastano", "Poliéster", "Seda"];//tecidos baseados em uma estudande de moda :p
 
 interface descricaoFooter {
   tecido: string;
